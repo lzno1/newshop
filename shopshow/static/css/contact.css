@@ -1,0 +1,30 @@
+body{
+    background: #cac6bc;
+    fill: #c6c1af;
+}
+
+.container{
+    max-width: 100%;
+}
+
+#aboutInfo{
+    margin-top: 100px;
+    
+}
+
+.container-row-left{
+   
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.aboutInfoPlace{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.aboutInfoTitle{
+    margin-top: 40px;
+    margin-bottom: 10px;
+}

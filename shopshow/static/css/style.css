@@ -1,0 +1,79 @@
+body {
+	color: #555;
+}
+#carousel {
+	background-color:#E7E7E7;
+	top: 3rem;
+	margin-bottom:4rem;
+}
+.carousel-indicators li {
+	background-color: #444;
+}
+.carousel-control-prev-icon {
+	background-image: url(../img/left.png);
+	cursor: pointer;
+}
+.carousel-control-next-icon{
+	background-image: url(../img/right.png);
+	cursor: pointer;
+}
+.index-h2 {
+	font-size: calc(1rem + 1vw); 
+	text-align: center;
+	letter-spacing: 1px;
+	color: #0059b2;
+	margin-top:6rem;
+}
+.index-h2-p {
+	font-size: calc(0.7rem + 0.8vw); 
+	text-align: center;
+	letter-spacing: 1px;
+	color: #999;
+}
+.tab5 {
+	background-color: #eee;
+	color: #555;
+}
+.index-content h5 {
+	font-size: calc(1.2rem + 0.09vw); 
+}
+.index-content p {
+	font-size: calc(0.9rem + 0.1vw); 
+}
+.tab5 h3,.tab6 h3 {
+	font-size: calc(1.2rem + 0.8vw); 
+}
+.tab5 p,.tab6 p {
+	font-size: calc(0.9rem + 0.1vw); 
+}
+footer {
+	font-size: calc(0.9rem + 0.1vw); 
+}
+
+
+
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) and (max-width: 767px) {
+
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+	.index-h2 {
+		font-size: 220%;
+	}
+	.index-h2-p {
+		font-size: 160%;
+	}
+}

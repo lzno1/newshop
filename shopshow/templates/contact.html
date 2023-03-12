@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
+        <ul class="nav ">
+            <li class="nav-item">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png' %}", height="30", alt="logo">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'goods' %}">Goods</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'store' %}">Store</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'contact' %}">Contact</a>
+            </li>
+        </ul>
+
+        <div class="form-inline ml-auto">
+            <input type="text" class=" mr-sm-2" placeholder="请输入订单号">
+            <button class="btn btn-outline-secondary my-2", id="searchOrderId">search</button>
+            
+        </div>
+    </nav>
+
+    <div class='container' id="aboutInfo">
+        <div class="row">
+            <div class="col-lg-6" id="container-row-left">
+                <div class="aboutInfoPlace">
+                    <div class="aboutInfoTitle"><h1>1.私人定制</h1></div>
+                    <h4 class="aboutInfoInfo">私人定制：您可以在这里根据您的需要进行个人定制</h4>
+                    <div class="aboutInfoTitle"><h1>2.大客户</h1></div>
+                    <h4 class="aboutInfoInfo">私人定制：您可以在这里根据您的需要进行个人定制</h4>
+                    <div class="aboutInfoTitle"><h1>3.合作事宜</h1></div>
+                    <h4 class="aboutInfoInfo">私人定制：您可以在这里根据您的需要进行个人定制</h4>
+                    <div class="aboutInfoTitle"><h1>4.商品购买</h1></div>
+                    <h4 class="aboutInfoInfo">私人定制：您可以在这里根据您的需要进行个人定制</h4>
+                    <div class="aboutInfoTitle"><h1>5.申请供货商</h1></div>
+                    <h4 class="aboutInfoInfo">私人定制：您可以在这里根据您的需要进行个人定制</h4>
+                     
+                </div>
+            </div>
+
+            <div class="col-lg-6" id="container-row-right">
+                <div class="aboutInfoPlace">
+                    <div class="aboutInfoTitle"><h1>邮箱</h1></div>
+                    <h4 class="aboutInfoInfo">11765@google.com</h4>
+                    <div class="aboutInfoTitle"><h1>电话</h1></div>
+                    <h4 class="aboutInfoInfo">11765@google.com</h4>
+                    <div class="aboutInfoTitle"><h1>推特</h1></div>
+                    <h4 class="aboutInfoInfo">11765@google.com</h4>
+                    <div class="aboutInfoTitle"><h1>脸书</h1></div>
+                    <h4 class="aboutInfoInfo">11765@google.com</h4>
+                    <div class="aboutInfoTitle"><h1>公司地址</h1></div>
+                    <h4 class="aboutInfoInfo">11765@google.com</h4>
+                    <div class="aboutInfoTitle"><h1>店铺地址</h1></div>
+                    <h4 class="aboutInfoInfo">11765@google.com</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

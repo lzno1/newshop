@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- <script>
+        document.querySelector('form input[type="text"]').addEventListener('submit', function(e){
+            e.preventDefault()
+        })
+    </script> -->
+</head>
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <ul class="nav ">
+            <li class="nav-item">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png' %}", height="30", alt="logo">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'goods' %}">Goods</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'store' %}">Store</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'contact' %}">Contact</a>
+            </li>
+        </ul>
+
+        <form action="", class="form-inline ml-auto">
+            <input type="text" class="form-control mr-sm-2" placeholder="请输入订单号">
+            <button class="btn btn-outline-secondary my-2",type="submit">search</button>
+        </form>
+    </nav>
+    
+    <div class="container jumbotron row m-auto">
+        <div class="card h-100 w-75 m-auto">
+            {% if logging %}
+            <div class="alert alert-success" role="alert" id="notice">
+                <button class="close" type="button" data-dismiss="alert">&times;</button>
+                {{ logging }}
+            </div>
+            {% endif %}
+            <form method="post" onkeydown="return event.key != 'Enter';">
+            <!-- <form method="post" > -->
+                {%csrf_token%}
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <h4>商品订单ID</h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="商品订单id" name="goodid">
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <input type="submit" class="btn btn-secondary" value="查询" name="googSearch">
+                                <input type="submit" class="btn btn-secondary" value="保存" name="goodSave">
+                                <input type="submit" class="btn btn-secondary" value="新建" name="googNew">
+                                <input type="submit" class="btn btn-secondary" value="删除" name="googDelete">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-bottom py-3">
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>效果图确认</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="效果图确认时间" name="check1" value={{good_info.check1}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>出样时间</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="出样时间" name="check2" value={{good_info.check2}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>出样拍照</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="出样拍照确认时间" name="check3" value={{good_info.check3}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>样品寄出</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="样品寄出时间" name="check4" value={{good_info.check4}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>样品送达确认</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="样品送达时间" name="check5" value={{good_info.check5}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>货物发出 + 单号更新</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="货物发出时间" name="tran1" value={{good_info.tran1}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>第一周</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="第一周开始时间" name="tran2" value={{good_info.tran2}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>第二周</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="第二周开始时间" name="tran3" value={{good_info.tran3}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>第三周</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="第三周开始时间" name="tran4" value={{good_info.tran4}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>物流单号</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="物流单号" name="tranid" value={{good_info.tranid}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>货物派送</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="货物派送" name="eva1" value={{good_info.eva1}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>货物送达</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="货物送达时间" name="eva2" value={{good_info.eva2}}>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-lg-2">
+                            <h5>确认收货</h5>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control input-round" placeholder="确认收货时间" name="eva3" value={{good_info.eva3}}>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+
+        </div>
+    </div>
+    
+
+
+
+
+
+</body>
+
+</html>
