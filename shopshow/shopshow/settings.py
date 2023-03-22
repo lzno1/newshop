@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '7-8wsqi(eq3wri62b$33bmzq_)^6jmwf7m&_-src+b$0y_nons'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['108.61.220.238']
-# ALLOWED_HOSTS = ['*']
+# DEBUG = True
+# ALLOWED_HOSTS = ['108.61.220.238']
+# ALLOWED_HOSTS = ['127.0.0.1']
 # ALLOWED_HOSTS = ['*',]
 
 
@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -126,17 +127,20 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+DEBUG = False
+ALLOWED_HOSTS = ['108.61.220.238']
+# ALLOWED_HOSTS = ['127.0.0.1']
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 # debug
+# DEBUG = True
+# ALLOWED_HOSTS = ['*']
+# STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
 # )
-STATIC_ROOT = 'static'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '/static/'),
-)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

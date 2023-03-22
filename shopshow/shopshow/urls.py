@@ -24,7 +24,8 @@ from goods.views import goods
 from goods.views import allgoods
 from goods.views import showAllGood
 from home.views import home
-from store.views import store
+# from store.views import store
+from goods.views import goodInfo
 from store.views import uplog
 
 
@@ -33,7 +34,7 @@ urlpatterns = [
     path('home/', home, name='home'),
     path('', home, name='home'),
     path('goods/', showAllGood, name='goods'),
-    path('store/', store, name='store'),
+    path('goodInfo/', goodInfo, name='foodInfo'),
     path('contact/', contact, name='contact'),
     path('uplog/', uplog, name='uploadLogistics'),
     path('upgood/', allgoods, name='uploadGoods'),
@@ -42,6 +43,8 @@ urlpatterns = [
 
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
     
+# if settings.DEBUG is False:
+#     urlpatterns += patterns( ' ',url(r'^static/(?P.*)$', 'django.views.static.serve', { 'document_root': settings.STATIC_ROOT,}),)

@@ -28,9 +28,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'goods' %}">Goods</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{% url 'store' %}">Store</a>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link " href="{% url 'contact' %}">Contact</a>
             </li>
@@ -45,10 +43,11 @@
                     {% for good in goods %}
                     <div class="goodsCard">
                         <div class="goodsCardItem">
-                            <a href="{{good.url}}">
+                            <a href="../goodInfo?goodid={{good.Product_Number}}">
                                 <img class="imgSize", src="{{good.Product_img}}", alt="">
                             </a>
                             <div class="cardname">{{good.Product_Name}}</div>
+                            <div class="cardprice">{{good.Product_Number}}</div>
                             <div class="cardprice">$ {{good.P1}}</div>
                         </div>
                     </div>

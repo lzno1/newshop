@@ -150,7 +150,7 @@ def allgoods(request):
             # data = getdata('F:\第一人生\软件设计--外接\外贸网站\c46671已修改.csv')
             # for one in data:
             #     try:
-            #         AllGoods.objects.create(Product_Name=one[0], Product_Number=one[1],Product_img=one[2], Product_IsHazmat=one[3], Description=one[4], Summary=one[5], Product_Type=one[6], Category=one[7], Keywords=one[8], Product_Color=one[9], Material=one[10], Size_Group=one[11], Size_Values=one[12], Shape=one[13], Theme=one[14], Origin=one[15], Imprint_Method=one[16], Imprint_Color=one[17], Imprint_Size=one[18], Imprint_Location=one[19], Price_Includes=one[20], Sequence=one[21], Currency=one[22], Always_Free_Setup=one[23], Upcharge_Name=one[24], Upcharge_Criteria_1=one[25], Upcharge_Criteria_2=one[26], Upcharge_Type=one[27], Upcharge_Level=one[28], Service_Charge=one[29], UQ1=one[30], UQ2=one[31], UQ3=one[32], UQ4=one[33], UQ5=one[34], UQ6=one[35], UQ7=one[36], UQ8=one[37], UQ9=one[38], UQ10=one[39], UP1=one[40], UP2=one[41], UP3=one[42], UP4=one[43], UP5=one[44], UP6=one[45], UP7=one[46], UP8=one[47], UP9=one[48], UP10=one[49], UD1=one[50], UD2=one[51], UD3=one[52], UD4=one[53], UD5=one[54], UD6=one[55], UD7=one[56], UD8=one[57], UD9=one[58], UD10=one[59], Upcharge_Details=one[60], Production_Time=one[61], Rush_Service=one[62], Rush_Time=one[63], Same_Day_Service=one[64], Packaging=one[65], Shipping_Items=one[66], Shipping_Dimensions=one[67], Shipping_Weight=one[68], Shipper_Bills_By=one[69], Shipping_Info=one[70], Free_Shipping=one[71], Q1=one[72], Q2=one[73], Q3=one[74], Q4=one[75], Q5=one[76], Q6=one[77], Q7=one[78], Q8=one[79], Q9=one[80], Q10=one[81], P1=one[82], P2=one[83], P3=one[86], P4=one[85], P5=one[86], P6=one[87], P7=one[88], P8=one[89], P9=one[90], P10=one[91], D1=one[92], D2=one[93], D3=one[94], D4=one[95], D5=one[96], D6=one[97], D7=one[98], D8=one[99], D9=one[100], D10=one[101], Distributor_View_Only=one[102], Carrier_Information=one[103], Market_Segment=one[104])
+            #         AllGoods.objects.create(Product_Name=one[0], Product_Number=one[1],Product_img=one[2], Product_IsHazmat=one[3], Description=one[4], Summary=one[5], Product_Type=one[6], Category=one[7], Keywords=one[8], Product_Color=one[9], Material=one[10], Size_Group=one[11], Size_Values=one[12], Shape=one[13], Theme=one[14], Origin=one[15], Imprint_Method=one[16], Imprint_Color=one[17], Imprint_Size=one[18], Imprint_Location=one[19], Price_Includes=one[20], Sequence=one[21], Currency=one[22], Always_Free_Setup=one[23], Upcharge_Name=one[24], Upcharge_Criteria_1=one[25], Upcharge_Criteria_2=one[26], Upcharge_Type=one[27], Upcharge_Level=one[28], Service_Charge=one[29], UQ1=one[30], UQ2=one[31], UQ3=one[32], UQ4=one[33], UQ5=one[34], UQ6=one[35], UQ7=one[36], UQ8=one[37], UQ9=one[38], UQ10=one[39], UP1=one[40], UP2=one[41], UP3=one[42], UP4=one[43], UP5=one[44], UP6=one[45], UP7=one[46], UP8=one[47], UP9=one[48], UP10=one[49], UD1=one[50], UD2=one[51], UD3=one[52], UD4=one[53], UD5=one[54], UD6=one[55], UD7=one[56], UD8=one[57], UD9=one[58], UD10=one[59], Upcharge_Details=one[60], Production_Time=one[61], Rush_Service=one[62], Rush_Time=one[63], Same_Day_Service=one[64], Packaging=one[65], Shipping_Items=one[66], Shipping_Dimensions=one[67], Shipping_Weight=one[68], Shipper_Bills_By=one[69], Shipping_Info=one[70], Free_Shipping=one[71], Q1=one[72], Q2=one[73], Q3=one[74], Q4=one[75], Q5=one[76], Q6=one[77], Q7=one[78], Q8=one[79], Q9=one[80], Q10=one[81], P1=one[82], P2=one[83], P3=one[84], P4=one[85], P5=one[86], P6=one[87], P7=one[88], P8=one[89], P9=one[90], P10=one[91], D1=one[92], D2=one[93], D3=one[94], D4=one[95], D5=one[96], D6=one[97], D7=one[98], D8=one[99], D9=one[100], D10=one[101], Distributor_View_Only=one[102], Carrier_Information=one[103], Market_Segment=one[104])
             #     except:
             #         pass
             try:
@@ -166,6 +166,12 @@ def allgoods(request):
 def showAllGood(request):
     allgoods = AllGoods.objects.all()[:100]
     return render(request, 'goods.html', {'goods': allgoods})
+
+def goodInfo(request):
+    id = request.GET['goodid']
+    goodinfo = AllGoods.objects.filter(Product_Number = id).first()
+    print(goodinfo.Product_Number)
+    return render(request, 'goodinfo.html', {'info': goodinfo})
 
 
 def getdata(filepath):

@@ -12,7 +12,7 @@
     <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
     <!-- <script src="{% static 'js/events.js' %}"></script> -->
-    
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
@@ -28,18 +28,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'goods' %}">Goods</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{% url 'store' %}">Store</a>
-            </li>
+           
             <li class="nav-item">
                 <a class="nav-link " href="{% url 'contact' %}">Contact</a>
             </li>
         </ul>
 
         <div class="form-inline ml-auto">
-            <input type="text" class=" mr-sm-2" placeholder="请输入订单号">
-            <button class="btn btn-outline-secondary my-2", id="searchOrderId">search</button>
-            
+            <form method="post" >
+                {%csrf_token%}
+                <input type="text" class=" mr-sm-2" placeholder="请输入商品编号" name="goodid" value="{{ERROR}}">
+                <button class="btn btn-outline-secondary my-2" id="searchOrderId" type="submit">search</button>
+            </form>
         </div>
     </nav>
 
@@ -49,6 +49,10 @@
             <li data-target="#carousel" data-slide-to="1"></li>
             <li data-target="#carousel" data-slide-to="2"></li>
             <li data-target="#carousel" data-slide-to="3"></li>
+            <li data-target="#carousel" data-slide-to="4"></li>
+            <li data-target="#carousel" data-slide-to="5"></li>
+            <li data-target="#carousel" data-slide-to="6"></li>
+            <li data-target="#carousel" data-slide-to="7"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active" >
@@ -76,12 +80,6 @@
             <div class="carousel-item" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
                     <img src="{% static 'img/carousel/carousel-3.jpg' %}" class="mx-auto d-block img-fluid" alt="">
-                    <div class="carousel-caption">
-                        <!-- <h1 class="carousel-title m-auto">title </h1>
-                        <h1 class="carousel-info m-auto">info</h1>
-                        <h1 class="carousel-content m-auto">content</h1>
-                        <div class="carousel-button m-auto">按键3</div> -->
-                    </div>
                 </a>
             </div>
             <div class="carousel-item" >
@@ -95,6 +93,28 @@
                     </div>
                 </a>
             </div>
+            <div class="carousel-item" >
+                <a class="carousel-a-href", href="https://www.baidu.com">
+                    <img src="{% static 'img/carousel/carousel-5.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                </a>
+            </div>
+            <div class="carousel-item" >
+                <a class="carousel-a-href", href="https://www.baidu.com">
+                    <img src="{% static 'img/carousel/carousel-6.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                </a>
+            </div>
+            <div class="carousel-item" >
+                <a class="carousel-a-href", href="https://www.baidu.com">
+                    <img src="{% static 'img/carousel/carousel-7.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                </a>
+            </div>
+            <div class="carousel-item" >
+                <a class="carousel-a-href", href="https://www.baidu.com">
+                    <img src="{% static 'img/carousel/carousel-8.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                </a>
+            </div>
+
+
         </div>
 
         <a href="#carousel" class="carousel-control-prev" data-slide="prev">
@@ -114,7 +134,7 @@
                         {%csrf_token%}
                         <div class="row m-auto">
                             <div class="col-lg-9">
-                                <input class="form-control input-round h-auto" placeholder="商品ID" type="text" name="id">
+                                <input class="form-control input-round h-auto" placeholder="订单ID" type="text" name="logisticsid">
                             </div>
                             <div class="col-lg-3 text-md-center text-lg-left mt-4 mb-4 m-lg-0">
                                 <input class="btn btn-success btn-round w-75" type="submit" value="search">

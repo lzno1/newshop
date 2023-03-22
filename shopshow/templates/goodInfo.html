@@ -1,0 +1,404 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <ul class="nav ">
+            <li class="nav-item">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png' %}", height="30", alt="logo">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'goods' %}">Goods</a>
+            </li>
+           
+            <li class="nav-item">
+                <a class="nav-link " href="{% url 'contact' %}">Contact</a>
+            </li>
+        </ul>
+
+        <!-- <form action="", class="form-inline ml-auto">
+            <input type="text" class="form-control mr-sm-2" placeholder="请输入订单号">
+            <button class="btn btn-outline-secondary my-2",type="submit">search</button>
+        </form> -->
+    </nav>
+
+    <div class="container w-75" id="goodsInfo">
+        <div class="row">
+            <div class="col-lg-3">
+                <img class="imgSize", src="{{info.Product_img}}", alt="">
+            </div>
+            <div class="col-lg-9">
+                <div class="text-left">
+                    <h2><strong>{{info.Product_Name}}</strong></h2>
+                    <h6>{{info.Product_Number}}</h6>
+                    <h5>{{info.Description}}</h5>
+                </div>
+                
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                BaseInfo
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 ">
+                                <div class="m-auto text-left">
+                                    {% if info.Category %}
+                                    <h6><strong>Category: </strong> {{info.Category}}</h6>
+                                    {% endif %}
+                                    {% if info.Product_Color %}
+                                    <h6><strong>Product_Color: </strong> {{info.Product_Color}}</h6>
+                                    {% endif %}
+                                    {% if info.Material %}
+                                    <h6><strong>Material: </strong> {{info.Material}}</h6>
+                                    {% endif %}
+                                    {% if info.Size_Group %}
+                                    <h6><strong>Size_Group: </strong> {{info.Size_Group}}</h6>
+                                    {% endif %}
+                                    {% if info.Size_Values %}
+                                    <h6><strong>Size_Values: </strong> {{info.Size_Values}}</h6>
+                                    {% endif %}
+                                    {% if info.Shape != ' ' %}
+                                    <h6><strong>Shape: </strong> {{info.Shape}}</h6>
+                                    {% endif %}
+                                        
+                                </div>
+        
+
+                                
+
+                                
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Price
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 ">
+                                <div class="m-auto text-left">
+                                    {% if info.Category %}
+                                    <h6><strong>Category: </strong> {{info.Category}}</h6>
+                                    {% endif %}
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Quantity</th>
+                                                {% if info.Q1 %}
+                                                <th>{{info.Q1}}</th>
+                                                {% endif %}
+                                                {% if info.Q2 %}
+                                                <th>{{info.Q2}}</th>
+                                                {% endif %}
+                                                {% if info.Q3 %}
+                                                <th>{{info.Q3}}</th>
+                                                {% endif %}
+                                                {% if info.Q4 %}
+                                                <th>{{info.Q4}}</th>
+                                                {% endif %}
+                                                {% if info.Q5 %}
+                                                <th>{{info.Q5}}</th>
+                                                {% endif %}
+                                                {% if info.Q6 %}
+                                                <th>{{info.Q6}}</th>
+                                                {% endif %}
+                                                {% if info.Q7 %}
+                                                <th>{{info.Q7}}</th>
+                                                {% endif %}
+                                                {% if info.Q8 %}
+                                                <th>{{info.Q8}}</th>
+                                                {% endif %}
+                                                {% if info.Q9 %}
+                                                <th>{{info.Q9}}</th>
+                                                {% endif %}
+                                                {% if info.Q10 %}
+                                                <th>{{info.Q10}}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="active">
+                                                <th>Price</th>
+                                                {% if info.Q1 %}
+                                                <th>{{info.P1}}</th>
+                                                {% endif %}
+                                                {% if info.Q2 %}
+                                                <th>{{info.P2}}</th>
+                                                {% endif %}
+                                                {% if info.Q3 %}
+                                                <th>{{info.P3}}</th>
+                                                {% endif %}
+                                                {% if info.Q4 %}
+                                                <th>{{info.P4}}</th>
+                                                {% endif %}
+                                                {% if info.Q5 %}
+                                                <th>{{info.P5}}</th>
+                                                {% endif %}
+                                                {% if info.Q6 %}
+                                                <th>{{info.P6}}</th>
+                                                {% endif %}
+                                                {% if info.Q7 %}
+                                                <th>{{info.P7}}</th>
+                                                {% endif %}
+                                                {% if info.Q8 %}
+                                                <th>{{info.P8}}</th>
+                                                {% endif %}
+                                                {% if info.Q9 %}
+                                                <th>{{info.P9}}</th>
+                                                {% endif %}
+                                                {% if info.Q10 %}
+                                                <th>{{info.P10}}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                        
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Imprint
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 ">
+                                <div class="m-auto text-left">
+                                    {% if info.Origin %}
+                                    <h6><strong>Origin: </strong> {{info.Origin}}</h6>
+                                    {% endif %}
+                                    {% if info.Imprint_Method %}
+                                    <h6><strong>Imprint_Method: </strong> {{info.Imprint_Method}}</h6>
+                                    {% endif %}
+                                    {% if info.Imprint_Color %}
+                                    <h6><strong>Imprint_Color: </strong> {{info.Imprint_Color}}</h6>
+                                    {% endif %}
+                                    {% if info.Imprint_Size %}
+                                    <h6><strong>Imprint_Size: </strong> {{info.Imprint_Size}}</h6>
+                                    {% endif %}
+                                    {% if info.Imprint_Location %}
+                                    <h6><strong>Imprint_Location: </strong> {{info.Imprint_Location}}</h6>
+                                    {% endif %}
+                                    {% if info.Price_Includes %}
+                                    <h6><strong>Price_Includes: </strong> {{info.Price_Includes}}</h6>
+                                    {% endif %}
+                                    {% if info.Upcharge_Name %}
+                                    <h6><strong>Upcharge_Name: </strong> {{info.Upcharge_Name}}</h6>
+                                    {% endif %}
+                                    {% if info.Service_Charge %}
+                                    <h6><strong>Service_Charge: </strong> {{info.Service_Charge}}</h6>
+                                    {% endif %}
+                                    {% if info.Upcharge_Type %}
+                                    <h6><strong>Upcharge_Type: </strong> {{info.Upcharge_Type}}</h6>
+                                    {% endif %}
+                                    {% if info.Upcharge_Level %}
+                                    <h6><strong>Upcharge_Level: </strong> {{info.Upcharge_Level}}</h6>
+                                    {% endif %}
+                                    {% if info.Upcharge_Details %}
+                                    <h6><strong>Upcharge_Details: </strong> {{info.Upcharge_Details}}</h6>
+                                    {% endif %}
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Quantity</th>
+                                                {% if info.UQ1 %}
+                                                <th>{{info.UQ1}}</th>
+                                                {% endif %}
+                                                {% if info.UQ2 %}
+                                                <th>{{info.UQ2}}</th>
+                                                {% endif %}
+                                                {% if info.UQ3 %}
+                                                <th>{{info.UQ3}}</th>
+                                                {% endif %}
+                                                {% if info.UQ4 %}
+                                                <th>{{info.UQ4}}</th>
+                                                {% endif %}
+                                                {% if info.UQ5 %}
+                                                <th>{{info.UQ5}}</th>
+                                                {% endif %}
+                                                {% if info.UQ6 %}
+                                                <th>{{info.UQ6}}</th>
+                                                {% endif %}
+                                                {% if info.UQ7 %}
+                                                <th>{{info.UQ7}}</th>
+                                                {% endif %}
+                                                {% if info.UQ8 %}
+                                                <th>{{info.UQ8}}</th>
+                                                {% endif %}
+                                                {% if info.UQ9 %}
+                                                <th>{{info.UQ9}}</th>
+                                                {% endif %}
+                                                {% if info.UQ10 %}
+                                                <th>{{info.UQ10}}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="active">
+                                                <th>Price</th>
+                                                {% if info.UQ1 %}
+                                                <th>{{info.UP1}}</th>
+                                                {% endif %}
+                                                {% if info.UQ2 %}
+                                                <th>{{info.UP2}}</th>
+                                                {% endif %}
+                                                {% if info.UQ3 %}
+                                                <th>{{info.UP3}}</th>
+                                                {% endif %}
+                                                {% if info.UQ4 %}
+                                                <th>{{info.UP4}}</th>
+                                                {% endif %}
+                                                {% if info.UQ5 %}
+                                                <th>{{info.UP5}}</th>
+                                                {% endif %}
+                                                {% if info.UQ6 %}
+                                                <th>{{info.UP6}}</th>
+                                                {% endif %}
+                                                {% if info.UQ7 %}
+                                                <th>{{info.UP7}}</th>
+                                                {% endif %}
+                                                {% if info.UQ8 %}
+                                                <th>{{info.UP8}}</th>
+                                                {% endif %}
+                                                {% if info.UQ9 %}
+                                                <th>{{info.UP9}}</th>
+                                                {% endif %}
+                                                {% if info.UQ10 %}
+                                                <th>{{info.UP10}}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                        
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Production And Shipping
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 ">
+                                <div class="m-auto text-left">
+                                    {% if info.Production_Time %}
+                                    <h6><strong>Production_Time: </strong> {{info.Production_Time}}</h6>
+                                    {% endif %}
+                                    {% if info.Rush_Service %}
+                                    <h6><strong>Rush_Service: </strong> {{info.Rush_Service}}</h6>
+                                    {% endif %}
+                                    {% if info.Rush_Time %}
+                                    <h6><strong>Rush_Time: </strong> {{info.Rush_Time}}</h6>
+                                    {% endif %}
+                                    {% if info.Same_Day_Service %}
+                                    <h6><strong>Same_Day_Service: </strong> {{info.Same_Day_Service}}</h6>
+                                    {% endif %}
+                                    {% if info.Packaging %}
+                                    <h6><strong>Packaging: </strong> {{info.Packaging}}</h6>
+                                    {% endif %}
+                                    {% if info.Shipping_Items %}
+                                    <h6><strong>Shipping_Items: </strong> {{info.Shipping_Items}}</h6>
+                                    {% endif %}
+                                    {% if info.Shipping_Dimensions %}
+                                    <h6><strong>Shipping_Dimensions: </strong> {{info.Shipping_Dimensions}}</h6>
+                                    {% endif %}
+                                    {% if info.Shipping_Weight %}
+                                    <h6><strong>Shipping_Weight: </strong> {{info.Shipping_Weight}}</h6>
+                                    {% endif %}
+                                    {% if info.Shipper_Bills_By %}
+                                    <h6><strong>Shipper_Bills_By: </strong> {{info.Shipper_Bills_By}}</h6>
+                                    {% endif %}
+                                    {% if info.Shipping_Info %}
+                                    <h6><strong>Shipping_Info: </strong> {{info.Shipping_Info}}</h6>
+                                    {% endif %}
+                                    {% if info.Free_Shipping %}
+                                    <h6><strong>Free_Shipping: </strong> {{info.Free_Shipping}}</h6>
+                                    {% endif %}
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Other
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 ">
+                                <div class="m-auto text-left">
+                                    {% if info.Distributor_View_Only %}
+                                    <h6><strong>Distributor_View_Only: </strong> {{info.Distributor_View_Only}}</h6>
+                                    {% endif %}
+                                    {% if info.Carrier_Information %}
+                                    <h6><strong>Carrier_Information: </strong> {{info.Carrier_Information}}</h6>
+                                    {% endif %}
+                                    {% if info.Market_Segment %}
+                                    <h6><strong>Market_Segment: </strong> {{info.Market_Segment}}</h6>
+                                    {% endif %}
+                                    
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+             
+            </div>
+        </div>
+        
+        
+    </div>
+
+</body>
+</html>
