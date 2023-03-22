@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import ALLHotGoods
 from .models import Dingdans
+from django.views.decorators.csrf import csrf_exempt
 from .models import AllGoods
 import csv
 
@@ -167,8 +168,9 @@ def showAllGood(request):
     allgoods = AllGoods.objects.all()[:100]
     return render(request, 'goods.html', {'goods': allgoods})
 
-def goodInfo(request):
-    id = request.GET['goodid']
+@csrf_exempt
+def goodInfo(request, goodid):
+    id = goodid
     goodinfo = AllGoods.objects.filter(Product_Number = id).first()
     print(goodinfo.Product_Number)
     return render(request, 'goodinfo.html', {'info': goodinfo})
