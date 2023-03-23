@@ -37,7 +37,7 @@
         <div class="form-inline ml-auto">
             <form method="post" >
                 {%csrf_token%}
-                <input type="text" class=" mr-sm-2" placeholder="请输入商品编号" name="goodid" value="{{ERROR}}">
+                <input type="text" class=" mr-sm-2" placeholder="Search for the Products You Need Here" name="goodid" value="{{ERROR}}">
                 <button class="btn btn-outline-secondary my-2" id="searchOrderId" type="submit">search</button>
             </form>
         </div>
@@ -57,7 +57,7 @@
         <div class="carousel-inner">
             <div class="carousel-item active" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/carousel-1.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                    <img src="{% static 'img/carousel/carousel-1.png' %}" class="w-100 carousel_img d-block img-fluid" alt="">
                     <div class="carousel-caption">
                         <!-- <h1 class="carousel-title m-auto">title </h1>
                         <h1 class="carousel-info m-auto">info</h1>
@@ -68,7 +68,7 @@
             </div>
             <div class="carousel-item" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/carousel-2.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                    <img src="{% static 'img/carousel/carousel-2.png' %}" class="w-100 carousel_img d-block img-fluid" alt="">
                     <div class="carousel-caption">
                         <!-- <h1 class="carousel-title m-auto">title </h1>
                         <h1 class="carousel-info m-auto">info</h1>
@@ -79,12 +79,12 @@
             </div>
             <div class="carousel-item" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/carousel-3.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                    <img src="{% static 'img/carousel/carousel-3.png' %}" class="w-100 carousel_img d-block img-fluid" alt="">
                 </a>
             </div>
             <div class="carousel-item" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/carousel-4.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                    <img src="{% static 'img/carousel/carousel-4.png' %}" class="w-100 carousel_img d-block img-fluid" alt="">
                     <div class="carousel-caption">
                         <!-- <h1 class="carousel-title m-auto">title </h1>
                         <h1 class="carousel-info m-auto">info</h1>
@@ -95,22 +95,22 @@
             </div>
             <div class="carousel-item" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/carousel-5.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                    <img src="{% static 'img/carousel/carousel-5.png' %}" class="w-100 carousel_img d-block img-fluid" alt="">
                 </a>
             </div>
             <div class="carousel-item" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/carousel-6.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                    <img src="{% static 'img/carousel/carousel-6.png' %}" class="w-100 carousel_img d-block img-fluid" alt="">
                 </a>
             </div>
             <div class="carousel-item" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/carousel-7.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                    <img src="{% static 'img/carousel/carousel-7.png' %}" class="w-100 carousel_img d-block img-fluid" alt="">
                 </a>
             </div>
             <div class="carousel-item" >
                 <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/carousel-8.jpg' %}" class="mx-auto d-block img-fluid" alt="">
+                    <img src="{% static 'img/carousel/carousel-8.png' %}" class="w-100 carousel_img d-block img-fluid" alt="">
                 </a>
             </div>
 
@@ -126,7 +126,7 @@
     </div>
 
     <div class="container jumbotron card_center", id="searchGoodGps">
-        <div class="whatWeDoTitle1 jumbotron-fluid">订单追踪</div>
+        <div class="whatWeDoTitle1 jumbotron-fluid">Promo Union--Order Tracking System</div>
         <div class="jumbotron p-5 jumbotron-fluid">
             <div class="container h-100">
                 <div class="row justify-content-between align-items-center text-md-center text-lg-left">
@@ -134,7 +134,7 @@
                         {%csrf_token%}
                         <div class="row m-auto">
                             <div class="col-lg-9">
-                                <input class="form-control input-round h-auto" placeholder="订单ID" type="text" name="logisticsid">
+                                <input class="form-control input-round h-auto" placeholder="Teack Your Order Status Here" type="text" name="logisticsid">
                             </div>
                             <div class="col-lg-3 text-md-center text-lg-left mt-4 mb-4 m-lg-0">
                                 <input class="btn btn-success btn-round w-75" type="submit" value="search">
@@ -314,10 +314,11 @@
         <div class="row">
             <div class="col-lg-6" id="container-row-left">
                 <div class="aboutInfoPlace">
-                    <div class="aboutInfoTitle"><h1>A Few Words About Us</h1></div>
-                    <h4 class="aboutInfoInfo">Enjoy getting closer to the nature? You're in the right place!</h4>
-                    <p class="aboutInfoP">We realize we are models for our clients behavior. We take minimal impact and Leave No Trace ethics seriously. We never use disposable plates or silverware for our trips, as an example. We strive to keep our group sizes relatively small when rock climbing to minimize our impact on other park users.</p>
-                    <p class="aboutInfoP">Cleanups are a fun, free, easy way to give back to your community by keeping pollution from entering the Pacific Ocean. --首页公司简介</p>
+                    <div class="aboutInfoTitle"><h1>Promo Unions</h1></div>
+                    <!-- <h4 class="aboutInfoInfo">Enjoy getting closer to the nature? You're in the right place!</h4> -->
+                    <p class="aboutInfoP">Looking for a specific item or just browsing for ideas? Promo Union is your one-stop shop for promotional products and business gifts. Our extensive range of promo products will ensure you find something to suit your requirements.</p>
+                    <p class="aboutInfoP">With over 100,000 of selections, Promo Union offers branded merchandise to fulfill all of your needs.</p>
+                    <p class="aboutInfoP">Put our knowledge about promotional products to work for you. With high quality promotional products, fast delivery times, free mock-ups and prices to fit all budgets, we will provide customized, relevant recommendations for you. Simply take a look around or contact us now and we'll do the shopping for you!</p>
                     <a href="" class="btn btn-primary aboutInfoButton">learn more</a>
                 </div>
             </div>
@@ -384,8 +385,7 @@
                     </svg>
                 </div>
                 <div class="pageFoot-text">
-                    <h4 class="pageFoot-font">151-12345678</h4>
-                    <h4 class="pageFoot-font">151-12345678</h4>
+                    <h4 class="pageFoot-font">留言板</h4>
                 </div>
             </div>
             <div class="col-lg-4 pagefootBorder">
@@ -395,11 +395,10 @@
                     </svg>
                 </div>
                 <div class="pageFoot-text">
-                    <h4 class="pageFoot-font">123456@google.com</h4>
-                    <h4 class="pageFoot-font">123789@google.com</h4>
+                    <h4 class="pageFoot-font">support@promo-union.com</h4>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <div class="pageFoot-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
                         <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
@@ -409,7 +408,7 @@
                     <h4 class="pageFoot-font">公司地址</h4>
                     
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

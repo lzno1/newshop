@@ -20,9 +20,13 @@ def home(request):
                 return render(request, 'home.html',{'hotgoods': hotgoods, 'ERROR':'商品ID错误'})
         elif 'logisticsid' in request.POST:
             goodid = request.POST['logisticsid']
-            logInfo = logistics.objects.get(goodid=goodid)
-            hotgoods = HotGoods.objects.all()
-            return render(request, 'home.html',{'hotgoods': hotgoods,'logInfo':logInfo})
+            try:
+                logInfo = logistics.objects.get(goodid=goodid)
+                hotgoods = HotGoods.objects.all()
+                return render(request, 'home.html',{'hotgoods': hotgoods,'logInfo':logInfo})
+            except:
+                hotgoods = HotGoods.objects.all()
+                return render(request, 'home.html',{'hotgoods': hotgoods,'logError':'订单ID错误'})
     else:
         hotgoods = HotGoods.objects.all()
         return render(request, 'home.html',{'hotgoods': hotgoods})
