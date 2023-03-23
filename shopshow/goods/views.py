@@ -172,7 +172,7 @@ def goodInfo(request):
         id = request.GET.get('goodid', None)
         goodinfo = AllGoods.objects.filter(Product_Number = id).first()
         print(goodinfo.Product_Number)
-        return render(request, 'goodinfo.html', {'info': goodinfo})
+        return render(request, 'goodInfo.html', {'info': goodinfo})
 
 
 
