@@ -167,11 +167,13 @@ def showAllGood(request):
     allgoods = AllGoods.objects.all()[:100]
     return render(request, 'goods.html', {'goods': allgoods})
 
-def goodInfo(request, goodid):
-    id = goodid
-    goodinfo = AllGoods.objects.filter(Product_Number = id).first()
-    print(goodinfo.Product_Number)
-    return render(request, 'goodinfo.html', {'info': goodinfo})
+def goodInfo(request):
+    if request.method == "GET" and request.GET:
+        id = request.GET.get('goodid', None)
+        goodinfo = AllGoods.objects.filter(Product_Number = id).first()
+        print(goodinfo.Product_Number)
+        return render(request, 'goodinfo.html', {'info': goodinfo})
+
 
 
 def getdata(filepath):

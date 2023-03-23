@@ -18,6 +18,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.views import static
 from django.conf.urls import url
+from django.urls import re_path
 from django.urls import path
 from contact.views import contact
 from goods.views import goods
@@ -34,7 +35,7 @@ urlpatterns = [
     path('home/', home, name='home'),
     path('', home, name='home'),
     path('goods/', showAllGood, name='goods'),
-    path('goodInfo/<goodid>/', goodInfo, name='goodInfo'),
+    re_path('^goodInfo/$', goodInfo, name='goodInfo'),
     path('contact/', contact, name='contact'),
     path('uplog/', uplog, name='uploadLogistics'),
     path('upgood/', allgoods, name='uploadGoods'),

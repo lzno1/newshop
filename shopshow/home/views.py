@@ -2,7 +2,6 @@ from cgitb import html
 from django.contrib import messages
 from django.shortcuts import render
 from django.shortcuts import HttpResponse,HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
 from .models import HotGoods
 from store.models import logistics
 from goods.models import AllGoods
