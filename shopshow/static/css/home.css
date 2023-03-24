@@ -356,7 +356,19 @@
     background-color: #000000;
   }
 
-  .carousel_img{
+.carousel_img{
     max-height: 700px;
   }
 
+.border_radius{
+    border-top-right-radius: 5px; 
+    border-top-left-radius: 5px; 
+    border-bottom-right-radius:5px;
+    border-bottom-left-radius:5px; 
+    background: #f8f8f8;
+}
+
+.nav-link{
+    font-size: x-large;
+    font-weight: bolder;
+}

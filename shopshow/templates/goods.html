@@ -36,6 +36,86 @@
 
     </nav>
 
+    <div class="container">
+        <form method="post" >
+            {%csrf_token%}
+            <div class="row text-center m-auto">
+            
+                <!-- 
+                <button class="btn btn-outline-secondary my-2" id="searchOrderId" type="submit">search</button> -->
+            
+                <div class="cardspad col-lg-2 row">
+                    <div class="col-lg-3">
+                        <label for="category">Category</label>
+                    </div>
+                    <div class="col-lg-9 w-100">
+                        <select id="category" name="category" class="w-100">
+                            <option value="false"></option>
+                            <option value="_Bags">BAGS</option>
+                            <option value="_Tools-Kitchen">TOOLS-KITCHEN</option>
+                            <option value="_Pet Items">PET ITEMS</option>
+                            <option value="_Tote Bags">TOTE BAGS</option>
+                            <option value="_Bottles">BOTTLES</option>
+                            <option value="_Mobile Accessories">MOBILE ACCESSORIES</option>
+                            <option value="_Caps & Hats">CAPS & HATS</option>
+                            <option value="_Sports Equipment & Access">SPORTS EQUIPMENT & ACCESS</option>
+                            <option value="_Backpacks">BACKPACKS</option>
+                            <option value="_Key Chains">KEY CHAINS</option>
+                            <option value="_Cups">CUPS</option>
+                            <option value="_Beauty Aids">BEAUTY AIDS</option>
+                            <option value="_Pens">PENS</option>
+                            <option value="_Toys">TOYS</option>
+                            <option value="_Travel Mugs/Cups">TRAVEL MUGS/CUPS</option>
+                        </select>
+                    </div>
+                    
+                </div>
+
+                <div class="cardspad col-lg-2 row">
+                    <div class="col-lg-3">
+                        <label for="theme">Theme</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <select id="theme" name="theme" class="w-100">
+                            <option value="false"></option>
+                            <option value="_Travel">Travel</option>
+                            <option value="_Camping">Camping</option>
+                            <option value="_Safety">Safety</option>
+                            <option value="_Trade Show">Trade Show</option>
+                            <option value="_Sports">Sports</option>
+                            <option value="_Back To School">Back To School</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cardspad col-lg-4 row">
+                    <div class="col-lg-2">
+                        <label>Search</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="w-100" placeholder="Search All Products" name="search_words" id="search_words" value="">
+                    </div>
+                </div>
+                
+                <div class="cardspad col-lg-4 row">
+                    <div class="col-lg-2">
+                        <label>Search</label>
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="text" class="w-100" placeholder="Price From $" name="price_from" id="price_from">
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="text" class="w-100" placeholder="Price To $" name="price_to" id="price_to">
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="submit" class="w-100" name="submit" value="Search">
+                    </div>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+
     <div class="container" id="goodsInfo">
         <div class="row">
             <div class="cardspad col-lg-12">

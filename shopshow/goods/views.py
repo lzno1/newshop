@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import ALLHotGoods
 from .models import Dingdans
 from .models import AllGoods
+from django.db.models import Q
 import csv
 
 # Create your views here.
@@ -164,8 +165,32 @@ def allgoods(request):
 
 
 def showAllGood(request):
-    allgoods = AllGoods.objects.all()[:100]
-    return render(request, 'goods.html', {'goods': allgoods})
+    if request.method == "POST":
+            category = request.POST['category']
+            theme = request.POST['theme']
+            search_words = request.POST['search_words']
+            price_from = request.POST['price_from']
+            price_to = request.POST['price_to']
+            allgoods = AllGoods.objects
+            showgoods = []
+            print(category, theme, search_words, price_from, price_to)
+            if not category=='false':
+                allgoods = allgoods.filter(Category__contains=category[1:])
+            if not theme=='false':
+                allgoods = allgoods.filter(Theme__contains=theme[1:])
+            if search_words:
+                allgoods = allgoods.filter(Q(Product_Name__contains=search_words) | Q(Keywords=search_words))
+            # for good in allgoods:
+            #     if good.P1 <= price_to:
+            #         showgoods.append(good)
+            # if price_from:
+            #     allgoods = AllGoods.objects.filter(P1__gte=str(price_from))
+
+            
+            return render(request, 'goods.html', {'goods': allgoods})
+    else:
+        allgoods = AllGoods.objects.all()[:100]
+        return render(request, 'goods.html', {'goods': allgoods})
 
 def goodInfo(request):
     if request.method == "GET" and request.GET:

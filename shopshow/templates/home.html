@@ -15,7 +15,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <ul class="nav ">
             <li class="nav-item">
                 <a class="navbar-brand" href="{% url 'home' %}">
@@ -34,11 +34,11 @@
             </li>
         </ul>
 
-        <div class="form-inline ml-auto">
-            <form method="post" >
+        <div class="form-inline m-auto w-50">
+            <form method="post" class="row w-75 my-2">
                 {%csrf_token%}
-                <input type="text" class=" mr-sm-2" placeholder="Search for the Products You Need Here" name="goodid" value="{{ERROR}}">
-                <button class="btn btn-outline-secondary my-2" id="searchOrderId" type="submit">search</button>
+                <input type="text" class="border_radius col-lg-9 mr-sm-2" placeholder="Search for the Products You Need Here" name="goodid" value="{{ERROR}}">
+                <button class="col-lg-2 btn btn-outline-secondary " id="searchOrderId" type="submit">search</button>
             </form>
         </div>
     </nav>
@@ -303,7 +303,7 @@
                     <img src="{% static 'img/icon/wedoicon01.png' %}" alt="">
                 </div>
                 <div class="wedoitem-text">
-                    <h4>Further Cooperation</h4>
+                    <h4>Free Mock-Up</h4>
                 </div>
             </div>
         </div>
@@ -314,21 +314,27 @@
         <div class="row">
             <div class="col-lg-6" id="container-row-left">
                 <div class="aboutInfoPlace">
-                    <div class="aboutInfoTitle"><h1>Promo Unions</h1></div>
+                    <div class="aboutInfoTitle"><h1>About Us</h1></div>
                     <!-- <h4 class="aboutInfoInfo">Enjoy getting closer to the nature? You're in the right place!</h4> -->
-                    <p class="aboutInfoP">Looking for a specific item or just browsing for ideas? Promo Union is your one-stop shop for promotional products and business gifts. Our extensive range of promo products will ensure you find something to suit your requirements.</p>
-                    <p class="aboutInfoP">With over 100,000 of selections, Promo Union offers branded merchandise to fulfill all of your needs.</p>
-                    <p class="aboutInfoP">Put our knowledge about promotional products to work for you. With high quality promotional products, fast delivery times, free mock-ups and prices to fit all budgets, we will provide customized, relevant recommendations for you. Simply take a look around or contact us now and we'll do the shopping for you!</p>
+                    <p class="aboutInfoP">Welcome to our company, a union of 7 experienced promotional products companies that brings together a vast selection of products for businesses and individuals. By combining our expertise and resources, we are able to offer our customers a wider range of products and services than any individual company could provide.</p>
+                    <p class="aboutInfoP">With over 20 years of experience in the industry, we have become a leading provider of promotional products, offering our customers a one-stop-shop for all their branding needs. Our team is made up of knowledgeable professionals who are passionate about providing the best possible service to our clients.</p>
+                    <p class="aboutInfoP">Our mission is to provide the highest quality promotional products while also prioritizing the environment. We specialize in green and eco-friendly products, helping our customers to reduce their environmental impact while still achieving their marketing goals.</p>
+                    <p class="aboutInfoP">Our website showcases over 100,000 products, giving our clients access to an unparalleled selection of items to choose from. From classic promotional items like pens and mugs to unique eco-friendly products like bamboo utensils and recycled tote bags, we have something for everyone.
+                        At our company, we believe in putting our clients first. We strive to provide the best possible customer service, working with our clients to find the perfect product for their needs and ensuring that their orders are delivered on time and to their satisfaction. Our commitment to our clients is reflected in our 200+ positive reviews from satisfied customers.</p>
+                    <p class="aboutInfoP">Thank you for choosing us as your promotional products supplier. We look forward to helping you achieve your branding goals while also making a positive impact on the environment.</p>
                     <a href="" class="btn btn-primary aboutInfoButton">learn more</a>
                 </div>
             </div>
 
             <div class="col-lg-6" id="container-row-right">
                 <div class="aboutInfoPlace">
-                    <div class="aboutInfoTitle"><h1>A Few Words About Us</h1></div>
-                    <h4 class="aboutInfoInfo">Enjoy getting closer to the nature? You're in the right place!</h4>
-                    <p class="aboutInfoP">We realize we are models for our clients behavior. We take minimal impact and Leave No Trace ethics seriously. We never use disposable plates or silverware for our trips, as an example. We strive to keep our group sizes relatively small when rock climbing to minimize our impact on other park users.</p>
-                    <p class="aboutInfoP">Cleanups are a fun, free, easy way to give back to your community by keeping pollution from entering the Pacific Ocean. --首页公司简介</p>
+                    <div class="aboutInfoTitle"><h1>Our Services</h1></div>
+                    <p class="aboutInfoP">At our company, we offer a range of services to help our clients achieve their branding goals. Whether you're looking for custom promotional products, free mock-up services, or help with shipping, we've got you covered.</p>
+                    <p class="aboutInfoP">Custom Branding: We specialize in creating custom-branded promotional products that showcase your logo or message. Our team works with you to select the best products for your needs and ensures that your branding is consistent across all items.</p>
+                    <p class="aboutInfoP">Free Mock-Up Services: Our team can provide free mock-up services to help you visualize how your logo or design will look on different products. This allows you to see how your branding will appear before you place an order, giving you confidence in your selection.</p>
+                    <p class="aboutInfoP">Eco-Friendly Options: We understand the importance of sustainability and offer a range of eco-friendly promotional products. From reusable water bottles to recycled tote bags, we can help you make a positive impact on the environment.</p>
+                    <p class="aboutInfoP">Shipping: We provide fast and reliable shipping services, ensuring that your promotional products are delivered on time and to your satisfaction. We also offer tracking information and notifications so that you can stay informed about the status of your order.</p>
+                    <p class="aboutInfoP">At our company, we're committed to providing the highest quality services to our clients. We work closely with each client to understand their unique needs and offer tailored solutions that meet their goals. Contact us today to learn more about our services and how we can help you achieve your branding goals.</p>
                     <a href="" class="btn btn-primary aboutInfoButton">learn more</a>
                 </div>
             </div>
