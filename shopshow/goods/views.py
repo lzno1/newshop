@@ -171,6 +171,22 @@ def goodInfo(request):
     if request.method == "GET" and request.GET:
         id = request.GET.get('goodid', None)
         goodinfo = AllGoods.objects.filter(Product_Number = id).first()
+        good_color = goodinfo.Product_Color
+        colors = good_color.split(',')
+        color_string = ''
+        for color in colors:
+            color_string +=  color.split('=')[1] + ', '
+        goodinfo.Product_Color = color_string
+
+        material = goodinfo.Material.split('=')[1]
+        goodinfo.Material = material
+
+        goodinfo.Rush_Time = goodinfo.Rush_Time.replace(':', '').replace('：','')
+        
+        if 'Y' in goodinfo.Free_Shipping:
+            goodinfo.Free_Shipping = 'Yes'
+        elif 'N' in goodinfo.Free_Shipping:
+            goodinfo.Free_Shipping = 'No'
         print(goodinfo.Product_Number)
         return render(request, 'goodInfo.html', {'info': goodinfo})
 

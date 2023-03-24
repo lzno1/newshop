@@ -67,17 +67,17 @@
                                     {% if info.Category %}
                                     <h6><strong>Category: </strong> {{info.Category}}</h6>
                                     {% endif %}
-                                    {% if info.Product_Color %}
-                                    <h6><strong>Product_Color: </strong> {{info.Product_Color}}</h6>
+                                    {% if color_info %}
+                                    <h6><strong>Color: </strong> {{color_info}}</h6>
                                     {% endif %}
-                                    {% if info.Material %}
-                                    <h6><strong>Material: </strong> {{info.Material}}</h6>
+                                    {% if material_info %}
+                                    <h6><strong>Material: </strong> {{material_info}}</h6>
                                     {% endif %}
-                                    {% if info.Size_Group %}
+                                    <!-- {% if info.Size_Group %}
                                     <h6><strong>Size_Group: </strong> {{info.Size_Group}}</h6>
-                                    {% endif %}
+                                    {% endif %} -->
                                     {% if info.Size_Values %}
-                                    <h6><strong>Size_Values: </strong> {{info.Size_Values}}</h6>
+                                    <h6><strong>Size: </strong> {{info.Size_Values}}</h6>
                                     {% endif %}
                                     {% if info.Shape != ' ' %}
                                     <h6><strong>Shape: </strong> {{info.Shape}}</h6>
@@ -106,9 +106,7 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div class="card-body border-bottom py-3 ">
                                 <div class="m-auto text-left">
-                                    {% if info.Category %}
-                                    <h6><strong>Category: </strong> {{info.Category}}</h6>
-                                    {% endif %}
+                                    <h6><strong>Category: </strong> Net Cost(ccccc)</h6>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -200,39 +198,17 @@
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <div class="card-body border-bottom py-3 ">
                                 <div class="m-auto text-left">
-                                    {% if info.Origin %}
-                                    <h6><strong>Origin: </strong> {{info.Origin}}</h6>
-                                    {% endif %}
                                     {% if info.Imprint_Method %}
-                                    <h6><strong>Imprint_Method: </strong> {{info.Imprint_Method}}</h6>
+                                    <h6><strong>Imprint Method: </strong> Laser/Silkscreen</h6>
                                     {% endif %}
                                     {% if info.Imprint_Color %}
-                                    <h6><strong>Imprint_Color: </strong> {{info.Imprint_Color}}</h6>
-                                    {% endif %}
-                                    {% if info.Imprint_Size %}
-                                    <h6><strong>Imprint_Size: </strong> {{info.Imprint_Size}}</h6>
-                                    {% endif %}
-                                    {% if info.Imprint_Location %}
-                                    <h6><strong>Imprint_Location: </strong> {{info.Imprint_Location}}</h6>
+                                    <h6><strong>Imprint Color: </strong> {{info.Imprint_Color}}</h6>
                                     {% endif %}
                                     {% if info.Price_Includes %}
-                                    <h6><strong>Price_Includes: </strong> {{info.Price_Includes}}</h6>
+                                    <h6><strong>Price Includes: </strong> {{info.Price_Includes}}</h6>
                                     {% endif %}
-                                    {% if info.Upcharge_Name %}
-                                    <h6><strong>Upcharge_Name: </strong> {{info.Upcharge_Name}}</h6>
-                                    {% endif %}
-                                    {% if info.Service_Charge %}
-                                    <h6><strong>Service_Charge: </strong> {{info.Service_Charge}}</h6>
-                                    {% endif %}
-                                    {% if info.Upcharge_Type %}
-                                    <h6><strong>Upcharge_Type: </strong> {{info.Upcharge_Type}}</h6>
-                                    {% endif %}
-                                    {% if info.Upcharge_Level %}
-                                    <h6><strong>Upcharge_Level: </strong> {{info.Upcharge_Level}}</h6>
-                                    {% endif %}
-                                    {% if info.Upcharge_Details %}
-                                    <h6><strong>Upcharge_Details: </strong> {{info.Upcharge_Details}}</h6>
-                                    {% endif %}
+                                    <h6><strong>Full Color Process: </strong> Pls check with us before placing your order</h6>
+                                    <h6><strong>Sold Unimprinted: </strong> Yes</h6>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -325,66 +301,32 @@
                             <div class="card-body border-bottom py-3 ">
                                 <div class="m-auto text-left">
                                     {% if info.Production_Time %}
-                                    <h6><strong>Production_Time: </strong> {{info.Production_Time}}</h6>
+                                    <h6><strong>Production Time: </strong> {{info.Production_Time}} Days</h6>
                                     {% endif %}
                                     {% if info.Rush_Service %}
-                                    <h6><strong>Rush_Service: </strong> {{info.Rush_Service}}</h6>
+                                    <h6><strong>Rush Service: </strong> {{info.Rush_Service}}</h6>
                                     {% endif %}
                                     {% if info.Rush_Time %}
-                                    <h6><strong>Rush_Time: </strong> {{info.Rush_Time}}</h6>
+                                    <h6><strong>Rush Time: </strong> {{info.Rush_Time}} Days</h6>
                                     {% endif %}
                                     {% if info.Same_Day_Service %}
-                                    <h6><strong>Same_Day_Service: </strong> {{info.Same_Day_Service}}</h6>
+                                    <h6><strong>Same Day Service: </strong> {{info.Same_Day_Service}}</h6>
                                     {% endif %}
                                     {% if info.Packaging %}
                                     <h6><strong>Packaging: </strong> {{info.Packaging}}</h6>
                                     {% endif %}
-                                    {% if info.Shipping_Items %}
-                                    <h6><strong>Shipping_Items: </strong> {{info.Shipping_Items}}</h6>
-                                    {% endif %}
-                                    {% if info.Shipping_Dimensions %}
-                                    <h6><strong>Shipping_Dimensions: </strong> {{info.Shipping_Dimensions}}</h6>
-                                    {% endif %}
                                     {% if info.Shipping_Weight %}
-                                    <h6><strong>Shipping_Weight: </strong> {{info.Shipping_Weight}}</h6>
+                                    <h6><strong>Shipping Weight: </strong> {{info.Shipping_Weight}}</h6>
                                     {% endif %}
                                     {% if info.Shipper_Bills_By %}
-                                    <h6><strong>Shipper_Bills_By: </strong> {{info.Shipper_Bills_By}}</h6>
+                                    <h6><strong>Shipper Bills By: </strong> {{info.Shipper_Bills_By}}</h6>
                                     {% endif %}
                                     {% if info.Shipping_Info %}
-                                    <h6><strong>Shipping_Info: </strong> {{info.Shipping_Info}}</h6>
+                                    <h6><strong>Shipping Info: </strong> {{info.Shipping_Info}}</h6>
                                     {% endif %}
                                     {% if info.Free_Shipping %}
-                                    <h6><strong>Free_Shipping: </strong> {{info.Free_Shipping}}</h6>
+                                    <h6><strong>Free Shipping: </strong> {{info.Free_Shipping}}</h6>
                                     {% endif %}
-                                        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header" id="headingFive">
-                            <h2 class="mb-0">
-                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                Other
-                            </button>
-                            </h2>
-                        </div>
-                    
-                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-                            <div class="card-body border-bottom py-3 ">
-                                <div class="m-auto text-left">
-                                    {% if info.Distributor_View_Only %}
-                                    <h6><strong>Distributor_View_Only: </strong> {{info.Distributor_View_Only}}</h6>
-                                    {% endif %}
-                                    {% if info.Carrier_Information %}
-                                    <h6><strong>Carrier_Information: </strong> {{info.Carrier_Information}}</h6>
-                                    {% endif %}
-                                    {% if info.Market_Segment %}
-                                    <h6><strong>Market_Segment: </strong> {{info.Market_Segment}}</h6>
-                                    {% endif %}
-                                    
                                         
                                 </div>
                             </div>

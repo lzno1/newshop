@@ -221,6 +221,11 @@
     vertical-align: middle;
     max-width: 100%;
     height: auto;
+    transform: all 1s;
+}
+
+.imgSize:hover{
+    transform: scale(2.0);
 }
 
 .goodsCardItem{
