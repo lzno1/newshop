@@ -23,6 +23,7 @@ from django.urls import path
 from contact.views import contact
 from goods.views import goods
 from goods.views import allgoods
+from goods.views import showAllGoodPage
 from goods.views import showAllGood
 from home.views import home
 # from store.views import store
@@ -34,7 +35,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', home, name='home'),
     path('', home, name='home'),
-    path('goods/', showAllGood, name='goods'),
+    path('goods/', showAllGoodPage, name='goods'),
+    path('goods/<category>/', showAllGood),
+    # re_path('^goods/$', showAllGood, name='newgoods'),
     re_path('^goodInfo/$', goodInfo, name='goodInfo'),
     path('contact/', contact, name='contact'),
     path('uplog/', uplog, name='uploadLogistics'),

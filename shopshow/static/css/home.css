@@ -372,3 +372,18 @@
     font-size: x-large;
     font-weight: bolder;
 }
+
+.sidebar_title{
+    border: none;
+    outline: none;
+    background: none;
+    font-size: x-large;
+    text-align: center;
+}
+
+.sidebar_title_text{
+    border: none;
+    outline: none;
+    background: none;
+    font-size: large;
+}

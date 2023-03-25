@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from .models import ALLHotGoods
 from .models import Dingdans
 from .models import AllGoods
@@ -163,34 +164,98 @@ def allgoods(request):
                 return render(request, 'UploadGoods.html', {'logging':'新建商品信息失败'})
     return render(request, 'UploadGoods.html')
 
+def showAllGoodPage(request):
+    allgoods = AllGoods.objects.all()
+    page = Paginator(allgoods, 40)
+    page_obj = page.get_page(0)
+    return render(request, 'goods.html', {'goods': page_obj})
 
-def showAllGood(request):
+def showAllGood(request, category):
     if request.method == "POST":
+        if 'goodid' in request.POST:
+            allgoods = AllGoods.objects.all()
+            goodid = request.POST['goodid']
+            long_num = 0
+            for s in goodid:
+                if (s.isupper()) or (s.isdigit()):
+                    long_num += 1
+            if long_num == len(goodid):
+                try:
+                    info = AllGoods.objects.get(Product_Number=goodid)
+                    return render(request, 'goodInfo.html',{'info':info})
+                except:
+                    page = Paginator(allgoods, 40)
+                    page_obj = page.get_page(0)
+                    return render(request, 'goods.html', {'goods': page_obj, 'ERROR':'商品ID错误'})
+            else:
+                print('111')
+                allgoods = AllGoods.objects.all()
+                goods = allgoods.values("Product_Name","Product_Number","P1","Product_img","Category","Keywords","Description")
+                newgoods = []
+                for good in goods.iterator():
+                    if good['Category']:
+                        # if category in good['Category']:
+                        if (goodid in good['Product_Name']) or (goodid in good['Description']) or (goodid in good['Keywords']):
+                            newgoods.append(good)
+                page = Paginator(newgoods, 40)
+                page_obj = page.get_page(0)
+                return render(request, 'goods.html', {'goods': page_obj, 'goodid':goodid})
+
+        elif 'more_search' in request.POST:
             category = request.POST['category']
-            theme = request.POST['theme']
-            search_words = request.POST['search_words']
             price_from = request.POST['price_from']
             price_to = request.POST['price_to']
-            allgoods = AllGoods.objects
-            showgoods = []
-            print(category, theme, search_words, price_from, price_to)
-            if not category=='false':
-                allgoods = allgoods.filter(Category__contains=category[1:])
-            if not theme=='false':
-                allgoods = allgoods.filter(Theme__contains=theme[1:])
-            if search_words:
-                allgoods = allgoods.filter(Q(Product_Name__contains=search_words) | Q(Keywords=search_words))
-            # for good in allgoods:
-            #     if good.P1 <= price_to:
-            #         showgoods.append(good)
-            # if price_from:
-            #     allgoods = AllGoods.objects.filter(P1__gte=str(price_from))
+            sort = request.POST['sort']
+            allgoods = AllGoods.objects.all()
+            goods = allgoods.values("Product_Name","Product_Number","P1","Product_img","Category","Keywords","Description")
+            newgoods = []
+            print(type(goods))
+            for good in goods.iterator():
+                if good['P1']:
+                    good['P1'] = float(good['P1'])
+                else:
+                    continue
+                if good['Category']:
+                    if category in good['Category'] or category=='All':
+                        if good['P1'] and price_from:
+                            if good['P1'] >= float(price_from):
+                                if price_to:
+                                    if good['P1'] <= float(price_to):
+                                        newgoods.append(good)
+                                else:
+                                    newgoods.append(good)
+                        else:
+                            if price_to:
+                                    if good['P1'] <= float(price_to):
+                                        newgoods.append(good)
+                            else:
+                                newgoods.append(good)
+            if sort:
+                if 'price_up' in sort:
+                    newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'))
+                elif 'price_down' in sort:
+                    newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'), reverse=True)
+            page = Paginator(newgoods, 40)
+            page_obj = page.get_page(0)
+            return render(request, 'goods.html', {'goods': page_obj})
+    elif request.method == "GET":
+        category_text = category
+        allgoods = AllGoods.objects.all()
+        goods = allgoods.values("Product_Name","Product_Number","P1","Product_img","Category","Keywords","Description")
+        newgoods = []
+        for good in goods.iterator():
+            if good['Category']:
+                if category in good['Category'] or category=='All':
+                    newgoods.append(good)
+        page = Paginator(newgoods, 40)
+        page_obj = page.get_page(0)
+        return render(request, 'goods.html', {'goods': page_obj, 'category_text':category_text})
 
-            
-            return render(request, 'goods.html', {'goods': allgoods})
     else:
-        allgoods = AllGoods.objects.all()[:100]
-        return render(request, 'goods.html', {'goods': allgoods})
+        allgoods = AllGoods.objects.all()
+        page = Paginator(allgoods, 40)
+        page_obj = page.get_page(0)
+        return render(request, 'goods.html', {'goods': page_obj})
 
 def goodInfo(request):
     if request.method == "GET" and request.GET:
@@ -214,7 +279,6 @@ def goodInfo(request):
             goodinfo.Free_Shipping = 'No'
         print(goodinfo.Product_Number)
         return render(request, 'goodInfo.html', {'info': goodinfo})
-
 
 
 def getdata(filepath):
