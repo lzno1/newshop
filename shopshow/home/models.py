@@ -1,4 +1,6 @@
 from django.db import models
+import datetime
+
 
 # Create your models here.
 class HotGoods(models.Model):
@@ -6,4 +8,9 @@ class HotGoods(models.Model):
     price = models.CharField(max_length=100, blank=True, null=True)
     url = models.CharField(max_length=100, blank=True, null=True)
     img = models.ImageField(upload_to='img/', blank=True)
+
+
+
+
+
 

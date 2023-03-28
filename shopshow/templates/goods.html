@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Promo Union</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <!-- <link rel="stylesheet" href="{% static 'css/home.css' %}"> -->
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -19,18 +19,18 @@
         <ul class="nav ">
             <li class="nav-item">
                 <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'img/logo.png' %}", height="30", alt="logo">
+                    <img src="{% static 'img/logo.png' %}", height="60", alt="logo">
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+            <li class="nav-item navbar-brand">
+                <a class="nav-link active " height="60" href="{% url 'home' %}">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'goods' %}">Goods</a>
+            <li class="nav-item navbar-brand">
+                <a class="nav-link" height="60" href="{% url 'goods' %}">Produsts</a>
             </li>
-            
-            <li class="nav-item">
-                <a class="nav-link " href="{% url 'contact' %}">Contact</a>
+           
+            <li class="nav-item navbar-brand">
+                <a class="nav-link " height="60" href="{% url 'contact' %}">Contact</a>
             </li>
         </ul>
 

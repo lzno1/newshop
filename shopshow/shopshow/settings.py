@@ -149,7 +149,7 @@ SIMPLEUI_HOME_INFO = False
 
 SIMPLEUI_CONFIG = {
     'system_keep':False,
-    'menu_display':['订单管理', '采购与物流管理', '客户管理', '任务管理', '权限管理'],
+    'menu_display':['订单管理', '采购与物流管理', '客户管理', '留言与任务', '页面自定义', '权限管理'],
     'dynamic':False,
     'menus':[
         {
@@ -206,11 +206,30 @@ SIMPLEUI_CONFIG = {
 
         {
             # 'app': 'admin',
-            'name': '任务管理',
+            'name': '留言与任务',
             'models':[
+                {
+                    'name': '留言板',
+                    'url': '/admin/contact/messageboard/'
+                },
+                {
+                    'name': '商品问询',
+                    'url': '/admin/contact/productrequest/'
+                },
                 {
                 'name': '任务列表',
                 'url': 'tasks/task/'
+                },
+            ]
+        },
+
+        {
+            # 'app': 'admin',
+            'name': '页面自定义',
+            'models':[
+                {
+                    'name': '介绍问答',
+                    'url': '/admin/contact/faquestion/'
                 },
             ]
         },

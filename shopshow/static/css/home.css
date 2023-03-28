@@ -387,3 +387,27 @@
     background: none;
     font-size: large;
 }
+
+.model-content{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.contact_title{
+    font-weight: 700;
+    font-size: 1.75em;
+    font-style: oblique;
+    color: #030303;
+    text-rendering: optimizeSpeed;
+    border-bottom: 1px solid #030303;
+}
