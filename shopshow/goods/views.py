@@ -3,6 +3,8 @@ from django.core.paginator import Paginator
 from .models import ALLHotGoods
 from .models import Dingdans
 from .models import AllGoods
+from django.shortcuts import HttpResponseRedirect
+from django.contrib import messages
 from django.db.models import Q
 import csv
 
@@ -17,7 +19,7 @@ def dingdans(request):
 
 def allgoods(request):
     if request.POST:
-        if 'save' in request.POST:
+        if 'good_save' in request.POST:
             # try:
             Product_Name = request.POST['Product_Name']
             Product_Number = request.POST['Product_Number']
@@ -133,7 +135,7 @@ def allgoods(request):
             return render(request, 'UploadGoods.html', {'logging':'成功保存订单'})
             # except:
             #     return render(request, 'UploadGoods.html', {'logging':'未能成功保存商品信息'})
-        elif 'search' in request.POST:
+        elif 'good_search' in request.POST:
             try:
                 good_id = request.POST['Product_Number']
                 good_info = AllGoods.objects.get(Product_Number = good_id)
@@ -141,20 +143,15 @@ def allgoods(request):
                     return render(request, 'UploadGoods.html', {'good_info':good_info,'logging':'已查询到对应商品'})
             except:
                 return render(request, 'UploadGoods.html', {'logging':'未能查询到id对应商品'})
-        elif 'del' in request.POST:
+        elif 'good_del' in request.POST:
             try:
                 goodid = request.POST['Product_Number']
                 AllGoods.objects.filter(Product_Number=goodid).delete()
                 return render(request, 'UploadGoods.html', {'logging':'成功删除商品信息'})
             except:
                 return render(request, 'UploadGoods.html', {'logging':'未能成功删除商品信息'})
-        elif 'new' in request.POST:
-            # data = getdata('F:\第一人生\软件设计--外接\外贸网站\c46671已修改.csv')
-            # for one in data:
-            #     try:
-            #         AllGoods.objects.create(Product_Name=one[0], Product_Number=one[1],Product_img=one[2], Product_IsHazmat=one[3], Description=one[4], Summary=one[5], Product_Type=one[6], Category=one[7], Keywords=one[8], Product_Color=one[9], Material=one[10], Size_Group=one[11], Size_Values=one[12], Shape=one[13], Theme=one[14], Origin=one[15], Imprint_Method=one[16], Imprint_Color=one[17], Imprint_Size=one[18], Imprint_Location=one[19], Price_Includes=one[20], Sequence=one[21], Currency=one[22], Always_Free_Setup=one[23], Upcharge_Name=one[24], Upcharge_Criteria_1=one[25], Upcharge_Criteria_2=one[26], Upcharge_Type=one[27], Upcharge_Level=one[28], Service_Charge=one[29], UQ1=one[30], UQ2=one[31], UQ3=one[32], UQ4=one[33], UQ5=one[34], UQ6=one[35], UQ7=one[36], UQ8=one[37], UQ9=one[38], UQ10=one[39], UP1=one[40], UP2=one[41], UP3=one[42], UP4=one[43], UP5=one[44], UP6=one[45], UP7=one[46], UP8=one[47], UP9=one[48], UP10=one[49], UD1=one[50], UD2=one[51], UD3=one[52], UD4=one[53], UD5=one[54], UD6=one[55], UD7=one[56], UD8=one[57], UD9=one[58], UD10=one[59], Upcharge_Details=one[60], Production_Time=one[61], Rush_Service=one[62], Rush_Time=one[63], Same_Day_Service=one[64], Packaging=one[65], Shipping_Items=one[66], Shipping_Dimensions=one[67], Shipping_Weight=one[68], Shipper_Bills_By=one[69], Shipping_Info=one[70], Free_Shipping=one[71], Q1=one[72], Q2=one[73], Q3=one[74], Q4=one[75], Q5=one[76], Q6=one[77], Q7=one[78], Q8=one[79], Q9=one[80], Q10=one[81], P1=one[82], P2=one[83], P3=one[84], P4=one[85], P5=one[86], P6=one[87], P7=one[88], P8=one[89], P9=one[90], P10=one[91], D1=one[92], D2=one[93], D3=one[94], D4=one[95], D5=one[96], D6=one[97], D7=one[98], D8=one[99], D9=one[100], D10=one[101], Distributor_View_Only=one[102], Carrier_Information=one[103], Market_Segment=one[104])
-            #     except:
-            #         pass
+        elif 'good_new' in request.POST:
+            
             try:
                 goodid = request.POST['Product_Number']
                 AllGoods.objects.create(Product_Number=goodid)
@@ -162,13 +159,33 @@ def allgoods(request):
                 return render(request, 'UploadGoods.html', {'good_info':good_info,'logging':'新建商品信息'})
             except:
                 return render(request, 'UploadGoods.html', {'logging':'新建商品信息失败'})
+        elif 'good_batch_upload' in request.POST:
+            fileName = request.FILES.get('excelfile', None)
+            avatar = request.FILES['excelfile']
+            if fileName:
+                writename = 'media/%s'%fileName
+                with open(writename, 'wb+') as f:
+                    for c in avatar.chunks():
+                        f.write(c)
+                data = getdata(writename)
+                for one in data:
+                    try:
+                        print('正在写入信息')
+                        AllGoods.objects.create(Product_Name=one[0], Product_Number=one[1],Product_img=one[2], Product_IsHazmat=one[3], Description=one[4], Summary=one[5], Product_Type=one[6], Category=one[7], Keywords=one[8], Product_Color=one[9], Material=one[10], Size_Group=one[11], Size_Values=one[12], Shape=one[13], Theme=one[14], Origin=one[15], Imprint_Method=one[16], Imprint_Color=one[17], Imprint_Size=one[18], Imprint_Location=one[19], Price_Includes=one[20], Sequence=one[21], Currency=one[22], Always_Free_Setup=one[23], Upcharge_Name=one[24], Upcharge_Criteria_1=one[25], Upcharge_Criteria_2=one[26], Upcharge_Type=one[27], Upcharge_Level=one[28], Service_Charge=one[29], UQ1=one[30], UQ2=one[31], UQ3=one[32], UQ4=one[33], UQ5=one[34], UQ6=one[35], UQ7=one[36], UQ8=one[37], UQ9=one[38], UQ10=one[39], UP1=one[40], UP2=one[41], UP3=one[42], UP4=one[43], UP5=one[44], UP6=one[45], UP7=one[46], UP8=one[47], UP9=one[48], UP10=one[49], UD1=one[50], UD2=one[51], UD3=one[52], UD4=one[53], UD5=one[54], UD6=one[55], UD7=one[56], UD8=one[57], UD9=one[58], UD10=one[59], Upcharge_Details=one[60], Production_Time=one[61], Rush_Service=one[62], Rush_Time=one[63], Same_Day_Service=one[64], Packaging=one[65], Shipping_Items=one[66], Shipping_Dimensions=one[67], Shipping_Weight=one[68], Shipper_Bills_By=one[69], Shipping_Info=one[70], Free_Shipping=one[71], Q1=one[72], Q2=one[73], Q3=one[74], Q4=one[75], Q5=one[76], Q6=one[77], Q7=one[78], Q8=one[79], Q9=one[80], Q10=one[81], P1=one[82], P2=one[83], P3=one[84], P4=one[85], P5=one[86], P6=one[87], P7=one[88], P8=one[89], P9=one[90], P10=one[91], D1=one[92], D2=one[93], D3=one[94], D4=one[95], D5=one[96], D6=one[97], D7=one[98], D8=one[99], D9=one[100], D10=one[101], Distributor_View_Only=one[102], Carrier_Information=one[103], Market_Segment=one[104])
+                        
+                    except:
+                        pass
+                messages.info(request, '数据写入成功')
+                return render(request, 'UploadGoods.html')
     return render(request, 'UploadGoods.html')
 
 def showAllGoodPage(request):
     allgoods = AllGoods.objects.all()
     page = Paginator(allgoods, 40)
-    page_obj = page.get_page(0)
-    return render(request, 'goods.html', {'goods': page_obj})
+    page_obj = page.get_page(1)
+    goodRequest = {}
+    goodRequest['category'] = 'All'
+    return render(request, 'goods.html', {'goods': page_obj, 'res':goodRequest})
 
 def showAllGood(request, category):
     if request.method == "POST":
@@ -185,20 +202,39 @@ def showAllGood(request, category):
                     return render(request, 'goodInfo.html',{'info':info})
                 except:
                     page = Paginator(allgoods, 40)
-                    page_obj = page.get_page(0)
+                    page_obj = page.get_page(1)
                     return render(request, 'goods.html', {'goods': page_obj, 'ERROR':'商品ID错误'})
             else:
-                print('111')
                 allgoods = AllGoods.objects.all()
-                goods = allgoods.values("Product_Name","Product_Number","P1","Product_img","Category","Keywords","Description")
+                goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
                 newgoods = []
                 for good in goods.iterator():
+                    if good['P10']:
+                        good['P1'] = good['P10']
+                    elif good['P9']:
+                        good['P1'] = good['P9']
+                    elif good['P8']:
+                        good['P1'] = good['P8']
+                    elif good['P7']:
+                        good['P1'] = good['P7']
+                    elif good['P6']:
+                        good['P1'] = good['P6']
+                    elif good['P5']:
+                        good['P1'] = good['P5']
+                    elif good['P4']:
+                        good['P1'] = good['P4']
+                    elif good['P3']:
+                        good['P1'] = good['P3']
+                    elif good['P2']:
+                        good['P1'] = good['P2']
+
+
                     if good['Category']:
                         # if category in good['Category']:
                         if (goodid in good['Product_Name']) or (goodid in good['Description']) or (goodid in good['Keywords']):
                             newgoods.append(good)
                 page = Paginator(newgoods, 40)
-                page_obj = page.get_page(0)
+                page_obj = page.get_page(1)
                 return render(request, 'goods.html', {'goods': page_obj, 'goodid':goodid})
 
         elif 'more_search' in request.POST:
@@ -206,13 +242,39 @@ def showAllGood(request, category):
             price_from = request.POST['price_from']
             price_to = request.POST['price_to']
             sort = request.POST['sort']
+            res = {}
+            res['category'] = category
+            res['price_from'] = price_from
+            res['price_to'] = price_to
+            res['sort'] = sort
             allgoods = AllGoods.objects.all()
-            goods = allgoods.values("Product_Name","Product_Number","P1","Product_img","Category","Keywords","Description")
+            goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
             newgoods = []
             print(type(goods))
             for good in goods.iterator():
+                if good['P10']:
+                    good['P1'] = good['P10']
+                elif good['P9']:
+                    good['P1'] = good['P9']
+                elif good['P8']:
+                    good['P1'] = good['P8']
+                elif good['P7']:
+                    good['P1'] = good['P7']
+                elif good['P6']:
+                    good['P1'] = good['P6']
+                elif good['P5']:
+                    good['P1'] = good['P5']
+                elif good['P4']:
+                    good['P1'] = good['P4']
+                elif good['P3']:
+                    good['P1'] = good['P3']
+                elif good['P2']:
+                    good['P1'] = good['P2']
                 if good['P1']:
-                    good['P1'] = float(good['P1'])
+                    try:
+                        good['P1'] = float(good['P1'])
+                    except:
+                        continue
                 else:
                     continue
                 if good['Category']:
@@ -236,25 +298,45 @@ def showAllGood(request, category):
                 elif 'price_down' in sort:
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'), reverse=True)
             page = Paginator(newgoods, 40)
-            page_obj = page.get_page(0)
-            return render(request, 'goods.html', {'goods': page_obj})
+            page_obj = page.get_page(1)
+            return render(request, 'goods.html', {'goods': page_obj, 'res':res})
     elif request.method == "GET":
         category_text = category
         allgoods = AllGoods.objects.all()
-        goods = allgoods.values("Product_Name","Product_Number","P1","Product_img","Category","Keywords","Description")
+        goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
         newgoods = []
         for good in goods.iterator():
+            if good['P10']:
+                good['P1'] = good['P10']
+            elif good['P9']:
+                good['P1'] = good['P9']
+            elif good['P8']:
+                good['P1'] = good['P8']
+            elif good['P7']:
+                good['P1'] = good['P7']
+            elif good['P6']:
+                good['P1'] = good['P6']
+            elif good['P5']:
+                good['P1'] = good['P5']
+            elif good['P4']:
+                good['P1'] = good['P4']
+            elif good['P3']:
+                good['P1'] = good['P3']
+            elif good['P2']:
+                good['P1'] = good['P2']
             if good['Category']:
                 if category in good['Category'] or category=='All':
                     newgoods.append(good)
         page = Paginator(newgoods, 40)
-        page_obj = page.get_page(0)
-        return render(request, 'goods.html', {'goods': page_obj, 'category_text':category_text})
+        page_obj = page.get_page(1)
+        res = {}
+        res['category'] = category
+        return render(request, 'goods.html', {'goods': page_obj, 'res':res})
 
     else:
         allgoods = AllGoods.objects.all()
         page = Paginator(allgoods, 40)
-        page_obj = page.get_page(0)
+        page_obj = page.get_page(1)
         return render(request, 'goods.html', {'goods': page_obj})
 
 def goodInfo(request):

@@ -12,8 +12,14 @@
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
     <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
+    {% if messages %}
+    <script>
+            alert('写入数据成功');
+    </script>
+    {% endif %}
 </head>
 <body>
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <ul class="nav ">
             <li class="nav-item">
@@ -46,17 +52,25 @@
             {{ logging }}
         </div>
         {% endif %}
-        <form method="post" onkeydown="return event.key != 'Enter';">
+        <form method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
             {%csrf_token%}
+            <div class="row">
+                <div class="col-lg-9">
+                    <input type="file" name="excelfile">
+                </div>
+                <div class="col-lg-3 w-100">
+                    <button class="btn btn-outline-secondary my-2" name='good_batch_upload' type="submit">批量上传数据</button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-9">
                     <input type="text" class="form-control mr-sm-2" name="Product_Number" placeholder="请输入商品id">
                 </div>
                 
-                <button class="btn btn-outline-secondary my-2" name='search' type="submit">查询</button>
-                <button class="btn btn-outline-secondary my-2" name='new' type="submit">新建</button>
-                <button class="btn btn-outline-secondary my-2" name='save' type="submit">保存</button>
-                <button class="btn btn-outline-secondary my-2" name='del' type="submit">删除</button>
+                <button class="btn btn-outline-secondary my-2" name='good_search' type="submit">查询</button>
+                <button class="btn btn-outline-secondary my-2" name='good_new' type="submit">新建</button>
+                <button class="btn btn-outline-secondary my-2" name='good_save' type="submit">保存</button>
+                <button class="btn btn-outline-secondary my-2" name='good_del' type="submit">删除</button>
             </div>
             
             <div class="card">

@@ -44,6 +44,7 @@ urlpatterns = [
     path('upgood/', allgoods, name='uploadGoods'),
     url(r'^static/(?P<path>.*)$', static.serve,
       {'document_root': settings.STATIC_ROOT}, name='static'),
+    re_path(r'^media/(?P<path>.*)$',static.serve,{'document_root':settings.MEDIA_ROOT}),
 
 ]
 

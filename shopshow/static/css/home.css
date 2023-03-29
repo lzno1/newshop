@@ -410,4 +410,9 @@
     color: #030303;
     text-rendering: optimizeSpeed;
     border-bottom: 1px solid #030303;
+    margin-bottom: 10px;
+}
+
+.accordion{
+    color: #030303;
 }

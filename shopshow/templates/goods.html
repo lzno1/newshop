@@ -55,8 +55,10 @@
             <div class="title row">
                 <div class="col-lg-3">
                     <div class="sidebar text-center">
-                        {% if category_text %}
-                        <input type="text" class="sidebar_title" name="category" id="category" value={{category_text}} readonly="readonly">
+                        {% if res.category %}
+                        <input type="text" class="sidebar_title" name="category" id="category" value={{res.category}} readonly="readonly">
+                        {% else %}
+                        <input type="text" class="sidebar_title" name="category" id="category" value='All' readonly="readonly">
                         {% endif %}
                     </div>
                 </div>
@@ -67,18 +69,32 @@
                                 <label>Price</label>
                             </div>
                             <div class="col-lg-3">
-                                <input type="text" class="w-100" placeholder="Price From $" name="price_from" id="price_from">
+                                <input type="text" class="w-100" placeholder="Price From $" value="{{res.price_from}}" name="price_from" id="price_from">
                             </div>
                             <div class="col-lg-3">
-                                <input type="text" class="w-100" placeholder="Price To $" name="price_to" id="price_to">
+                                <input type="text" class="w-100" placeholder="Price To $" value="{{res.price_to}}" name="price_to" id="price_to">
                             </div>
                             
                             <div class="col-lg-3 w-100">
                                 <select id="sort" name="sort" class="w-100">
                                     <option value="default">Default Sorting</option>
+                                    {% if res.sort == "laster" %}
+                                    <option value="laster" selected>Sort by laster</option>
+                                    {% else %}
                                     <option value="laster">Sort by laster</option>
+                                    {% endif %}
+
+                                    {% if res.sort == "price_up" %}
+                                    <option value="price_up" selected>Sort by price:low to high</option>
+                                    {% else %}
                                     <option value="price_up">Sort by price:low to high</option>
+                                    {% endif %}
+
+                                    {% if res.sort == "price_down" %}
+                                    <option value="price_down" selected>Sort by price:high to low</option>
+                                    {% else %}
                                     <option value="price_down">Sort by price:high to low</option>
+                                    {% endif %}
                                 </select>
                             </div>
 
