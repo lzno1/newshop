@@ -3,9 +3,11 @@ from django.core.paginator import Paginator
 from .models import ALLHotGoods
 from .models import Dingdans
 from .models import AllGoods
+from contact.models import ProductRequest
 from django.shortcuts import HttpResponseRedirect
 from django.contrib import messages
 from django.db.models import Q
+from django.shortcuts import redirect
 import csv
 
 # Create your views here.
@@ -181,7 +183,7 @@ def allgoods(request):
 
 def showAllGoodPage(request):
     allgoods = AllGoods.objects.all()
-    page = Paginator(allgoods, 40)
+    page = Paginator(allgoods, 20)
     page_obj = page.get_page(1)
     goodRequest = {}
     goodRequest['category'] = 'All'
@@ -201,7 +203,7 @@ def showAllGood(request, category):
                     info = AllGoods.objects.get(Product_Number=goodid)
                     return render(request, 'goodInfo.html',{'info':info})
                 except:
-                    page = Paginator(allgoods, 40)
+                    page = Paginator(allgoods, 20)
                     page_obj = page.get_page(1)
                     return render(request, 'goods.html', {'goods': page_obj, 'ERROR':'商品ID错误'})
             else:
@@ -233,7 +235,7 @@ def showAllGood(request, category):
                         # if category in good['Category']:
                         if (goodid in good['Product_Name']) or (goodid in good['Description']) or (goodid in good['Keywords']):
                             newgoods.append(good)
-                page = Paginator(newgoods, 40)
+                page = Paginator(newgoods, 20)
                 page_obj = page.get_page(1)
                 return render(request, 'goods.html', {'goods': page_obj, 'goodid':goodid})
 
@@ -297,8 +299,108 @@ def showAllGood(request, category):
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'))
                 elif 'price_down' in sort:
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'), reverse=True)
-            page = Paginator(newgoods, 40)
+            page = Paginator(newgoods, 20)
             page_obj = page.get_page(1)
+            return render(request, 'goods.html', {'goods': page_obj, 'res':res})
+        elif ('page_index_previous' in request.POST) or ('page_index_0001' in request.POST) or ('page_index_0002' in request.POST) or ('page_index_0003' in request.POST) or ('page_index_0004' in request.POST) or ('page_index_0005' in request.POST) or ('page_index_next' in request.POST):
+            print('进入函数')
+            page_index = int(request.POST['page_index'].split(' ')[1])
+            if 'page_index_previous' in request.POST:
+                page_index -= 5
+            elif 'page_index_0001' in request.POST:
+                page_index = request.POST['page_index_0001']
+            elif 'page_index_0002' in request.POST:
+                page_index = request.POST['page_index_0002']
+            elif 'page_index_0003' in request.POST:
+                page_index = request.POST['page_index_0003']
+            elif 'page_index_0004' in request.POST:
+                page_index = request.POST['page_index_0004']
+            elif 'page_index_0005' in request.POST:
+                page_index = request.POST['page_index_0005']
+            elif 'page_index_next' in request.POST:
+                page_index += 5
+            category = request.POST['category']
+            price_from = request.POST['price_from']
+            price_to = request.POST['price_to']
+            sort = request.POST['sort']
+            res = {}
+            res['category'] = category
+            res['price_from'] = price_from
+            res['price_to'] = price_to
+            res['sort'] = sort
+            res['page_index'] = int(page_index)
+            allgoods = AllGoods.objects.all()
+            goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
+            newgoods = []
+            print(type(goods))
+            for good in goods.iterator():
+                if good['P10']:
+                    good['P1'] = good['P10']
+                elif good['P9']:
+                    good['P1'] = good['P9']
+                elif good['P8']:
+                    good['P1'] = good['P8']
+                elif good['P7']:
+                    good['P1'] = good['P7']
+                elif good['P6']:
+                    good['P1'] = good['P6']
+                elif good['P5']:
+                    good['P1'] = good['P5']
+                elif good['P4']:
+                    good['P1'] = good['P4']
+                elif good['P3']:
+                    good['P1'] = good['P3']
+                elif good['P2']:
+                    good['P1'] = good['P2']
+                if good['P1']:
+                    try:
+                        good['P1'] = float(good['P1'])
+                    except:
+                        continue
+                else:
+                    continue
+                if good['Category']:
+                    if category in good['Category'] or category=='All':
+                        if good['P1'] and price_from:
+                            if good['P1'] >= float(price_from):
+                                if price_to:
+                                    if good['P1'] <= float(price_to):
+                                        newgoods.append(good)
+                                else:
+                                    newgoods.append(good)
+                        else:
+                            if price_to:
+                                    if good['P1'] <= float(price_to):
+                                        newgoods.append(good)
+                            else:
+                                newgoods.append(good)
+            if sort:
+                if 'price_up' in sort:
+                    newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'))
+                elif 'price_down' in sort:
+                    newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'), reverse=True)
+            goodNum = len(newgoods)//20
+            if len(newgoods)%20 != 0:
+                goodNum += 1
+            res['page_max_index'] = goodNum
+            if res['page_index'] < 1:
+                res['page_index'] = 1
+            elif res['page_index'] > goodNum:
+                res['page_index'] = goodNum
+            res['page_3'] = res['page_index']
+            nowPageIndex = res['page_index']
+            if res['page_3'] < 3:
+                res['page_3'] = 3
+            elif res['page_3'] > goodNum-2:
+                res['page_3'] = goodNum-2
+            res['page_1'] = res['page_3'] - 2
+            res['page_2'] = res['page_3'] - 1
+            res['page_4'] = res['page_3'] + 1
+            res['page_5'] = res['page_3'] + 2
+            
+            res['page_index'] = 'now ' + str(res['page_index']) + ' pages'
+            page = Paginator(newgoods, 20)
+            page_obj = page.get_page(nowPageIndex)
             return render(request, 'goods.html', {'goods': page_obj, 'res':res})
     elif request.method == "GET":
         category_text = category
@@ -327,7 +429,7 @@ def showAllGood(request, category):
             if good['Category']:
                 if category in good['Category'] or category=='All':
                     newgoods.append(good)
-        page = Paginator(newgoods, 40)
+        page = Paginator(newgoods, 20)
         page_obj = page.get_page(1)
         res = {}
         res['category'] = category
@@ -335,7 +437,7 @@ def showAllGood(request, category):
 
     else:
         allgoods = AllGoods.objects.all()
-        page = Paginator(allgoods, 40)
+        page = Paginator(allgoods, 20)
         page_obj = page.get_page(1)
         return render(request, 'goods.html', {'goods': page_obj})
 
@@ -361,7 +463,20 @@ def goodInfo(request):
             goodinfo.Free_Shipping = 'No'
         print(goodinfo.Product_Number)
         return render(request, 'goodInfo.html', {'info': goodinfo})
-
+    if request.method == "POST":
+        if 'commit_request' in request.POST:
+            fname = request.POST['first_name']
+            lname = request.POST['last_name']
+            company = request.POST['company']
+            phone = request.POST['phone']
+            email = request.POST['email']
+            product_name = request.POST['product_name']
+            product_code = request.POST['product_code']
+            date = request.POST['date']
+            quantity = request.POST['quantity']
+            contact = request.POST['comments']
+            ProductRequest.objects.create(fname=fname,date=date,quantity=quantity,product_code=product_code,product_name=product_name,lname=lname,company=company,phone=phone,email=email,contact=contact)
+            return redirect('/')
 
 def getdata(filepath):
     data = []
@@ -375,7 +490,7 @@ def getdata(filepath):
         add_data = []
         add_data.append(one[1])
         add_data.append(one[2])
-        add_data.append('../static/img/goods/' + one[2] + '.jpg')
+        add_data.append(one[3])
         add_data.append(one[8])
         add_data.append(one[10])
         add_data.append(one[11])

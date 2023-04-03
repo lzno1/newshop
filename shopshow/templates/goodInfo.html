@@ -26,7 +26,7 @@
                 <a class="nav-link active " height="60" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item navbar-brand">
-                <a class="nav-link" height="60" href="{% url 'goods' %}">Produsts</a>
+                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Produsts</a>
             </li>
            
             <li class="nav-item navbar-brand">
@@ -50,7 +50,7 @@
                     <h2><strong>{{info.Product_Name}}</strong></h2>
                     <h6>{{info.Product_Number}}</h6>
                     <h5>{{info.Description}}</h5>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Open modal for @mdo</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Request Info</button>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="model-content">
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" name="commit_request">
                                         Send Request Info
                                     </button>
                                 </div>
@@ -154,12 +154,6 @@
                                     {% endif %}
                                     
                                 </div>
-        
-
-                                
-
-                                
-
                             </div>
                         </div>
                     </div>

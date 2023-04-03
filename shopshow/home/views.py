@@ -6,6 +6,7 @@ from django.shortcuts import HttpResponse,HttpResponseRedirect
 from .models import HotGoods
 from store.models import logistics
 from goods.models import AllGoods
+from contact.models import MessageBoard
 
 # Create your views here.
 def home(request):
@@ -48,6 +49,16 @@ def home(request):
             except:
                 hotgoods = HotGoods.objects.all()
                 return render(request, 'home.html',{'hotgoods': hotgoods,'logError':'订单ID错误'})
+        
+        elif 'submit_to_me' in request.POST:
+            fname = request.POST['first_name']
+            lname = request.POST['last_name']
+            company = request.POST['company']
+            phone = request.POST['phone']
+            email = request.POST['email']
+            contact = request.POST['contact']
+            logistics.objects.create(fname=fname,lname=lname,company=company,phone=phone,email=email,contact=contact)
+            
     else:
         hotgoods = HotGoods.objects.all()
         return render(request, 'home.html',{'hotgoods': hotgoods})

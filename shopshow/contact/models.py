@@ -23,7 +23,7 @@ class ProductRequest(models.Model):
     phone = models.CharField('phone', max_length=20, blank=True, null=True)
     product_name = models.CharField('商品名称' ,max_length=64, blank=True, null=True)
     product_code = models.CharField('商品代码', max_length=10, blank=True, null=True)
-    date = models.DateField('计划日期',default=datetime.date.today)
+    date = models.CharField('计划日期',max_length=40, blank=True, null=True)
     quantity = models.CharField('需求数量', max_length=40, blank=True, null=True)
     contact = models.CharField('留言内容',max_length=400, blank=True, null=True)
     create_time = models.DateField('提交日期',default=datetime.date.today)

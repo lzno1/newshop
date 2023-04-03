@@ -26,7 +26,7 @@
                 <a class="nav-link active " height="60" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item navbar-brand">
-                <a class="nav-link" height="60" href="{% url 'goods' %}">Produsts</a>
+                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Produsts</a>
             </li>
            
             <li class="nav-item navbar-brand">
@@ -52,7 +52,7 @@
         <div id="main" >
             <form method="post">
                 {%csrf_token%}
-            <div class="title row">
+                <div class="title row">
                 <div class="col-lg-3">
                     <div class="sidebar text-center">
                         {% if res.category %}
@@ -102,24 +102,56 @@
                                 <input type="submit" class="w-100" name="more_search" id="more_search" value="Search">
                             </div>
                         </div>
-                        <div class="cardspad w-100 row">
-                            <div class="col-lg-6 text-right">
-                                Showing 1-25 of 100 results
+                        <div class="cardspad w-100 row ">
+                            <div class="col-lg-9 text-right row">
+                                <div class="col-lg-6 sidebar_title">
+                                    ALL 12542 results, 200 pages
+                                </div>
+                                <div class="col-lg-6">
+                                    {% if res.page_index %}
+                                    <input type="text" class="sidebar_title" name="page_index" id="page_index" value='{{res.page_index}}' readonly="readonly">
+                                    {% else %}
+                                    <input type="text" class="sidebar_title" name="page_index" id="page_index" value='now 1 page' readonly="readonly">
+                                    {% endif %}
+                                </div>
+                                
                             </div>
-                            <div class="col-lg-6 text-right">
+                            
+                            <div class="col-lg-3">
+                                <div class="fa-pull-right">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <input type="submit" class="page-item page-link" name="page_index_previous" id="page_index_previous" value='<<' readonly="readonly">
+                                            {% if res.page_5 %}
+                                            <input type="submit" class="page-item page-link" name="page_index_0001" id="page_index_0001" value='{{res.page_1}}' readonly="readonly">
+                                            <input type="submit" class="page-item page-link" name="page_index_0002" id="page_index_0002" value='{{res.page_2}}' readonly="readonly">
+                                            <input type="submit" class="page-item page-link" name="page_index_0003" id="page_index_0003" value='{{res.page_3}}' readonly="readonly">
+                                            <input type="submit" class="page-item page-link" name="page_index_0004" id="page_index_0004" value='{{res.page_4}}' readonly="readonly">
+                                            <input type="submit" class="page-item page-link" name="page_index_0005" id="page_index_0005" value='{{res.page_5}}' readonly="readonly">
+                                            {% else %}
+                                            <input type="submit" class="page-item page-link" name="page_index_0001" id="page_index_0001" value='1' readonly="readonly">
+                                            <input type="submit" class="page-item page-link" name="page_index_0002" id="page_index_0002" value='2' readonly="readonly">
+                                            <input type="submit" class="page-item page-link" name="page_index_0003" id="page_index_0003" value='3' readonly="readonly">
+                                            <input type="submit" class="page-item page-link" name="page_index_0004" id="page_index_0004" value='4' readonly="readonly">
+                                            <input type="submit" class="page-item page-link" name="page_index_0005" id="page_index_0005" value='5' readonly="readonly">
+                                            {% endif %}
+                                            <input type="submit" class="page-item page-link" name="page_index_next" id="page_index_next" value='>>' readonly="readonly">
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
 
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
+                </div>
+            </form>
             <div class="main row">
                 <div class="col-lg-3">
-                    <div class="sidebar">
-                        <div class="sidebar_title_text">Catogray</div>
+                    <div class="sidebar w-50 m-auto">
+                        <div class="sidebar_title_text">Categray</div>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush w-50 m-auto">
                         <a href="{% url 'goods' %}All/" class="list-group-item">All</a>
                         <a href="{% url 'goods' %}Bags/" class="list-group-item">Bags</a>
                         <a href="{% url 'goods' %}Mobile Accessories/" class="list-group-item">Mobile Accessories</a>

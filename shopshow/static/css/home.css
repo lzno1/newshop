@@ -168,7 +168,7 @@
 
 #goodsInfo{
     color: #848484;
-    margin-top: 80px;
+    margin-top: 10px;
     text-align: center;
 }
 
@@ -191,25 +191,24 @@
 }
 
 .goodsInfoCards{
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 1%;
+    padding-right: 1%;
     /* padding-top: 10px; */
-    padding-bottom: 40px;
+    padding-bottom: 10px;
 }
 
 .goodsCard{
-    width: 18%;
-    padding-top: 40px;
+    width: 23%;
+    padding-top: 20px;
     margin-left: 1%;
     margin-right: 1%;
     font-size: 20px;
-    background: #f8f7f2;
-    fill: #f8f7f2;
+    background: #dfddd7;
+    fill: #f8f7f200;
 }
 
 .goodspad{
-    padding-top: 20px;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .cardspad{
@@ -225,12 +224,12 @@
 }
 
 .imgSize:hover{
-    transform: scale(2.0);
+    transform: scale(1.5);
 }
 
 .goodsCardItem{
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .cardname{
