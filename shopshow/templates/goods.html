@@ -145,11 +145,10 @@
                     </div>
                 </div>
                 </div>
-            </form>
             <div class="main row">
                 <div class="col-lg-3">
                     <div class="sidebar w-50 m-auto">
-                        <div class="sidebar_title_text">Categray</div>
+                        <div class="sidebar_title_text">Categroy</div>
                     </div>
                     <ul class="list-group list-group-flush w-50 m-auto">
                         <a href="{% url 'goods' %}All/" class="list-group-item">All</a>
@@ -157,7 +156,7 @@
                         <a href="{% url 'goods' %}Mobile Accessories/" class="list-group-item">Mobile Accessories</a>
                         <a href="{% url 'goods' %}Key Chains/" class="list-group-item">Key Chains</a>
                         <a href="{% url 'goods' %}Awards/" class="list-group-item">Awards</a>
-                        <a href="{% url 'goods' %}Tote Bages/" class="list-group-item">Tote Bages</a>
+                        <a href="{% url 'goods' %}Tote Bags/" class="list-group-item">Tote Bages</a>
                         <a href="{% url 'goods' %}Pens/" class="list-group-item">Pens</a>
                         <a href="{% url 'goods' %}Bottles/" class="list-group-item">Bottles</a>
                         <a href="{% url 'goods' %}Caps & Hats/" class="list-group-item">Caps & Hats</a>
@@ -214,20 +213,65 @@
                                     <div class="goodsCard">
                                         <div class="goodsCardItem">
                                             <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}">
-                                                <img class="imgSize", src="../{{good.Product_img}}", alt="">
+                                                <img class="imgSize", src="{{good.Product_img}}", alt="">
                                             </a>
-                                            <div class="cardname">{{good.Product_Name}}</div>
-                                            <div class="cardprice">{{good.Product_Number}}</div>
+                                            <div>
+                                                <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardname">{{good.Product_Name}}</a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardprice">{{good.Product_Number}}</a>
+                                            </div>
                                             <div class="cardprice">$ {{good.P1}}</div>
                                         </div>
                                     </div>
                                     {% endfor %}
                                 </div>
                             </div>
+                            <div class="cardspad w-100 row ">
+                                <div class="col-lg-9 text-right row">
+                                    <div class="col-lg-6 sidebar_title">
+                                        ALL 12542 results, 200 pages
+                                    </div>
+                                    <div class="col-lg-6">
+                                        {% if res.page_index %}
+                                        <input type="text" class="sidebar_title" name="page_index" id="page_index" value='{{res.page_index}}' readonly="readonly">
+                                        {% else %}
+                                        <input type="text" class="sidebar_title" name="page_index" id="page_index" value='now 1 page' readonly="readonly">
+                                        {% endif %}
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="col-lg-3">
+                                    <div class="fa-pull-right">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <input type="submit" class="page-item page-link" name="page_index_previous" id="page_index_previous" value='<<' readonly="readonly">
+                                                {% if res.page_5 %}
+                                                <input type="submit" class="page-item page-link" name="page_index_0001" id="page_index_0001" value='{{res.page_1}}' readonly="readonly">
+                                                <input type="submit" class="page-item page-link" name="page_index_0002" id="page_index_0002" value='{{res.page_2}}' readonly="readonly">
+                                                <input type="submit" class="page-item page-link" name="page_index_0003" id="page_index_0003" value='{{res.page_3}}' readonly="readonly">
+                                                <input type="submit" class="page-item page-link" name="page_index_0004" id="page_index_0004" value='{{res.page_4}}' readonly="readonly">
+                                                <input type="submit" class="page-item page-link" name="page_index_0005" id="page_index_0005" value='{{res.page_5}}' readonly="readonly">
+                                                {% else %}
+                                                <input type="submit" class="page-item page-link" name="page_index_0001" id="page_index_0001" value='1' readonly="readonly">
+                                                <input type="submit" class="page-item page-link" name="page_index_0002" id="page_index_0002" value='2' readonly="readonly">
+                                                <input type="submit" class="page-item page-link" name="page_index_0003" id="page_index_0003" value='3' readonly="readonly">
+                                                <input type="submit" class="page-item page-link" name="page_index_0004" id="page_index_0004" value='4' readonly="readonly">
+                                                <input type="submit" class="page-item page-link" name="page_index_0005" id="page_index_0005" value='5' readonly="readonly">
+                                                {% endif %}
+                                                <input type="submit" class="page-item page-link" name="page_index_next" id="page_index_next" value='>>' readonly="readonly">
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+    
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 

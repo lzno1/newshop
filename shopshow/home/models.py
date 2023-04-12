@@ -4,10 +4,12 @@ import datetime
 
 # Create your models here.
 class HotGoods(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True)
-    price = models.CharField(max_length=100, blank=True, null=True)
-    url = models.CharField(max_length=100, blank=True, null=True)
-    img = models.ImageField(upload_to='img/', blank=True)
+    goodID = models.CharField('商品ID', max_length=100, blank=True, null=True)
+    goodType = models.CharField('主页展示类型', max_length=100, blank=True, null=True)
+    goodUrl = models.CharField('商品图片网址', max_length=100, blank=True, null=True)
+    goodPrice = models.CharField('商品价格展示', max_length=100, blank=True, null=True)
+    goodName = models.CharField('商品名称', max_length=100, blank=True, null=True)
+    
 
 
 

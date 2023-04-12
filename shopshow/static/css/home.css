@@ -186,8 +186,9 @@
 }
 
 .goodsTypeBuuton{
-    width: 25%;
+    width: 100%;
     font-size: 20px;
+    border-style: none;
 }
 
 .goodsInfoCards{
@@ -199,6 +200,16 @@
 
 .goodsCard{
     width: 23%;
+    padding-top: 20px;
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: 20px;
+    background: #dfddd7;
+    fill: #f8f7f200;
+}
+
+.goodsCard_home{
+    width: 18%;
     padding-top: 20px;
     margin-left: 1%;
     margin-right: 1%;
@@ -406,7 +417,7 @@
     font-weight: 700;
     font-size: 1.75em;
     font-style: oblique;
-    color: #030303;
+    color:darkred;
     text-rendering: optimizeSpeed;
     border-bottom: 1px solid #030303;
     margin-bottom: 10px;
@@ -414,4 +425,33 @@
 
 .accordion{
     color: #030303;
+}
+
+.title_time_phone_email{
+    text-align: center;
+    font-size: smaller;
+    font-style: oblique;
+    width: 20%;
+    color: #e0e0e0;
+}
+
+.search-title{
+    width: 40%;
+}
+
+.title_nav{
+    width: 40%;
+}
+
+.answer_card{
+    color: #a1a1a1;
+}
+
+.question_card{
+    color: darkorange;
+}
+
+.question_card:hover{
+    cursor: pointer;
+    color: orange;
 }

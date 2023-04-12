@@ -5,7 +5,7 @@ from store.models import logistics
 
 
 class HotGoodsInfo(admin.ModelAdmin):
-    list_display = ['name', 'price', 'url', 'img']
+    list_display = ['goodID', 'goodType', 'goodUrl', 'goodName', 'goodPrice']
 
 # class LogisticsInfo(admin.ModelAdmin):
 #     list_display = ['goodid', 'tranid', 

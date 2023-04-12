@@ -19,7 +19,7 @@ class CaiGouInfo(admin.ModelAdmin):
     list_display = ['time', 'user', 'goods', 'upMoney', 'PI', 'com', 'phone', 'type', 'num', 'money', 'otherMoney', 'allMoney']
 
 class AllGoodsInfo(admin.ModelAdmin):
-    list_display = ['Product_Name', 'Product_Number', 'Product_IsHazmat', 'Description', 'Summary', 'Product_Type', 'Category', 'Keywords', 'Product_Color', 'Material', 'Size_Group', 'Size_Values', 'Shape', 'Theme', 
+    list_display = ['create_time','Product_Name', 'Product_Number', 'Product_img', 'Product_IsHazmat', 'Description', 'Summary', 'Product_Type', 'Category', 'Keywords', 'Product_Color', 'Material', 'Size_Group', 'Size_Values', 'Shape', 'Theme', 
                     'Origin', 'Imprint_Method', 'Imprint_Color', 'Imprint_Size', 'Imprint_Location', 'Price_Includes', 'Sequence', 'Currency', 'Always_Free_Setup', 'Upcharge_Name', 'Upcharge_Criteria_1', 'Upcharge_Criteria_2', 'Upcharge_Type', 'Upcharge_Level', 'Service_Charge', 'Upcharge_Details',  
                     'UQ1', 'UQ2', 'UQ3', 'UQ4', 'UQ5', 'UQ6', 'UQ7', 'UQ8', 'UQ9', 'UQ10', 
                     'UP1', 'UP2', 'UP3', 'UP4', 'UP5', 'UP6', 'UP7', 'UP8', 'UP9', 'UP10', 

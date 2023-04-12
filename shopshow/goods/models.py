@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 class ALLHotGoods(models.Model):
@@ -49,7 +50,7 @@ class CaiGou(models.Model):
 class AllGoods(models.Model):
     Product_Name = models.CharField(max_length=80, blank=True, null=True)
     Product_Number = models.CharField(max_length=10, primary_key=True)
-    Product_img = models.CharField(max_length=40, blank=True, null=True)
+    Product_img = models.CharField(max_length=80, blank=True, null=True)
     Product_IsHazmat = models.CharField(max_length=20, blank=True, null=True)
     Description = models.CharField(max_length=1000, blank=True, null=True)
     Summary = models.CharField(max_length=80, blank=True, null=True)
@@ -158,3 +159,4 @@ class AllGoods(models.Model):
     Distributor_View_Only = models.CharField(max_length=4, blank=True, null=True)
     Carrier_Information = models.CharField(max_length=100, blank=True, null=True)
     Market_Segment = models.CharField(max_length=40, blank=True, null=True)
+    create_time = models.DateField('提交日期',default=datetime.date.today)

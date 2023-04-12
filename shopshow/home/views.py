@@ -11,6 +11,7 @@ from contact.models import MessageBoard
 # Create your views here.
 def home(request):
     if request.method == "POST":
+        hotgoods = HotGoods.objects.all()
         if 'goodid' in request.POST:
             allgoods = AllGoods.objects.all()
             goodid = request.POST['goodid']
@@ -60,8 +61,14 @@ def home(request):
             logistics.objects.create(fname=fname,lname=lname,company=company,phone=phone,email=email,contact=contact)
             
     else:
-        hotgoods = HotGoods.objects.all()
-        return render(request, 'home.html',{'hotgoods': hotgoods})
+        hotgoods = HotGoods.objects.all().values()
+        allgoods = AllGoods.objects.all()
+        hotGoodInfo = {'Swag_Stuff':[], 'Seasonal_Items':[], 'New_Peomo':[], 'Holidays_Related':[]}
+        for good in hotgoods.iterator():
+            if good['goodType'] in hotGoodInfo.keys():
+                print(good)
+                hotGoodInfo[good['goodType']].append(good)
+        return render(request, 'home.html',{'hotgoods': hotGoodInfo})
 
 
 

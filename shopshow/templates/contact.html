@@ -34,23 +34,23 @@
 
     </nav>
 
-    <div class='container bg-dark' id="aboutInfo">
+    <div class='container bg-light' id="aboutInfo">
         <div class="row w-75 m-auto">
             <div class="col-lg-6" >
                 <div class="aboutInfoPlace">
                     <div class="contact_title text-left">Frequently Asked Questions (FAQs)</div>
                     <div class="accordion " id="accordionExample">
                         {% for faq in faqs %}
-                        <div class="card bg-dark">
+                        <div class="card bg-light">
                             <div class="card-header" id="headingOne">
                                 <h2 class="mb-0">
-                                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq{{forloop.counter}}" aria-expanded="true" aria-controls="faq{{forloop.counter}}">
+                                    <button class="btn btn-block text-left question_card" type="button" data-toggle="collapse" data-target="#faq{{forloop.counter}}" aria-expanded="true" aria-controls="faq{{forloop.counter}}">
                                         {{faq.title}}
                                     </button>
                                 </h2>
                             </div>
                             <div id="faq{{forloop.counter}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                <div class="card-body">
+                                <div class="card-body answer_card">
                                     {{faq.answer}}
                                 </div>
                             </div>

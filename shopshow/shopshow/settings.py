@@ -127,19 +127,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-DEBUG = False
-ALLOWED_HOSTS = ['108.61.220.238']
-# ALLOWED_HOSTS = ['127.0.0.1']
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# DEBUG = False
+# ALLOWED_HOSTS = ['108.61.220.238']
+# # ALLOWED_HOSTS = ['127.0.0.1']
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # debug
-# DEBUG = True
-# ALLOWED_HOSTS = ['*']
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+DEBUG = True
+ALLOWED_HOSTS = ['*']
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 
 MEDIA_URL = '/media/'
@@ -230,6 +230,10 @@ SIMPLEUI_CONFIG = {
                 {
                     'name': '介绍问答',
                     'url': '/admin/contact/faquestion/'
+                },
+                {
+                    'name': '主页商品展示',
+                    'url': '/admin/home/hotgoods/'
                 },
             ]
         },
