@@ -178,22 +178,44 @@ def allgoods(request):
                 data = getdata(writename)
                 for one in data:
                     # try:
-                    print('正在写入信息')
-                    print(one)
+                    print('写入： ' + str(one[1]))
                     good_info = AllGoods.objects.filter(Product_Number=one[1])
                     if good_info:
                         AllGoods.objects.filter(Product_Number=one[1]).delete()
-                        time.sleep(0.5)
+                        time.sleep(0.2)
                     AllGoods.objects.create(Product_Name=one[0], Product_Number=one[1],Product_img=one[2], Product_IsHazmat=one[3], Description=one[4], Summary=one[5], Product_Type=one[6], Category=one[7], Keywords=one[8], Product_Color=one[9], Material=one[10], Size_Group=one[11], Size_Values=one[12], Shape=one[13], Theme=one[14], Origin=one[15], Imprint_Method=one[16], Imprint_Color=one[17], Imprint_Size=one[18], Imprint_Location=one[19], Price_Includes=one[20], Sequence=one[21], Currency=one[22], Always_Free_Setup=one[23], Upcharge_Name=one[24], Upcharge_Criteria_1=one[25], Upcharge_Criteria_2=one[26], Upcharge_Type=one[27], Upcharge_Level=one[28], Service_Charge=one[29], UQ1=one[30], UQ2=one[31], UQ3=one[32], UQ4=one[33], UQ5=one[34], UQ6=one[35], UQ7=one[36], UQ8=one[37], UQ9=one[38], UQ10=one[39], UP1=one[40], UP2=one[41], UP3=one[42], UP4=one[43], UP5=one[44], UP6=one[45], UP7=one[46], UP8=one[47], UP9=one[48], UP10=one[49], UD1=one[50], UD2=one[51], UD3=one[52], UD4=one[53], UD5=one[54], UD6=one[55], UD7=one[56], UD8=one[57], UD9=one[58], UD10=one[59], Upcharge_Details=one[60], Production_Time=one[61], Rush_Service=one[62], Rush_Time=one[63], Same_Day_Service=one[64], Packaging=one[65], Shipping_Items=one[66], Shipping_Dimensions=one[67], Shipping_Weight=one[68], Shipper_Bills_By=one[69], Shipping_Info=one[70], Free_Shipping=one[71], Q1=one[72], Q2=one[73], Q3=one[74], Q4=one[75], Q5=one[76], Q6=one[77], Q7=one[78], Q8=one[79], Q9=one[80], Q10=one[81], P1=one[82], P2=one[83], P3=one[84], P4=one[85], P5=one[86], P6=one[87], P7=one[88], P8=one[89], P9=one[90], P10=one[91], D1=one[92], D2=one[93], D3=one[94], D4=one[95], D5=one[96], D6=one[97], D7=one[98], D8=one[99], D9=one[100], D10=one[101], Distributor_View_Only=one[102], Carrier_Information=one[103], Market_Segment=one[104])
-                    print('正在写入信息')
                     # except:
                     #     pass
-                messages.info(request, '数据写入成功')
+                messages.info(request, '数据写入成功,共写入 ' + str(len(data)) + ' 条数据')
                 return render(request, 'UploadGoods.html')
+        elif 'good_batch_delete' in request.POST:
+            fileName = request.FILES.get('excelfile', None)
+            avatar = request.FILES['excelfile']
+            if fileName:
+                writename = 'media/%s'%fileName
+                with open(writename, 'wb+') as f:
+                    for c in avatar.chunks():
+                        f.write(c)
+                data = getdata(writename)
+                for one in data:
+                    # try:
+                    print('删除： ' + str(one[1]))
+                    good_info = AllGoods.objects.filter(Product_Number=one[1])
+                    if good_info:
+                        AllGoods.objects.filter(Product_Number=one[1]).delete()
+                        time.sleep(0.2)
+                    # AllGoods.objects.create(Product_Name=one[0], Product_Number=one[1],Product_img=one[2], Product_IsHazmat=one[3], Description=one[4], Summary=one[5], Product_Type=one[6], Category=one[7], Keywords=one[8], Product_Color=one[9], Material=one[10], Size_Group=one[11], Size_Values=one[12], Shape=one[13], Theme=one[14], Origin=one[15], Imprint_Method=one[16], Imprint_Color=one[17], Imprint_Size=one[18], Imprint_Location=one[19], Price_Includes=one[20], Sequence=one[21], Currency=one[22], Always_Free_Setup=one[23], Upcharge_Name=one[24], Upcharge_Criteria_1=one[25], Upcharge_Criteria_2=one[26], Upcharge_Type=one[27], Upcharge_Level=one[28], Service_Charge=one[29], UQ1=one[30], UQ2=one[31], UQ3=one[32], UQ4=one[33], UQ5=one[34], UQ6=one[35], UQ7=one[36], UQ8=one[37], UQ9=one[38], UQ10=one[39], UP1=one[40], UP2=one[41], UP3=one[42], UP4=one[43], UP5=one[44], UP6=one[45], UP7=one[46], UP8=one[47], UP9=one[48], UP10=one[49], UD1=one[50], UD2=one[51], UD3=one[52], UD4=one[53], UD5=one[54], UD6=one[55], UD7=one[56], UD8=one[57], UD9=one[58], UD10=one[59], Upcharge_Details=one[60], Production_Time=one[61], Rush_Service=one[62], Rush_Time=one[63], Same_Day_Service=one[64], Packaging=one[65], Shipping_Items=one[66], Shipping_Dimensions=one[67], Shipping_Weight=one[68], Shipper_Bills_By=one[69], Shipping_Info=one[70], Free_Shipping=one[71], Q1=one[72], Q2=one[73], Q3=one[74], Q4=one[75], Q5=one[76], Q6=one[77], Q7=one[78], Q8=one[79], Q9=one[80], Q10=one[81], P1=one[82], P2=one[83], P3=one[84], P4=one[85], P5=one[86], P6=one[87], P7=one[88], P8=one[89], P9=one[90], P10=one[91], D1=one[92], D2=one[93], D3=one[94], D4=one[95], D5=one[96], D6=one[97], D7=one[98], D8=one[99], D9=one[100], D10=one[101], Distributor_View_Only=one[102], Carrier_Information=one[103], Market_Segment=one[104])
+                    # except:
+                    #     pass
+                messages.info(request, '数据删除成功,共删除 ' + str(len(data)) + ' 条数据')
+                return render(request, 'UploadGoods.html')
+        
     return render(request, 'UploadGoods.html')
 
 def showAllGoodPage(request):
     allgoods = AllGoods.objects.all()
+    goodRequest['allNum'] = allgoods.values().count()
+    goodRequest['allPage'] = allgoods.values().count()//20 + 1
     page = Paginator(allgoods, 20)
     page_obj = page.get_page(1)
     goodRequest = {}
@@ -312,6 +334,8 @@ def showAllGood(request, category):
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'), reverse=True)
             page = Paginator(newgoods, 20)
             page_obj = page.get_page(1)
+            res['allNum'] = len(newgoods)
+            res['allPage'] = len(newgoods)//20 + 1
             return render(request, 'goods.html', {'goods': page_obj, 'res':res})
         elif ('page_index_previous' in request.POST) or ('page_index_0001' in request.POST) or ('page_index_0002' in request.POST) or ('page_index_0003' in request.POST) or ('page_index_0004' in request.POST) or ('page_index_0005' in request.POST) or ('page_index_next' in request.POST):
             print('进入函数')
@@ -412,6 +436,8 @@ def showAllGood(request, category):
             res['page_index'] = 'now ' + str(res['page_index']) + ' pages'
             page = Paginator(newgoods, 20)
             page_obj = page.get_page(nowPageIndex)
+            res['allNum'] = len(newgoods)
+            res['allPage'] = len(newgoods)//20 + 1
             return render(request, 'goods.html', {'goods': page_obj, 'res':res})
     elif request.method == "GET":
         category_text = category
@@ -444,6 +470,8 @@ def showAllGood(request, category):
         page_obj = page.get_page(1)
         res = {}
         res['category'] = category
+        res['allNum'] = len(newgoods)
+        res['allPage'] = len(newgoods)//20 + 1
         return render(request, 'goods.html', {'goods': page_obj, 'res':res})
 
     else:
@@ -472,7 +500,7 @@ def goodInfo(request):
             goodinfo.Free_Shipping = 'Yes'
         elif 'N' in goodinfo.Free_Shipping:
             goodinfo.Free_Shipping = 'No'
-        print(goodinfo.Product_Number)
+        # print(goodinfo.Product_Number)
         return render(request, 'goodInfo.html', {'info': goodinfo})
     if request.method == "POST":
         if 'commit_request' in request.POST:
@@ -491,7 +519,7 @@ def goodInfo(request):
 
 def getdata(filepath):
     data = []
-    with open(filepath, 'rt') as f:
+    with open(filepath, 'rt', encoding='latin-1') as f:
         lines = csv.reader(f)
         for line in lines:
             data.append(line)

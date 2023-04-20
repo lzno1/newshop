@@ -55,11 +55,14 @@
         <form method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
             {%csrf_token%}
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-8">
                     <input type="file" name="excelfile">
                 </div>
-                <div class="col-lg-3 w-100">
-                    <button class="btn btn-outline-secondary my-2" name='good_batch_upload' type="submit">批量上传数据</button>
+                <div class="col-lg-2 w-100">
+                    <button class="btn btn-outline-secondary my-2 w-100" name='good_batch_upload' type="submit">批量上传数据</button>
+                </div>
+                <div class="col-lg-2 w-100">
+                    <button class="btn btn-outline-secondary my-2 w-100" name='good_batch_delete' type="submit">批量删除数据</button>
                 </div>
             </div>
             <div class="row">
