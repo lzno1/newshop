@@ -1,11 +1,15 @@
 from django.contrib import admin
 from .models import HotGoods
+from .models import BannerShow
 from store.models import logistics
 # Register your models here.
 
 
 class HotGoodsInfo(admin.ModelAdmin):
     list_display = ['goodID', 'goodType', 'goodUrl', 'goodName', 'goodPrice']
+
+class BannerShowInfo(admin.ModelAdmin):
+    list_display = ['bannerImg', 'bannerUrl']
 
 # class LogisticsInfo(admin.ModelAdmin):
 #     list_display = ['goodid', 'tranid', 
@@ -15,4 +19,5 @@ class HotGoodsInfo(admin.ModelAdmin):
 
 admin.site.site_title = '用户名'
 admin.site.register(HotGoods, HotGoodsInfo)
+admin.site.register(BannerShow, BannerShowInfo)
 # admin.site.register(logistics, LogisticsInfo)

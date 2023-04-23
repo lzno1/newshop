@@ -26,6 +26,7 @@ from goods.views import allgoods
 from goods.views import showAllGoodPage
 from goods.views import showAllGood
 from home.views import home
+from home.views import downsq
 # from store.views import store
 from goods.views import goodInfo
 from store.views import uplog
@@ -42,6 +43,7 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('uplog/', uplog, name='uploadLogistics'),
     path('upgood/', allgoods, name='uploadGoods'),
+    path('downloadDataMysqlbd/', downsq, name='downsq'),
     url(r'^static/(?P<path>.*)$', static.serve,
       {'document_root': settings.STATIC_ROOT}, name='static'),
     re_path(r'^media/(?P<path>.*)$',static.serve,{'document_root':settings.MEDIA_ROOT}),

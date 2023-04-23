@@ -11,7 +11,9 @@ class HotGoods(models.Model):
     goodName = models.CharField('商品名称', max_length=100, blank=True, null=True)
     
 
-
+class BannerShow(models.Model):
+    bannerImg = models.CharField('主页展示图片地址', max_length=100, blank=True, null=True)
+    bannerUrl = models.CharField('点击跳转到的网址', max_length=100, blank=True, null=True)
 
 
 

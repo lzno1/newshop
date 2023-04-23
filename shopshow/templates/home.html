@@ -26,7 +26,7 @@
                 <a class="nav-link active " height="60" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item navbar-brand">
-                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Produsts</a>
+                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Products</a>
             </li>
            
             <li class="nav-item navbar-brand">
@@ -88,65 +88,21 @@
             <li data-target="#carousel" data-slide-to="7"></li>
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active" >
-                <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/1.jpg' %}" class="w-100 carousel_img d-block img-fluid" alt="">
-                    <div class="carousel-caption">
-                        <!-- <h1 class="carousel-title m-auto">title </h1>
-                        <h1 class="carousel-info m-auto">info</h1>
-                        <h1 class="carousel-content m-auto">content</h1>
-                        <div class="carousel-button m-auto">按键1</div> -->
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item" >
-                <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/2.jpg' %}" class="w-100 carousel_img d-block img-fluid" alt="">
-                    <div class="carousel-caption">
-                        <!-- <h1 class="carousel-title m-auto">title </h1>
-                        <h1 class="carousel-info m-auto">info</h1>
-                        <h1 class="carousel-content m-auto">content</h1>
-                        <div class="carousel-button m-auto">按键2</div> -->
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item" >
-                <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/3.jpg' %}" class="w-100 carousel_img d-block img-fluid" alt="">
-                </a>
-            </div>
-            <div class="carousel-item" >
-                <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/4.jpg' %}" class="w-100 carousel_img d-block img-fluid" alt="">
-                    <div class="carousel-caption">
-                        <!-- <h1 class="carousel-title m-auto">title </h1>
-                        <h1 class="carousel-info m-auto">info</h1>
-                        <h1 class="carousel-content m-auto">content</h1>
-                        <div class="carousel-button m-auto">按键4</div> -->
-                    </div>
-                </a>
-            </div>
-            <div class="carousel-item" >
-                <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/5.jpg' %}" class="w-100 carousel_img d-block img-fluid" alt="">
-                </a>
-            </div>
-            <div class="carousel-item" >
-                <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/6.jpg' %}" class="w-100 carousel_img d-block img-fluid" alt="">
-                </a>
-            </div>
-            <div class="carousel-item" >
-                <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/7.jpg' %}" class="w-100 carousel_img d-block img-fluid" alt="">
-                </a>
-            </div>
-            <div class="carousel-item" >
-                <a class="carousel-a-href", href="https://www.baidu.com">
-                    <img src="{% static 'img/carousel/8.jpg' %}" class="w-100 carousel_img d-block img-fluid" alt="">
-                </a>
-            </div>
-
+            {% for ban in banner %}
+                {% if not forloop.first %}
+                <div class="carousel-item" >
+                    <a class="carousel-a-href", href="{% url 'goods' %}../goodInfo/?test=a&goodid={{ban.bannerUrl}}">
+                        <img src="{{ban.bannerImg}}" class="w-100 carousel_img d-block img-fluid" alt="">
+                    </a>
+                </div>
+                {% else %}
+                <div class="carousel-item active" >
+                    <a class="carousel-a-href", href="{% url 'goods' %}../goodInfo/?test=a&goodid={{ban.bannerUrl}}">
+                        <img src="{{ban.bannerImg}}" class="w-100 carousel_img d-block img-fluid" alt="">
+                    </a>
+                </div>
+                {% endif %}
+            {% endfor %}
 
         </div>
 

@@ -26,13 +26,21 @@
                 <a class="nav-link active " height="60" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item navbar-brand">
-                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Produsts</a>
+                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Products</a>
             </li>
            
             <li class="nav-item navbar-brand">
                 <a class="nav-link " height="60" href="{% url 'contact' %}">Contact</a>
             </li>
         </ul>
+
+        <div class="form-inline m-auto search-title">
+            <form action="{% url 'home' %}" method="post" class="row w-100 my-2">
+                {%csrf_token%}
+                <input type="text" class="border_radius col-lg-9 mr-sm-2" placeholder="Search for the Products You Need Here" name="goodid" value="{{ERROR}}">
+                <button class="col-lg-2 btn btn-outline-secondary " id="searchOrderId" type="submit">search</button>
+            </form>
+        </div>
 
         <!-- <form action="", class="form-inline ml-auto">
             <input type="text" class="form-control mr-sm-2" placeholder="请输入订单号">

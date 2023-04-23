@@ -235,6 +235,10 @@ SIMPLEUI_CONFIG = {
                     'name': '主页商品展示',
                     'url': '/admin/home/hotgoods/'
                 },
+                {
+                    'name': '主页banner展示',
+                    'url': '/admin/home/bannershow/'
+                },
             ]
         },
 

@@ -274,11 +274,13 @@ def showAllGood(request, category):
 
         elif 'more_search' in request.POST:
             category = request.POST['category']
+            key_word = request.POST['key_word']
             price_from = request.POST['price_from']
             price_to = request.POST['price_to']
             sort = request.POST['sort']
             res = {}
             res['category'] = category
+            res['key_word'] = key_word
             res['price_from'] = price_from
             res['price_to'] = price_to
             res['sort'] = sort
@@ -318,15 +320,19 @@ def showAllGood(request, category):
                             if good['P1'] >= float(price_from):
                                 if price_to:
                                     if good['P1'] <= float(price_to):
-                                        newgoods.append(good)
+                                        if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                            newgoods.append(good)
                                 else:
-                                    newgoods.append(good)
+                                    if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                        newgoods.append(good)
                         else:
                             if price_to:
                                     if good['P1'] <= float(price_to):
-                                        newgoods.append(good)
+                                        if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                            newgoods.append(good)
                             else:
-                                newgoods.append(good)
+                                if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                    newgoods.append(good)
             if sort:
                 if 'price_up' in sort:
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'))
@@ -355,11 +361,13 @@ def showAllGood(request, category):
             elif 'page_index_next' in request.POST:
                 page_index += 5
             category = request.POST['category']
+            key_word = request.POST['key_word']
             price_from = request.POST['price_from']
             price_to = request.POST['price_to']
             sort = request.POST['sort']
             res = {}
             res['category'] = category
+            res['key_word'] = key_word
             res['price_from'] = price_from
             res['price_to'] = price_to
             res['sort'] = sort
@@ -400,15 +408,19 @@ def showAllGood(request, category):
                             if good['P1'] >= float(price_from):
                                 if price_to:
                                     if good['P1'] <= float(price_to):
-                                        newgoods.append(good)
+                                        if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                            newgoods.append(good)
                                 else:
-                                    newgoods.append(good)
+                                    if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                        newgoods.append(good)
                         else:
                             if price_to:
                                     if good['P1'] <= float(price_to):
-                                        newgoods.append(good)
+                                        if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                            newgoods.append(good)
                             else:
-                                newgoods.append(good)
+                                if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                    newgoods.append(good)
             if sort:
                 if 'price_up' in sort:
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'))

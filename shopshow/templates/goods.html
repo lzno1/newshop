@@ -26,7 +26,7 @@
                 <a class="nav-link active " height="60" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item navbar-brand">
-                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Produsts</a>
+                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Products</a>
             </li>
            
             <li class="nav-item navbar-brand">
@@ -65,17 +65,23 @@
                 <div class="col-lg-9">
                     <div class="row w-100">
                         <div class="cardspad w-100 row">
-                            <div class="col-lg-1">
+                            <div class="col-lg-2 text-right">
+                                <label>Key Words Search</label>
+                            </div>
+                            <div class="col-lg-2">
+                                <input type="text" class="w-100" placeholder="Key words" value="{{res.key_word}}" name="key_word" id="key_word">
+                            </div>
+                            <div class="col-lg-1 text-right">
                                 <label>Price</label>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-1">
                                 <input type="text" class="w-100" placeholder="Price From $" value="{{res.price_from}}" name="price_from" id="price_from">
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-1">
                                 <input type="text" class="w-100" placeholder="Price To $" value="{{res.price_to}}" name="price_to" id="price_to">
                             </div>
                             
-                            <div class="col-lg-3 w-100">
+                            <div class="col-lg-2 w-100">
                                 <select id="sort" name="sort" class="w-100">
                                     <option value="default">Default Sorting</option>
                                     {% if res.sort == "laster" %}
