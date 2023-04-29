@@ -9,6 +9,12 @@ from store.models import logistics
 from goods.models import AllGoods
 from contact.models import MessageBoard
 from django.http import HttpResponse,Http404,FileResponse
+from django.conf import settings
+import os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.header import Header
 
 # Create your views here.
 def home(request):
@@ -62,6 +68,8 @@ def home(request):
             email = request.POST['email']
             contact = request.POST['contact']
             MessageBoard.objects.create(fname=fname,lname=lname,company=company,phone=phone,email=email,contact=contact)
+            email_content = 'firstname: ' + fname + '<br/>lastname: ' + lname + '<br/>company: ' + company + '<br/>phone: ' + phone + '<br/>email: ' + email + '<br/>comments: ' + contact
+            sendEmail('主页留言板', email_content, 'support@promo-union.com')
             hotgoods = HotGoods.objects.all().values()
             allgoods = AllGoods.objects.all()
             hotGoodInfo = {'Swag_Stuff':[], 'Seasonal_Items':[], 'New_Peomo':[], 'Holidays_Related':[]}
@@ -82,7 +90,8 @@ def home(request):
 
 
 def downsq(request):
-    file_path = r"F:\Project\webShow-master\ShopingShow\shopshow\db.sqlite3"
+    # print(str(settings.BASE_DIR))
+    file_path = os.path.join(settings.BASE_DIR, 'db.sqlite3') 
     try:
         f = open(file_path,"rb")
         r = FileResponse(f,as_attachment=True,filename="sqlite.sqlite3")
@@ -91,4 +100,31 @@ def downsq(request):
         raise Http404("Download error")
     
     return render(request, 'UploadGoods.html')
+
+def sendEmail(title, email_content, mail_receivers):
+    mail_host = "smtp.163.com"
+    mail_sender = 'm18831899513@163.com'
+    mail_license = 'UTKLVKJXVESYHXTX'
+    # mail_receivers = 'wj18831899513@gmail.com'
+
+    # 带有附件时
+    # mm = MIMEMultipart('')
+
+    msg = MIMEMultipart()
+    msg['From'] = mail_sender
+    msg['To'] = mail_receivers
+    msg['Subject'] = Header(title, 'utf-8')
+
+    message = MIMEText(email_content, 'html', 'utf-8')
+
+    msg.attach(message)
+
+    smtpObject = smtplib.SMTP()
+    smtpObject.connect(mail_host, 25)
+    # 打印SMTP服务器交互信息
+    # smtpObject.set_debuglevel(1)
+    smtpObject.login(mail_sender, mail_license)
+    smtpObject.sendmail(mail_sender, mail_receivers, msg.as_string())
+    print('邮件发送成功')
+    smtpObject.quit()
  

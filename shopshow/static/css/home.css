@@ -95,6 +95,7 @@
     color: #848484;
 }
 
+
 .wedoitemdorder{
     border-width: 0;
     border-style: solid;
@@ -195,16 +196,17 @@
     padding-left: 1%;
     padding-right: 1%;
     /* padding-top: 10px; */
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
 .goodsCard{
     width: 23%;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     margin-left: 1%;
     margin-right: 1%;
+    margin-bottom: 1%;
     font-size: 20px;
-    background: #dfddd7;
+    background: #eeece7;
     fill: #f8f7f200;
 }
 
@@ -214,8 +216,16 @@
     margin-left: 1%;
     margin-right: 1%;
     font-size: 20px;
-    background: #dfddd7;
+    background: #dce0d7;
     fill: #f8f7f200;
+}
+
+.goodsCard_home_banner{
+    width: 21%;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-size: 20px;
+    margin-bottom: 2%;
 }
 
 .goodspad{
@@ -239,25 +249,28 @@
 }
 
 .goodsCardItem{
-    padding-left: 2%;
-    padding-right: 2%;
+    margin-bottom: 10px;
 }
 
 .cardname{
     margin-top: 20px;
     margin-bottom: 20px;
-    color: #f36561;
+    color: #291717;
     font-size: 16px;
     line-height: 1.5;
 }
 
 .cardprice{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    color: #f36561;
-    font-size: 16px;
-    line-height: 1.5;
+    color: #332625;
+    font-size: 20px;
+    line-height: 2;
+    text-decoration: none;
+    text-shadow: #000000;
+}
 
+.priceidtype{
+    margin-top: 8px;
+    margin-bottom: 20px;
 }
 
 .btn-ash-outline{
@@ -291,14 +304,15 @@
 
 #pagefoot{
     text-align: center;
-    background: #c6c1af;
-    fill: #c6c1af;
-    margin-top: 100px;
+    background: #615e56;
+    fill: #585549;
+    /* margin-top: 100px; */
 }
 
 .pagefootmp{
     padding-top: 40px;
     padding-bottom: 40px;
+    
 }
 
 .pageFoot-icon{
@@ -307,6 +321,7 @@
 }
 
 .pageFoot-font{
+    margin-top: 20px;
     margin-bottom: 20px;
     font-size: 24;
     letter-spacing: 2px;
@@ -454,4 +469,30 @@
 .question_card:hover{
     cursor: pointer;
     color: orange;
+}
+
+
+
+.bottomGood{
+    margin-top: 16px;
+    font-size:2rem;
+    color:rgb(37, 30, 30);
+    border:none;
+    border-top:2px solid rgb(48, 43, 43);
+    background: #ebeae9;
+}
+
+.bottomHomeTitle{
+    margin-top: 24px;
+    font-size:2rem;
+    color:rgb(236, 223, 223);
+    border:none;
+    border-bottom:2px solid rgb(230, 216, 216);
+    /* background: #ebeae9; */
+}
+
+.bottomHomeContent{
+    margin-top: 24px;
+    font-size:1rem;
+    color:rgb(236, 223, 223);
 }

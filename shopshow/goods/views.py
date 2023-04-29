@@ -10,6 +10,11 @@ from django.db.models import Q
 from django.shortcuts import redirect
 import csv
 import time
+import random
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.header import Header
 
 # Create your views here.
 def goods(request):
@@ -452,6 +457,7 @@ def showAllGood(request, category):
             res['allPage'] = len(newgoods)//20 + 1
             return render(request, 'goods.html', {'goods': page_obj, 'res':res})
     elif request.method == "GET":
+        # 左侧栏点击搜索
         category_text = category
         allgoods = AllGoods.objects.all()
         goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
@@ -478,6 +484,31 @@ def showAllGood(request, category):
             if good['Category']:
                 if category in good['Category'] or category=='All':
                     newgoods.append(good)
+        if len(newgoods) < 5:
+            newgoods = []
+            for good in goods.iterator():
+                if good['P10']:
+                    good['P1'] = good['P10']
+                elif good['P9']:
+                    good['P1'] = good['P9']
+                elif good['P8']:
+                    good['P1'] = good['P8']
+                elif good['P7']:
+                    good['P1'] = good['P7']
+                elif good['P6']:
+                    good['P1'] = good['P6']
+                elif good['P5']:
+                    good['P1'] = good['P5']
+                elif good['P4']:
+                    good['P1'] = good['P4']
+                elif good['P3']:
+                    good['P1'] = good['P3']
+                elif good['P2']:
+                    good['P1'] = good['P2']
+                if good['Category']:
+                    if category in good['Product_Name'] or category in good['Description']:
+                        newgoods.append(good)
+
         page = Paginator(newgoods, 20)
         page_obj = page.get_page(1)
         res = {}
@@ -513,8 +544,20 @@ def goodInfo(request):
         elif 'N' in goodinfo.Free_Shipping:
             goodinfo.Free_Shipping = 'No'
         # print(goodinfo.Product_Number)
-        return render(request, 'goodInfo.html', {'info': goodinfo})
+        category = goodinfo.Category
+        allgoods = AllGoods.objects.filter(Category = category).values()
+        bottomGoods = []
+        if len(allgoods) > 5:
+            indexs = random.sample(range(0,len(allgoods)), 4)
+            for i in indexs:
+                bottomGoods.append(allgoods[i])
+        else:
+            for i in range(len(allgoods)):
+                bottomGoods.append(allgoods[i])
+
+        return render(request, 'goodInfo.html', {'info': goodinfo, 'goods':bottomGoods})
     if request.method == "POST":
+        # 商品询问信息留言
         if 'commit_request' in request.POST:
             fname = request.POST['first_name']
             lname = request.POST['last_name']
@@ -527,7 +570,37 @@ def goodInfo(request):
             quantity = request.POST['quantity']
             contact = request.POST['comments']
             ProductRequest.objects.create(fname=fname,date=date,quantity=quantity,product_code=product_code,product_name=product_name,lname=lname,company=company,phone=phone,email=email,contact=contact)
+            email_content = 'firstname: ' + fname  + '<br/>lastname: ' + lname + '<br/>company: ' + company + '<br/>phone: ' + phone + '<br/>email: ' + email + '<br/>product_name: ' + product_name + '<br/>product_code: ' + product_code + '<br/>date: ' + date + '<br/>quantity: ' + quantity + '<br/>comments: ' + contact
+            sendEmail('商品页面询问', email_content, 'support@promo-union.com')
             return redirect('/')
+
+def sendEmail(title, email_content, mail_receivers):
+    mail_host = "smtp.163.com"
+    mail_sender = 'm18831899513@163.com'
+    mail_license = 'UTKLVKJXVESYHXTX'
+    # mail_receivers = 'wj18831899513@gmail.com'
+
+    # 带有附件时
+    # mm = MIMEMultipart('')
+
+    msg = MIMEMultipart()
+    msg['From'] = mail_sender
+    msg['To'] = mail_receivers
+    msg['Subject'] = Header(title, 'utf-8')
+
+    message = MIMEText(email_content, 'html', 'utf-8')
+
+    msg.attach(message)
+
+    smtpObject = smtplib.SMTP()
+    smtpObject.connect(mail_host, 25)
+    # 打印SMTP服务器交互信息
+    # smtpObject.set_debuglevel(1)
+    smtpObject.login(mail_sender, mail_license)
+    smtpObject.sendmail(mail_sender, mail_receivers, msg.as_string())
+    print('邮件发送成功')
+    smtpObject.quit()
+
 
 def getdata(filepath):
     data = []

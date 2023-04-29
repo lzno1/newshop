@@ -161,25 +161,24 @@
                         <a href="{% url 'goods' %}Bags/" class="list-group-item">Bags</a>
                         <a href="{% url 'goods' %}Mobile Accessories/" class="list-group-item">Mobile Accessories</a>
                         <a href="{% url 'goods' %}Key Chains/" class="list-group-item">Key Chains</a>
-                        <a href="{% url 'goods' %}Awards/" class="list-group-item">Awards</a>
+                        <a href="{% url 'goods' %}awards/" class="list-group-item">Awards</a>
                         <a href="{% url 'goods' %}Tote Bags/" class="list-group-item">Tote Bages</a>
                         <a href="{% url 'goods' %}Pens/" class="list-group-item">Pens</a>
                         <a href="{% url 'goods' %}Bottles/" class="list-group-item">Bottles</a>
                         <a href="{% url 'goods' %}Caps & Hats/" class="list-group-item">Caps & Hats</a>
-                        <a href="{% url 'goods' %}Backpackes/" class="list-group-item">Backpackes</a>
+                        <a href="{% url 'goods' %}Backpacks/" class="list-group-item">Backpacks</a>
                         <a href="{% url 'goods' %}Tools-Kitchen/" class="list-group-item">Tools-Kitchen</a>
                         <a href="{% url 'goods' %}Battery Rechargers & Adaptors/" class="list-group-item">Battery Rechargers & Adaptors</a>
                         <a href="{% url 'goods' %}Glasses-Drinking/" class="list-group-item">Glasses-Drinking</a>
                         <a href="{% url 'goods' %}Toys/" class="list-group-item">Toys</a>
                         <a href="{% url 'goods' %}Mugs & Steins/" class="list-group-item">Mugs & Steins</a>
                         <a href="{% url 'goods' %}Pet Items/" class="list-group-item">Pet Items</a>
-                        <a href="{% url 'goods' %}Travel Mugs/Cups/" class="list-group-item">Travel Mugs/Cups</a>
                         <a href="{% url 'goods' %}Signs & Displays/" class="list-group-item">Signs & Displays</a>
                         <a href="{% url 'goods' %}Masks/" class="list-group-item">Masks</a>
                         <a href="{% url 'goods' %}Cups/" class="list-group-item">Cups</a>
                         <a href="{% url 'goods' %}Openers/" class="list-group-item">Openers</a>
                         <a href="{% url 'goods' %}Performance Apparel/" class="list-group-item">Performance Apparel</a>
-                        <a href="{% url 'goods' %}Computer Accessories/" class="list-group-item">Computer Accessories</a>
+                        <a href="{% url 'goods' %}computer/" class="list-group-item">Computer Accessories</a>
                         <a href="{% url 'goods' %}Led Products/" class="list-group-item">Led Products</a>
                         <a href="{% url 'goods' %}Sports Equipment & Access./" class="list-group-item">Sports Equipment & Access.</a>
                         <a href="{% url 'goods' %}Uniforms/" class="list-group-item">Uniforms</a>
@@ -188,12 +187,12 @@
                         <a href="{% url 'goods' %}Baseball Caps/" class="list-group-item">Baseball Caps</a>
                         <a href="{% url 'goods' %}Flags/" class="list-group-item">Flags</a>
                         <a href="{% url 'goods' %}Food Gifts/" class="list-group-item">Food Gifts</a>
-                        <a href="{% url 'goods' %}Lanyards/" class="list-group-item">Lanyards</a>
+                        <a href="{% url 'goods' %}lanyard/" class="list-group-item">Lanyards</a>
                         <a href="{% url 'goods' %}Decals/" class="list-group-item">Decals</a>
                         <a href="{% url 'goods' %}Watches/" class="list-group-item">Watches</a>
-                        <a href="{% url 'goods' %}USB/Flash Drives/" class="list-group-item">USB/Flash Drives</a>
+                        <a href="{% url 'goods' %}flash drives/" class="list-group-item">USB/Flash Drives</a>
                         <a href="{% url 'goods' %}Shirts/" class="list-group-item">Shirts</a>
-                        <a href="{% url 'goods' %}Sunglasses/" class="list-group-item">Sunglasses</a>
+                        <a href="{% url 'goods' %}sunglasses/" class="list-group-item">Sunglasses</a>
                         <a href="{% url 'goods' %}Wristbands/" class="list-group-item">Wristbands</a>
                         <a href="{% url 'goods' %}Gloves/" class="list-group-item">Gloves</a>
                         <a href="{% url 'goods' %}Kits/" class="list-group-item">Kits</a>
@@ -201,13 +200,13 @@
                         <a href="{% url 'goods' %}Golf Accessories/" class="list-group-item">Golf Accessories</a>
                         <a href="{% url 'goods' %}Pouches/" class="list-group-item">Pouches</a>
                         <a href="{% url 'goods' %}Jackets/" class="list-group-item">Jackets</a>
-                        <a href="{% url 'goods' %}Blankets/" class="list-group-item">Blankets</a>
+                        <a href="{% url 'goods' %}blankets/" class="list-group-item">Blankets</a>
                         <a href="{% url 'goods' %}Flashlights/" class="list-group-item">Flashlights</a>
                         <a href="{% url 'goods' %}Headphones/" class="list-group-item">Headphones</a>
                         <a href="{% url 'goods' %}Mats/" class="list-group-item">Mats</a>
                         <a href="{% url 'goods' %}Furniture/" class="list-group-item">Furniture</a>
-                        <a href="{% url 'goods' %}Scarves/" class="list-group-item">Scarves</a>
-                        <a href="{% url 'goods' %}Gift Sets/" class="list-group-item">Gift Sets</a>
+                        <a href="{% url 'goods' %}scarves/" class="list-group-item">Scarves</a>
+                        <a href="{% url 'goods' %}gift/" class="list-group-item">Gift Sets</a>
                     </ul>
                 </div>
                 <div class="col-lg-9">
@@ -221,13 +220,21 @@
                                             <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}">
                                                 <img class="imgSize", src="{{good.Product_img}}", alt="">
                                             </a>
+
+                                            
                                             <div>
                                                 <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardname">{{good.Product_Name}}</a>
                                             </div>
-                                            <div>
-                                                <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardprice">{{good.Product_Number}}</a>
+                                            <div class="row priceidtype">
+                                                <div class="col-lg-6">
+                                                    <div class="cardprice">$ {{good.P1}}</div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardprice">{{good.Product_Number}}</a>
+                                                </div>
+                                                
                                             </div>
-                                            <div class="cardprice">$ {{good.P1}}</div>
+                                            
                                         </div>
                                     </div>
                                     {% endfor %}

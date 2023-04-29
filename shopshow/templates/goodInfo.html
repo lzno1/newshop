@@ -139,7 +139,7 @@
                             </h2>
                         </div>
                     
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body border-bottom py-3 ">
                                 <div class="m-auto text-left">
                                     {% if info.Category %}
@@ -175,7 +175,7 @@
                             </h2>
                         </div>
                     
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div class="card-body border-bottom py-3 ">
                                 <div class="m-auto text-left">
                                     <h6><strong>Category: </strong> Net Cost(ccccc)</h6>
@@ -408,6 +408,41 @@
                 </div>
 
              
+            </div>
+
+            <div class="col-lg-12 text-left bottomGood">
+                RELATED PRODUCTS
+            </div>
+            
+
+            <div class="row">
+                <div class="cardspad col-lg-12">
+                    <div class="goodsInfoCards row">
+                        {% for good in goods %}
+                        <div class="goodsCard">
+                            <div class="goodsCardItem">
+                                <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}">
+                                    <img class="imgSize", src="{{good.Product_img}}", alt="">
+                                </a>
+                                
+                                <div>
+                                    <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardname">{{good.Product_Name}}</a>
+                                </div>
+                                <div class="row priceidtype">
+                                    <div class="col-lg-6">
+                                        <div class="cardprice">$ {{good.P1}}</div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardprice">{{good.Product_Number}}</a>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         
