@@ -2,7 +2,7 @@ from cgitb import html
 from django.contrib import messages
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from django.shortcuts import HttpResponse,HttpResponseRedirect
+from django.shortcuts import HttpResponse,HttpResponseRedirect,redirect
 from .models import HotGoods
 from .models import BannerShow
 from store.models import logistics
@@ -41,13 +41,14 @@ def home(request):
                 for good in goods.iterator():
                     if good['Category']:
                         # if category in good['Category']:
-                        if (goodid in good['Product_Name']) or (goodid in good['Description']) or (goodid in good['Keywords']):
+                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                             newgoods.append(good)
                 if len(newgoods) == 0:
                     return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners,  'ERROR':'未找到商品'})
                 else:
                     page = Paginator(newgoods, 25)
                     page_obj = page.get_page(0)
+                    # redirect('/goods/All/')
                     return render(request, 'goods.html', {'goods': page_obj, 'goodid':goodid})
         
         elif 'logisticsid' in request.POST:

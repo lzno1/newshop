@@ -271,7 +271,7 @@ def showAllGood(request, category):
 
                     if good['Category']:
                         # if category in good['Category']:
-                        if (goodid in good['Product_Name']) or (goodid in good['Description']) or (goodid in good['Keywords']):
+                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                             newgoods.append(good)
                 page = Paginator(newgoods, 20)
                 page_obj = page.get_page(1)
@@ -325,18 +325,18 @@ def showAllGood(request, category):
                             if good['P1'] >= float(price_from):
                                 if price_to:
                                     if good['P1'] <= float(price_to):
-                                        if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                                             newgoods.append(good)
                                 else:
-                                    if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                    if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                                         newgoods.append(good)
                         else:
                             if price_to:
                                     if good['P1'] <= float(price_to):
-                                        if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                                             newgoods.append(good)
                             else:
-                                if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                                     newgoods.append(good)
             if sort:
                 if 'price_up' in sort:
@@ -413,18 +413,18 @@ def showAllGood(request, category):
                             if good['P1'] >= float(price_from):
                                 if price_to:
                                     if good['P1'] <= float(price_to):
-                                        if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                                             newgoods.append(good)
                                 else:
-                                    if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                    if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                                         newgoods.append(good)
                         else:
                             if price_to:
                                     if good['P1'] <= float(price_to):
-                                        if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                                             newgoods.append(good)
                             else:
-                                if (key_word in good['Product_Name']) or (key_word in good['Description']) or (key_word in good['Keywords']):
+                                if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                                     newgoods.append(good)
             if sort:
                 if 'price_up' in sort:
@@ -506,7 +506,7 @@ def showAllGood(request, category):
                 elif good['P2']:
                     good['P1'] = good['P2']
                 if good['Category']:
-                    if category in good['Product_Name'] or category in good['Description']:
+                    if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                         newgoods.append(good)
 
         page = Paginator(newgoods, 20)
