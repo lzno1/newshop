@@ -15,6 +15,7 @@ class BannerShow(models.Model):
     bannerImg = models.CharField('主页展示图片地址', max_length=100, blank=True, null=True)
     bannerUrl = models.CharField('点击跳转到的网址', max_length=100, blank=True, null=True)
 
-
+class EmailSubmit(models.Model):
+    email = models.CharField('提交邮箱', max_length=48, blank=True, null=True)
 
 

@@ -229,6 +229,7 @@ def showAllGoodPage(request):
 
 def showAllGood(request, category):
     if request.method == "POST":
+        # 导航栏搜索功能
         if 'goodid' in request.POST:
             allgoods = AllGoods.objects.all()
             goodid = request.POST['goodid']
@@ -237,6 +238,7 @@ def showAllGood(request, category):
                 if (s.isupper()) or (s.isdigit()):
                     long_num += 1
             if long_num == len(goodid):
+                # 商品ID搜索
                 try:
                     info = AllGoods.objects.get(Product_Number=goodid)
                     return render(request, 'goodInfo.html',{'info':info})
@@ -245,6 +247,7 @@ def showAllGood(request, category):
                     page_obj = page.get_page(1)
                     return render(request, 'goods.html', {'goods': page_obj, 'ERROR':'商品ID错误'})
             else:
+                # 关键字搜索
                 allgoods = AllGoods.objects.all()
                 goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
                 newgoods = []
@@ -271,13 +274,14 @@ def showAllGood(request, category):
 
                     if good['Category']:
                         # if category in good['Category']:
-                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                        if keywords(goodid, good):
                             newgoods.append(good)
                 page = Paginator(newgoods, 20)
                 page_obj = page.get_page(1)
                 return render(request, 'goods.html', {'goods': page_obj, 'goodid':goodid})
 
         elif 'more_search' in request.POST:
+            # 商品页面多条件搜索
             category = request.POST['category']
             key_word = request.POST['key_word']
             price_from = request.POST['price_from']
@@ -325,18 +329,18 @@ def showAllGood(request, category):
                             if good['P1'] >= float(price_from):
                                 if price_to:
                                     if good['P1'] <= float(price_to):
-                                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                                        if keywords(key_word, good):
                                             newgoods.append(good)
                                 else:
-                                    if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                                    if keywords(key_word, good):
                                         newgoods.append(good)
                         else:
                             if price_to:
                                     if good['P1'] <= float(price_to):
-                                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                                        if keywords(key_word, good):
                                             newgoods.append(good)
                             else:
-                                if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                                if keywords(key_word, good):
                                     newgoods.append(good)
             if sort:
                 if 'price_up' in sort:
@@ -349,7 +353,8 @@ def showAllGood(request, category):
             res['allPage'] = len(newgoods)//20 + 1
             return render(request, 'goods.html', {'goods': page_obj, 'res':res})
         elif ('page_index_previous' in request.POST) or ('page_index_0001' in request.POST) or ('page_index_0002' in request.POST) or ('page_index_0003' in request.POST) or ('page_index_0004' in request.POST) or ('page_index_0005' in request.POST) or ('page_index_next' in request.POST):
-            print('进入函数')
+            # print('进入函数')
+            # 翻页功能
             page_index = int(request.POST['page_index'].split(' ')[1])
             if 'page_index_previous' in request.POST:
                 page_index -= 5
@@ -413,18 +418,18 @@ def showAllGood(request, category):
                             if good['P1'] >= float(price_from):
                                 if price_to:
                                     if good['P1'] <= float(price_to):
-                                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                                        if keywords(key_word, good):
                                             newgoods.append(good)
                                 else:
-                                    if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                                    if keywords(key_word, good):
                                         newgoods.append(good)
                         else:
                             if price_to:
                                     if good['P1'] <= float(price_to):
-                                        if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                                        if keywords(key_word, good):
                                             newgoods.append(good)
                             else:
-                                if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                                if keywords(key_word, good):
                                     newgoods.append(good)
             if sort:
                 if 'price_up' in sort:
@@ -506,7 +511,7 @@ def showAllGood(request, category):
                 elif good['P2']:
                     good['P1'] = good['P2']
                 if good['Category']:
-                    if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
+                    if keywords(category, good):
                         newgoods.append(good)
 
         page = Paginator(newgoods, 20)
@@ -522,6 +527,19 @@ def showAllGood(request, category):
         page = Paginator(allgoods, 20)
         page_obj = page.get_page(1)
         return render(request, 'goods.html', {'goods': page_obj})
+
+
+def keywords(words, items):
+    search_words = words.lower().replace(',',' ').replace('.',' ').split(' ')
+    item_1 = items['Product_Name'].lower().replace(',',' ').replace('.',' ').split(' ')
+    item_2 = items['Keywords'].lower().replace(',',' ').replace('.',' ').split(' ')
+    item_3 = items['Description'].lower().replace(',',' ').replace('.',' ').split(' ')
+    all_words = item_1 + item_2 + item_3
+    for word in search_words:
+        if word not in all_words:
+            return False
+    return True
+
 
 def goodInfo(request):
     if request.method == "GET" and request.GET:

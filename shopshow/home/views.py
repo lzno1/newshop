@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import HttpResponse,HttpResponseRedirect,redirect
 from .models import HotGoods
 from .models import BannerShow
+from .models import EmailSubmit
 from store.models import logistics
 from goods.models import AllGoods
 from contact.models import MessageBoard
@@ -46,10 +47,11 @@ def home(request):
                 if len(newgoods) == 0:
                     return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners,  'ERROR':'未找到商品'})
                 else:
-                    page = Paginator(newgoods, 25)
-                    page_obj = page.get_page(0)
-                    # redirect('/goods/All/')
-                    return render(request, 'goods.html', {'goods': page_obj, 'goodid':goodid})
+                    return redirect('/goods/' + goodid)
+                    # page = Paginator(newgoods, 25)
+                    # page_obj = page.get_page(0)
+                    # # redirect('/goods/All/')
+                    # return render(request, 'goods.html', {'goods': page_obj, 'goodid':goodid})
         
         elif 'logisticsid' in request.POST:
             goodid = request.POST['logisticsid']
@@ -79,6 +81,24 @@ def home(request):
                     print(good)
                     hotGoodInfo[good['goodType']].append(good)
             return render(request, 'home.html',{'hotgoods': hotGoodInfo, 'banner':allBanners})
+        elif 'submit_email' in request.POST:
+            print('submit_email')
+            allBanners = BannerShow.objects.all()
+            hotgoods = HotGoods.objects.all().values()
+            hotGoodInfo = {'Swag_Stuff':[], 'Seasonal_Items':[], 'New_Peomo':[], 'Holidays_Related':[]}
+            for good in hotgoods.iterator():
+                if good['goodType'] in hotGoodInfo.keys():
+                    print(good)
+                    hotGoodInfo[good['goodType']].append(good)
+            email_name = request.POST['email_request']
+            try:
+                EmailSubmit.objects.filter(email=email_name)
+            except:
+                pass
+            EmailSubmit.objects.create(email=email_name)
+            return render(request, 'home.html',{'hotgoods': hotGoodInfo, 'banner':allBanners})
+
+
     else:
         hotgoods = HotGoods.objects.all().values()
         allgoods = AllGoods.objects.all()

@@ -496,3 +496,23 @@
     font-size:1rem;
     color:rgb(236, 223, 223);
 }
+
+.email_input{
+    /* height: 100; */
+    padding: 16px;
+    border-radius: 32px;
+    background: #a1a1a1;
+    margin: 32px;
+    font-size: x-large;
+}
+
+.email_button{
+    font-size: x-large;
+    padding: 16px;
+    border-radius: 32px;
+    background: #304f5e;
+    /* width: 30%; */
+    /* margin: 32px; */
+    margin-left: 32px;
+    margin-right: 32px;
+}

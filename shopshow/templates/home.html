@@ -141,7 +141,7 @@
 
             <div class="goodsCard_home_banner">
                 <div class="goodsCardItem">
-                    <a href="{% url 'goods' %}KITCHEN WARES">
+                    <a href="{% url 'goods' %}kitchen">
                         <img class="imgSize", src="https://images12.fotki.com/v1686/photos/2/4164902/16539898/banner3-vi.png", alt="">
                     </a>
                 </div>
@@ -149,7 +149,7 @@
 
             <div class="goodsCard_home_banner">
                 <div class="goodsCardItem">
-                    <a href="{% url 'goods' %}MOBILE PHONE ACCESSORIES">
+                    <a href="{% url 'goods' %}phone">
                         <img class="imgSize", src="https://images14.fotki.com/v1683/photos/2/4164902/16539898/banner4-vi.png", alt="">
                     </a>
                 </div>
@@ -157,7 +157,7 @@
 
             <div class="goodsCard_home_banner">
                 <div class="goodsCardItem">
-                    <a href="{% url 'goods' %}OUTDOOR & SPORTS ITEMS">
+                    <a href="{% url 'goods' %}outdoor">
                         <img class="imgSize", src="https://images49.fotki.com/v1679/photos/2/4164902/16539898/banner5-vi.png", alt="">
                     </a>
                 </div>
@@ -173,7 +173,7 @@
 
             <div class="goodsCard_home_banner">
                 <div class="goodsCardItem">
-                    <a href="{% url 'goods' %}STRESS RELIEVERS">
+                    <a href="{% url 'goods' %}reliever">
                         <img class="imgSize", src="https://images12.fotki.com/v1686/photos/2/4164902/16539898/banner7-vi.png", alt="">
                     </a>
                 </div>
@@ -181,7 +181,7 @@
 
             <div class="goodsCard_home_banner">
                 <div class="goodsCardItem">
-                    <a href="{% url 'goods' %}WATER BOTTLES">
+                    <a href="{% url 'goods' %}water bottle">
                         <img class="imgSize", src="https://images14.fotki.com/v1683/photos/2/4164902/16539898/banner8-vi.png", alt="">
                     </a>
                 </div>
@@ -513,6 +513,14 @@
             <div class="text-left bottomHomeContent">
                 Subscribe to our regular newsletter for all the lastest updates
             </div>
+            <div class="text-left bottomHomeContent">
+                <form method="post" class="row w-100 my-2">
+                    {%csrf_token%}
+                    <input type="text" class="border_radius col-lg-11 mr-sm-2 email_input" placeholder="Your Email(required)" id="email_request" name="email_request">
+                    <button class="col-lg-6 btn btn-outline-secondary email_button" id="submit_email" name="submit_email" type="submit">SIGN UP</button>
+                </form>
+            </div>
+            
         </div>
         
         <div class="col-lg-6 m-auto">
