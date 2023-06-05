@@ -141,11 +141,12 @@ def allgoods(request):
                 Carrier_Information = request.POST['Carrier_Information']
                 Market_Segment = request.POST['Market_Segment']
                 good_info = AllGoods.objects.get(Product_Number = Product_Number)
-                if good_info:
-                    AllGoods.objects.filter(Product_Number=Product_Number).delete()
-                    time.sleep(0.5)
-                AllGoods.objects.create(Product_Name=Product_Name, Product_Number=Product_Number,Product_img=Product_img, Product_IsHazmat=Product_IsHazmat, Description=Description, Summary=Summary, Product_Type=Product_Type, Category=Category, Keywords=Keywords, Product_Color=Product_Color, Material=Material, Size_Group=Size_Group, Size_Values=Size_Values, Shape=Shape, Theme=Theme, Origin=Origin, Imprint_Method=Imprint_Method, Imprint_Color=Imprint_Color, Imprint_Size=Imprint_Size, Imprint_Location=Imprint_Location, Price_Includes=Price_Includes, Sequence=Sequence, Currency=Currency, Always_Free_Setup=Always_Free_Setup, Upcharge_Name=Upcharge_Name, Upcharge_Criteria_1=Upcharge_Criteria_1, Upcharge_Criteria_2=Upcharge_Criteria_2, Upcharge_Type=Upcharge_Type, Upcharge_Level=Upcharge_Level, Service_Charge=Service_Charge, UQ1=UQ1, UQ2=UQ2, UQ3=UQ3, UQ4=UQ4, UQ5=UQ5, UQ6=UQ6, UQ7=UQ7, UQ8=UQ8, UQ9=UQ9, UQ10=UQ10, UP1=UP1, UP2=UP2, UP3=UP3, UP4=UP4, UP5=UP5, UP6=UP6, UP7=UP7, UP8=UP8, UP9=UP9, UP10=UP10, UD1=UD1, UD2=UD2, UD3=UD3, UD4=UD4, UD5=UD5, UD6=UD6, UD7=UD7, UD8=UD8, UD9=UD9, UD10=UD10, Upcharge_Details=Upcharge_Details, Production_Time=Production_Time, Rush_Service=Rush_Service, Rush_Time=Rush_Time, Same_Day_Service=Same_Day_Service, Packaging=Packaging, Shipping_Items=Shipping_Items, Shipping_Dimensions=Shipping_Dimensions, Shipping_Weight=Shipping_Weight, Shipper_Bills_By=Shipper_Bills_By, Shipping_Info=Shipping_Info, Free_Shipping=Free_Shipping, Q1=Q1, Q2=Q2, Q3=Q3, Q4=Q4, Q5=Q5, Q6=Q6, Q7=Q7, Q8=Q8, Q9=Q9, Q10=Q10, P1=P1, P2=P2, P3=P3, P4=P4, P5=P5, P6=P6, P7=P7, P8=P8, P9=P9, P10=P10, D1=D1, D2=D2, D3=D3, D4=D4, D5=D5, D6=D6, D7=D7, D8=D8, D9=D9, D10=D10, Distributor_View_Only=Distributor_View_Only, Carrier_Information=Carrier_Information, Market_Segment=Market_Segment)
-                return render(request, 'UploadGoods.html', {'logging':'成功保存订单'})
+                if Product_img:
+                    if good_info:
+                        AllGoods.objects.filter(Product_Number=Product_Number).delete()
+                        time.sleep(0.5)
+                    AllGoods.objects.create(Product_Name=Product_Name, Product_Number=Product_Number,Product_img=Product_img, Product_IsHazmat=Product_IsHazmat, Description=Description, Summary=Summary, Product_Type=Product_Type, Category=Category, Keywords=Keywords, Product_Color=Product_Color, Material=Material, Size_Group=Size_Group, Size_Values=Size_Values, Shape=Shape, Theme=Theme, Origin=Origin, Imprint_Method=Imprint_Method, Imprint_Color=Imprint_Color, Imprint_Size=Imprint_Size, Imprint_Location=Imprint_Location, Price_Includes=Price_Includes, Sequence=Sequence, Currency=Currency, Always_Free_Setup=Always_Free_Setup, Upcharge_Name=Upcharge_Name, Upcharge_Criteria_1=Upcharge_Criteria_1, Upcharge_Criteria_2=Upcharge_Criteria_2, Upcharge_Type=Upcharge_Type, Upcharge_Level=Upcharge_Level, Service_Charge=Service_Charge, UQ1=UQ1, UQ2=UQ2, UQ3=UQ3, UQ4=UQ4, UQ5=UQ5, UQ6=UQ6, UQ7=UQ7, UQ8=UQ8, UQ9=UQ9, UQ10=UQ10, UP1=UP1, UP2=UP2, UP3=UP3, UP4=UP4, UP5=UP5, UP6=UP6, UP7=UP7, UP8=UP8, UP9=UP9, UP10=UP10, UD1=UD1, UD2=UD2, UD3=UD3, UD4=UD4, UD5=UD5, UD6=UD6, UD7=UD7, UD8=UD8, UD9=UD9, UD10=UD10, Upcharge_Details=Upcharge_Details, Production_Time=Production_Time, Rush_Service=Rush_Service, Rush_Time=Rush_Time, Same_Day_Service=Same_Day_Service, Packaging=Packaging, Shipping_Items=Shipping_Items, Shipping_Dimensions=Shipping_Dimensions, Shipping_Weight=Shipping_Weight, Shipper_Bills_By=Shipper_Bills_By, Shipping_Info=Shipping_Info, Free_Shipping=Free_Shipping, Q1=Q1, Q2=Q2, Q3=Q3, Q4=Q4, Q5=Q5, Q6=Q6, Q7=Q7, Q8=Q8, Q9=Q9, Q10=Q10, P1=P1, P2=P2, P3=P3, P4=P4, P5=P5, P6=P6, P7=P7, P8=P8, P9=P9, P10=P10, D1=D1, D2=D2, D3=D3, D4=D4, D5=D5, D6=D6, D7=D7, D8=D8, D9=D9, D10=D10, Distributor_View_Only=Distributor_View_Only, Carrier_Information=Carrier_Information, Market_Segment=Market_Segment)
+                    return render(request, 'UploadGoods.html', {'logging':'成功保存订单'})
             except:
                 return render(request, 'UploadGoods.html', {'logging':'未能成功保存商品信息'})
         elif 'good_search' in request.POST:
@@ -221,6 +222,7 @@ def showAllGoodPage(request):
     allgoods = AllGoods.objects.all()
     goodRequest['allNum'] = allgoods.values().count()
     goodRequest['allPage'] = allgoods.values().count()//20 + 1
+    random.shuffle(allgoods)
     page = Paginator(allgoods, 20)
     page_obj = page.get_page(1)
     goodRequest = {}
@@ -228,6 +230,7 @@ def showAllGoodPage(request):
     return render(request, 'goods.html', {'goods': page_obj, 'res':goodRequest})
 
 def showAllGood(request, category):
+    random.seed(int(time.time())//86400)
     if request.method == "POST":
         # 导航栏搜索功能
         if 'goodid' in request.POST:
@@ -243,6 +246,7 @@ def showAllGood(request, category):
                     info = AllGoods.objects.get(Product_Number=goodid)
                     return render(request, 'goodInfo.html',{'info':info})
                 except:
+                    random.shuffle(allgoods)
                     page = Paginator(allgoods, 20)
                     page_obj = page.get_page(1)
                     return render(request, 'goods.html', {'goods': page_obj, 'ERROR':'商品ID错误'})
@@ -276,6 +280,7 @@ def showAllGood(request, category):
                         # if category in good['Category']:
                         if keywords(goodid, good):
                             newgoods.append(good)
+                random.shuffle(newgoods)
                 page = Paginator(newgoods, 20)
                 page_obj = page.get_page(1)
                 return render(request, 'goods.html', {'goods': page_obj, 'goodid':goodid})
@@ -287,6 +292,7 @@ def showAllGood(request, category):
             price_from = request.POST['price_from']
             price_to = request.POST['price_to']
             sort = request.POST['sort']
+            
             res = {}
             res['category'] = category
             res['key_word'] = key_word
@@ -347,6 +353,7 @@ def showAllGood(request, category):
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'))
                 elif 'price_down' in sort:
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'), reverse=True)
+            random.shuffle(newgoods)
             page = Paginator(newgoods, 20)
             page_obj = page.get_page(1)
             res['allNum'] = len(newgoods)
@@ -456,6 +463,7 @@ def showAllGood(request, category):
             res['page_5'] = res['page_3'] + 2
             
             res['page_index'] = 'now ' + str(res['page_index']) + ' pages'
+            random.shuffle(newgoods)
             page = Paginator(newgoods, 20)
             page_obj = page.get_page(nowPageIndex)
             res['allNum'] = len(newgoods)
@@ -513,7 +521,7 @@ def showAllGood(request, category):
                 if good['Category']:
                     if keywords(category, good):
                         newgoods.append(good)
-
+        random.shuffle(newgoods)
         page = Paginator(newgoods, 20)
         page_obj = page.get_page(1)
         res = {}
@@ -524,17 +532,19 @@ def showAllGood(request, category):
 
     else:
         allgoods = AllGoods.objects.all()
+        random.shuffle(allgoods)
         page = Paginator(allgoods, 20)
         page_obj = page.get_page(1)
         return render(request, 'goods.html', {'goods': page_obj})
 
 
 def keywords(words, items):
-    search_words = words.lower().replace(',',' ').replace('.',' ').split(' ')
+    search_words = words.lower().replace(',',' ').replace('.',' ').replace('_',' ').split(' ')
     item_1 = items['Product_Name'].lower().replace(',',' ').replace('.',' ').split(' ')
     item_2 = items['Keywords'].lower().replace(',',' ').replace('.',' ').split(' ')
-    item_3 = items['Description'].lower().replace(',',' ').replace('.',' ').split(' ')
-    all_words = item_1 + item_2 + item_3
+    # item_3 = items['Description'].lower().replace(',',' ').replace('.',' ').split(' ')
+    # all_words = item_1 + item_2 + item_3
+    all_words = item_1 + item_2
     for word in search_words:
         if word not in all_words:
             return False

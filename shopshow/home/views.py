@@ -32,9 +32,10 @@ def home(request):
             if long_num == len(goodid):
                 try:
                     info = AllGoods.objects.get(Product_Number=goodid)
-                    return render(request, 'goodInfo.html',{'info':info})
+                    return redirect('/goodInfo/?test=a&goodid=' + goodid)
+                    # return render(request, 'goodInfo.html',{'info':info})
                 except:
-                    return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners, 'ERROR':'商品ID错误'})
+                    return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners, 'ERROR':'Item not found'})
             else:
                 allgoods = AllGoods.objects.all()
                 goods = allgoods.values("Product_Name","Product_Number","P1","Product_img","Category","Keywords","Description")
@@ -45,7 +46,7 @@ def home(request):
                         if (goodid.lower() in good['Product_Name'].lower()) or (goodid.lower() in good['Keywords'].lower()):
                             newgoods.append(good)
                 if len(newgoods) == 0:
-                    return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners,  'ERROR':'未找到商品'})
+                    return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners,  'ERROR':'Item not found'})
                 else:
                     return redirect('/goods/' + goodid)
                     # page = Paginator(newgoods, 25)
