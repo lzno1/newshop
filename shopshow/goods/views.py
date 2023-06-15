@@ -184,7 +184,7 @@ def allgoods(request):
                 data = getdata(writename)
                 for one in data:
                     # try:
-                    print('写入： ' + str(one[1]))
+                    # print('写入： ' + str(one[1]))
                     good_info = AllGoods.objects.filter(Product_Number=one[1])
                     if good_info:
                         AllGoods.objects.filter(Product_Number=one[1]).delete()
@@ -205,7 +205,7 @@ def allgoods(request):
                 data = getdata(writename)
                 for one in data:
                     # try:
-                    print('删除： ' + str(one[1]))
+                    # print('删除： ' + str(one[1]))
                     good_info = AllGoods.objects.filter(Product_Number=one[1])
                     if good_info:
                         AllGoods.objects.filter(Product_Number=one[1]).delete()
@@ -302,7 +302,7 @@ def showAllGood(request, category):
             allgoods = AllGoods.objects.all()
             goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
             newgoods = []
-            print(type(goods))
+            # print(type(goods))
             for good in goods.iterator():
                 if good['P10']:
                     good['P1'] = good['P10']
@@ -392,7 +392,7 @@ def showAllGood(request, category):
             allgoods = AllGoods.objects.all()
             goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
             newgoods = []
-            print(type(goods))
+            # print(type(goods))
             for good in goods.iterator():
                 if good['P10']:
                     good['P1'] = good['P10']
@@ -626,7 +626,7 @@ def sendEmail(title, email_content, mail_receivers):
     # smtpObject.set_debuglevel(1)
     smtpObject.login(mail_sender, mail_license)
     smtpObject.sendmail(mail_sender, mail_receivers, msg.as_string())
-    print('邮件发送成功')
+    # print('邮件发送成功')
     smtpObject.quit()
 
 

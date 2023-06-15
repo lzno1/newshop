@@ -51,5 +51,5 @@ def sendEmail(title, email_content, mail_receivers):
     # smtpObject.set_debuglevel(1)
     smtpObject.login(mail_sender, mail_license)
     smtpObject.sendmail(mail_sender, mail_receivers, msg.as_string())
-    print('邮件发送成功')
+    # print('邮件发送成功')
     smtpObject.quit()

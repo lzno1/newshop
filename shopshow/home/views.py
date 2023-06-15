@@ -74,22 +74,23 @@ def home(request):
             MessageBoard.objects.create(fname=fname,lname=lname,company=company,phone=phone,email=email,contact=contact)
             email_content = 'firstname: ' + fname + '<br/>lastname: ' + lname + '<br/>company: ' + company + '<br/>phone: ' + phone + '<br/>email: ' + email + '<br/>comments: ' + contact
             sendEmail('主页留言板', email_content, 'support@promo-union.com')
+            # sendEmail('主页留言板', email_content, '1176530132@qq.com')
             hotgoods = HotGoods.objects.all().values()
             allgoods = AllGoods.objects.all()
             hotGoodInfo = {'Swag_Stuff':[], 'Seasonal_Items':[], 'New_Peomo':[], 'Holidays_Related':[]}
             for good in hotgoods.iterator():
                 if good['goodType'] in hotGoodInfo.keys():
-                    print(good)
+                    # print(good)
                     hotGoodInfo[good['goodType']].append(good)
             return render(request, 'home.html',{'hotgoods': hotGoodInfo, 'banner':allBanners})
         elif 'submit_email' in request.POST:
-            print('submit_email')
+            # print('submit_email')
             allBanners = BannerShow.objects.all()
             hotgoods = HotGoods.objects.all().values()
             hotGoodInfo = {'Swag_Stuff':[], 'Seasonal_Items':[], 'New_Peomo':[], 'Holidays_Related':[]}
             for good in hotgoods.iterator():
                 if good['goodType'] in hotGoodInfo.keys():
-                    print(good)
+                    # print(good)
                     hotGoodInfo[good['goodType']].append(good)
             email_name = request.POST['email_request']
             try:
@@ -106,7 +107,7 @@ def home(request):
         hotGoodInfo = {'Swag_Stuff':[], 'Seasonal_Items':[], 'New_Peomo':[], 'Holidays_Related':[]}
         for good in hotgoods.iterator():
             if good['goodType'] in hotGoodInfo.keys():
-                print(good)
+                # print(good)
                 hotGoodInfo[good['goodType']].append(good)
         return render(request, 'home.html',{'hotgoods': hotGoodInfo, 'banner':allBanners})
 
@@ -147,6 +148,6 @@ def sendEmail(title, email_content, mail_receivers):
     # smtpObject.set_debuglevel(1)
     smtpObject.login(mail_sender, mail_license)
     smtpObject.sendmail(mail_sender, mail_receivers, msg.as_string())
-    print('邮件发送成功')
+    # print('邮件发送成功')
     smtpObject.quit()
  
