@@ -182,6 +182,10 @@ SIMPLEUI_CONFIG = {
                 'name': '物流信息',
                 'url': '/admin/store/logistics/'
                 },
+                {
+                'name': 'Order Tracking System',
+                'url': '/admin/home/ponumber/'
+                },
             ]
         },
 

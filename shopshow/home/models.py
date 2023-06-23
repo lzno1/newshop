@@ -19,3 +19,12 @@ class EmailSubmit(models.Model):
     email = models.CharField('提交邮箱', max_length=48, blank=True, null=True)
 
 
+class PONumber(models.Model):
+    poNumber = models.CharField('PO-Number', max_length=16, blank=True, null=True)
+    mockUp = models.CharField('Mock-Up', max_length=100, blank=True, null=True)
+    orderDate = models.CharField('Order-Date', max_length=64, blank=True, null=True)
+    paymentReceived = models.CharField('Payment-Received', max_length=64, blank=True, null=True)
+    balance = models.CharField('Balance', max_length=64, blank=True, null=True)
+    orderStatus = models.CharField('Order-Status', max_length=32, blank=True, null=True)
+    testReport = models.CharField('Test-Report', max_length=100, blank=True, null=True)
+    eta = models.CharField('ETA', max_length=64, blank=True, null=True)

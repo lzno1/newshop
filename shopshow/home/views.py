@@ -6,6 +6,7 @@ from django.shortcuts import HttpResponse,HttpResponseRedirect,redirect
 from .models import HotGoods
 from .models import BannerShow
 from .models import EmailSubmit
+from .models import PONumber
 from store.models import logistics
 from goods.models import AllGoods
 from contact.models import MessageBoard
@@ -26,10 +27,17 @@ def home(request):
             allgoods = AllGoods.objects.all()
             goodid = request.POST['goodid']
             long_num = 0
+            letter_num = 0
+            number_num = 0
             for s in goodid:
-                if (s.isupper()) or (s.isdigit()):
+                if s.isalpha():
+                    letter_num += 1
                     long_num += 1
-            if long_num == len(goodid):
+                elif s.isdigit():
+                    number_num += 1
+                    long_num += 1
+
+            if (long_num == len(goodid)) and (letter_num > 1) and (number_num > 1):
                 try:
                     info = AllGoods.objects.get(Product_Number=goodid)
                     return redirect('/goodInfo/?test=a&goodid=' + goodid)
@@ -56,13 +64,22 @@ def home(request):
         
         elif 'logisticsid' in request.POST:
             goodid = request.POST['logisticsid']
-            try:
-                logInfo = logistics.objects.get(goodid=goodid)
-                hotgoods = HotGoods.objects.all()
-                return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners, 'logInfo':logInfo})
-            except:
-                hotgoods = HotGoods.objects.all()
-                return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners, 'logError':'订单ID错误'})
+            if goodid.startswith('#'):
+                try:
+                    PONumberInfo = PONumber.objects.get(poNumber=goodid)
+                    hotgoods = HotGoods.objects.all()
+                    return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners, 'poInfo':PONumberInfo})
+                except:
+                    hotgoods = HotGoods.objects.all()
+                    return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners, 'logError':'Item not found'})
+            else:
+                try:
+                    logInfo = logistics.objects.get(goodid=goodid)
+                    hotgoods = HotGoods.objects.all()
+                    return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners, 'logInfo':logInfo})
+                except:
+                    hotgoods = HotGoods.objects.all()
+                    return render(request, 'home.html',{'hotgoods': hotgoods, 'banner':allBanners, 'logError':'Item not found'})
         
         elif 'submit_to_me' in request.POST:
             fname = request.POST['first_name']

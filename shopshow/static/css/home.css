@@ -516,3 +516,17 @@
     margin-left: 32px;
     margin-right: 32px;
 }
+
+.btn-no-outline{
+    outline: none;
+    border: #bb1d5f;
+}
+
+.mock-up-img{
+    width: 100%;
+    max-width: 100%;
+}
+
+.modal-dialog-home{
+    max-width: 80%;
+}

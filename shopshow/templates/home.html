@@ -208,6 +208,76 @@
                 </div>
             </div>
         </div>
+        {% if poInfo %}
+        <div class="card bg-transparent">
+            <div class="table-responsive">
+                <table class="table table-vcenter card-table">
+                    <thead>
+                        <tr>
+                            <th>PO Number</th>
+                            <th>Mock-up</th>
+                            <th>Order Date</th>
+                            <th>Payment Received</th>
+                            <th>Balance</th>
+                            <th>Order Status</th>
+                            <th>Test Report</th>
+                            <th>ETA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{poInfo.poNumber}}</td>
+                            <td>
+                                <button type="button" class="alert-info" data-toggle="modal" data-target="#exampleModal" >Image Viewer</button>
+                            </td>
+                            <td>{{poInfo.orderDate}}</td>
+                            <td>{{poInfo.paymentReceived}}</td>
+                            <td>{{poInfo.balance}}</td>
+                            <td>{{poInfo.orderStatus}}</td>
+                            <td>
+                                <button type="button" class="alert-info" data-toggle="modal" data-target="#exampleModal1" >Image Viewer</button>
+                            </td>
+                            <td>{{poInfo.eta}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-home">
+                        <div class="model-content">
+                            <div class="modal-header">
+                                <h4 class="model-title" id="exampleModalLabel">Mock-Up</h4>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    X
+                                </button>
+                            </div>
+                            <div class="model-body text-center">
+                                <span id="myImg">
+                                    <img src={{poInfo.mockUp}} class="mock-up-img">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-home">
+                        <div class="model-content">
+                            <div class="modal-header">
+                                <h4 class="model-title" id="exampleModalLabel">Test Report</h4>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    X
+                                </button>
+                            </div>
+                            <div class="model-body text-center">
+                                <span id="myImg">
+                                    <img src={{poInfo.testReport}} class="mock-up-img">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
     {% if logInfo %}
     <div class="container jumbotron row m-auto">
