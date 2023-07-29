@@ -158,15 +158,15 @@ SIMPLEUI_CONFIG = {
             'models': [
             {
                 'name': '订单查询',
-                'url': '/admin/goods/selectdingdans/'
+                'url': '/aecihrydbfsakm/goods/selectdingdans/'
             },
             {
                 'name': '订单基本信息',
-                'url': '/admin/goods/dingdans/'
+                'url': '/aecihrydbfsakm/goods/dingdans/'
             },
             {
                 'name': '商品信息',
-                'url': '/admin/goods/allgoods/'
+                'url': '/aecihrydbfsakm/goods/allgoods/'
             }
         ]
         },
@@ -176,15 +176,15 @@ SIMPLEUI_CONFIG = {
             'models':[
                 {
                 'name': '采购信息',
-                'url': '/admin/goods/caigou/'
+                'url': '/aecihrydbfsakm/goods/caigou/'
                 },
                 {
                 'name': '物流信息',
-                'url': '/admin/store/logistics/'
+                'url': '/aecihrydbfsakm/store/logistics/'
                 },
                 {
                 'name': 'Order Tracking System',
-                'url': '/admin/home/ponumber/'
+                'url': '/aecihrydbfsakm/home/ponumber/'
                 },
             ]
         },
@@ -195,15 +195,15 @@ SIMPLEUI_CONFIG = {
             'models':[
                 {
                 'name': '客户黑名单',
-                'url': '/admin/store/customblacklist/'
+                'url': '/aecihrydbfsakm/store/customblacklist/'
                 },
                 {
                 'name': '客户等级查询',
-                'url': '/admin/store/customlevel/'
+                'url': '/aecihrydbfsakm/store/customlevel/'
                 },
                 {
                 'name': '客户明细表',
-                'url': '/admin/store/custominfo/'
+                'url': '/aecihrydbfsakm/store/custominfo/'
                 },
             ]
         },
@@ -214,15 +214,15 @@ SIMPLEUI_CONFIG = {
             'models':[
                 {
                     'name': '留言板',
-                    'url': '/admin/contact/messageboard/'
+                    'url': '/aecihrydbfsakm/contact/messageboard/'
                 },
                 {
                     'name': '商品问询',
-                    'url': '/admin/contact/productrequest/'
+                    'url': '/aecihrydbfsakm/contact/productrequest/'
                 },
                 {
                     'name': '邮箱提交',
-                    'url': '/admin/home/emailsubmit/'
+                    'url': '/aecihrydbfsakm/home/emailsubmit/'
                 },
                 {
                 'name': '任务列表',
@@ -237,15 +237,15 @@ SIMPLEUI_CONFIG = {
             'models':[
                 {
                     'name': '介绍问答',
-                    'url': '/admin/contact/faquestion/'
+                    'url': '/aecihrydbfsakm/contact/faquestion/'
                 },
                 {
                     'name': '主页商品展示',
-                    'url': '/admin/home/hotgoods/'
+                    'url': '/aecihrydbfsakm/home/hotgoods/'
                 },
                 {
                     'name': '主页banner展示',
-                    'url': '/admin/home/bannershow/'
+                    'url': '/aecihrydbfsakm/home/bannershow/'
                 },
             ]
         },
