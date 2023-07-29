@@ -33,7 +33,7 @@ from store.views import uplog
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('aecihrydbfsakm/', admin.site.urls),
     path('home/', home, name='home'),
     path('', home, name='home'),
     path('goods/', showAllGoodPage, name='goods'),
