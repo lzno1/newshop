@@ -1,0 +1,454 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Union</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/goodinfo_m.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_m.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <ul class="nav title_nav ">
+            <!-- <li class="nav-item">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png' %}", height="30", alt="logo">
+                </a>
+            </li> -->
+            <li class="nav-item navbar-brand">
+                <a class="nav-link active " height="40" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item navbar-brand">
+                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Products</a>
+            </li>
+           
+            <li class="nav-item navbar-brand">
+                <a class="nav-link " height="60" href="{% url 'contact' %}">Contact</a>
+            </li>
+        </ul>
+
+        <div class="form-inline m-auto search-title">
+            <form action="{% url 'home' %}" method="post" class="row w-100 my-2">
+                {%csrf_token%}
+                <input type="text" class="border_radius search_form_input" placeholder="Search for the Products You Need Here" name="goodid" value="{{ERROR}}">
+                <button class="btn btn-outline-secondary search_form_button" id="searchOrderId" type="submit">search</button>
+            </form>
+        </div>
+
+        <!-- <form action="", class="form-inline ml-auto">
+            <input type="text" class="form-control mr-sm-2" placeholder="请输入订单号">
+            <button class="btn btn-outline-secondary my-2",type="submit">search</button>
+        </form> -->
+    </nav>
+
+    <div class="container w-100" id="goodsInfo">
+        <div class="row">
+            <div class="col-lg-3">
+                <img class="imgSize", src="{{info.Product_img}}", alt="">
+            </div>
+            <div class="col-lg-9">
+                <div class="text-left">
+                    <h5><strong>{{info.Product_Name}}</strong></h5>
+                    <h6>{{info.Product_Number}}</h6>
+                    <h6>{{info.Description}}</h6>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >Request Info</button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="model-content">
+                                <div class="modal-header">
+                                    <h4 class="model-title" id="exampleModalLabel">request info</h4>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        X
+                                    </button>
+                                    
+                                </div>
+                            <form action="" method="post">
+                                {%csrf_token%}
+                                
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="first_name">First Name:</label>
+                                        <input type="text" class="form-control" name="first_name" id="first_name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last_name">Last Name:</label>
+                                        <input type="text" class="form-control" name="last_name" id="last_name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email Address:</label>
+                                        <input type="text" class="form-control" name="email" id="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="company">Company Name:</label>
+                                        <input type="text" class="form-control" name="company" id="company">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone:</label>
+                                        <input type="text" class="form-control" name="phone" id="phone">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product">Produst Name:</label>
+                                        <input type="text" class="form-control" name="product_name" id="product_name" readonly value="{{info.Product_Name}}">
+                                        <label for="product">Produst Code:</label>
+                                        <input type="text" class="form-control" name="product_code" id="product_code" readonly value="{{info.Product_Number}}">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date">Date Needed:</label>
+                                        <input type="text" class="form-control" name="date" id="date">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="quantity">Quantity:</label>
+                                        <input type="text" class="form-control" name="quantity" id="quantity">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comments">comments:</label>
+                                        <textarea type="text" class="form-control" name="comments" id="comments" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" name="commit_request">
+                                        Send Request Info
+                                    </button>
+                                </div>
+                            </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class = 'good_info_button'>
+                        <a href="mailto:support@promo-union.com">Contact us for more detail</a>
+                    </div>
+                </div>
+                
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                BaseInfo
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 ">
+                                <div class="m-auto text-left">
+                                    {% if info.Category %}
+                                    <h6><strong>Category: </strong> {{info.Category}}</h6>
+                                    {% endif %}
+                                    {% if info.Product_Color %}
+                                    <h6><strong>Color: </strong> {{info.Product_Color}}</h6>
+                                    {% endif %}
+                                    {% if info.Material %}
+                                    <h6><strong>Material: </strong> {{info.Material}}</h6>
+                                    {% endif %}
+                                    <!-- {% if info.Size_Group %}
+                                    <h6><strong>Size_Group: </strong> {{info.Size_Group}}</h6>
+                                    {% endif %} -->
+                                    {% if info.Size_Values %}
+                                    <h6><strong>Size: </strong> {{info.Size_Values}}</h6>
+                                    {% endif %}
+                                    {% if info.Shape != ' ' %}
+                                    <h6><strong>Shape: </strong> {{info.Shape}}</h6>
+                                    {% endif %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Price
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 price_nomp">
+                                <div class="m-auto text-left">
+                                    <h6><strong>Category: </strong> Net Cost(ccccc)</h6>
+                                    <table class="table table-bordered price_table_font">
+                                        <thead>
+                                            <tr>
+                                                <th>Quantity</th>
+                                                {% if info.Q1 %}
+                                                <th>{{info.Q1}}</th>
+                                                {% endif %}
+                                                {% if info.Q2 %}
+                                                <th>{{info.Q2}}</th>
+                                                {% endif %}
+                                                {% if info.Q3 %}
+                                                <th>{{info.Q3}}</th>
+                                                {% endif %}
+                                                {% if info.Q4 %}
+                                                <th>{{info.Q4}}</th>
+                                                {% endif %}
+                                                {% if info.Q5 %}
+                                                <th>{{info.Q5}}</th>
+                                                {% endif %}
+                                                {% if info.Q6 %}
+                                                <th>{{info.Q6}}</th>
+                                                {% endif %}
+                                                {% if info.Q7 %}
+                                                <th>{{info.Q7}}</th>
+                                                {% endif %}
+                                                {% if info.Q8 %}
+                                                <th>{{info.Q8}}</th>
+                                                {% endif %}
+                                                {% if info.Q9 %}
+                                                <th>{{info.Q9}}</th>
+                                                {% endif %}
+                                                {% if info.Q10 %}
+                                                <th>{{info.Q10}}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="active">
+                                                <th>Price</th>
+                                                {% if info.Q1 %}
+                                                <th>{{info.P1}}</th>
+                                                {% endif %}
+                                                {% if info.Q2 %}
+                                                <th>{{info.P2}}</th>
+                                                {% endif %}
+                                                {% if info.Q3 %}
+                                                <th>{{info.P3}}</th>
+                                                {% endif %}
+                                                {% if info.Q4 %}
+                                                <th>{{info.P4}}</th>
+                                                {% endif %}
+                                                {% if info.Q5 %}
+                                                <th>{{info.P5}}</th>
+                                                {% endif %}
+                                                {% if info.Q6 %}
+                                                <th>{{info.P6}}</th>
+                                                {% endif %}
+                                                {% if info.Q7 %}
+                                                <th>{{info.P7}}</th>
+                                                {% endif %}
+                                                {% if info.Q8 %}
+                                                <th>{{info.P8}}</th>
+                                                {% endif %}
+                                                {% if info.Q9 %}
+                                                <th>{{info.P9}}</th>
+                                                {% endif %}
+                                                {% if info.Q10 %}
+                                                <th>{{info.P10}}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                        
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Imprint
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 ">
+                                <div class="m-auto text-left">
+                                    {% if info.Imprint_Method %}
+                                    <h6><strong>Imprint Method: </strong> Laser/Silkscreen</h6>
+                                    {% endif %}
+                                    {% if info.Imprint_Color %}
+                                    <h6><strong>Imprint Color: </strong> {{info.Imprint_Color}}</h6>
+                                    {% endif %}
+                                    {% if info.Price_Includes %}
+                                    <h6><strong>Price Includes: </strong> {{info.Price_Includes}}</h6>
+                                    {% endif %}
+                                    <h6><strong>Full Color Process: </strong> Pls check with us before placing your order</h6>
+                                    <h6><strong>Sold Unimprinted: </strong> Yes</h6>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Quantity</th>
+                                                {% if info.UQ1 %}
+                                                <th>{{info.UQ1}}</th>
+                                                {% endif %}
+                                                {% if info.UQ2 %}
+                                                <th>{{info.UQ2}}</th>
+                                                {% endif %}
+                                                {% if info.UQ3 %}
+                                                <th>{{info.UQ3}}</th>
+                                                {% endif %}
+                                                {% if info.UQ4 %}
+                                                <th>{{info.UQ4}}</th>
+                                                {% endif %}
+                                                {% if info.UQ5 %}
+                                                <th>{{info.UQ5}}</th>
+                                                {% endif %}
+                                                {% if info.UQ6 %}
+                                                <th>{{info.UQ6}}</th>
+                                                {% endif %}
+                                                {% if info.UQ7 %}
+                                                <th>{{info.UQ7}}</th>
+                                                {% endif %}
+                                                {% if info.UQ8 %}
+                                                <th>{{info.UQ8}}</th>
+                                                {% endif %}
+                                                {% if info.UQ9 %}
+                                                <th>{{info.UQ9}}</th>
+                                                {% endif %}
+                                                {% if info.UQ10 %}
+                                                <th>{{info.UQ10}}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="active">
+                                                <th>Price</th>
+                                                {% if info.UQ1 %}
+                                                <th>{{info.UP1}}</th>
+                                                {% endif %}
+                                                {% if info.UQ2 %}
+                                                <th>{{info.UP2}}</th>
+                                                {% endif %}
+                                                {% if info.UQ3 %}
+                                                <th>{{info.UP3}}</th>
+                                                {% endif %}
+                                                {% if info.UQ4 %}
+                                                <th>{{info.UP4}}</th>
+                                                {% endif %}
+                                                {% if info.UQ5 %}
+                                                <th>{{info.UP5}}</th>
+                                                {% endif %}
+                                                {% if info.UQ6 %}
+                                                <th>{{info.UP6}}</th>
+                                                {% endif %}
+                                                {% if info.UQ7 %}
+                                                <th>{{info.UP7}}</th>
+                                                {% endif %}
+                                                {% if info.UQ8 %}
+                                                <th>{{info.UP8}}</th>
+                                                {% endif %}
+                                                {% if info.UQ9 %}
+                                                <th>{{info.UP9}}</th>
+                                                {% endif %}
+                                                {% if info.UQ10 %}
+                                                <th>{{info.UP10}}</th>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                        
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h2 class="mb-0">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Production And Shipping
+                            </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body border-bottom py-3 ">
+                                <div class="m-auto text-left">
+                                    {% if info.Production_Time %}
+                                    <h6><strong>Production Time: </strong> {{info.Production_Time}} Days</h6>
+                                    {% endif %}
+                                    {% if info.Rush_Service %}
+                                    <h6><strong>Rush Service: </strong> {{info.Rush_Service}}</h6>
+                                    {% endif %}
+                                    {% if info.Rush_Time %}
+                                    <h6><strong>Rush Time: </strong> {{info.Rush_Time}} Days</h6>
+                                    {% endif %}
+                                    {% if info.Same_Day_Service %}
+                                    <h6><strong>Same Day Service: </strong> {{info.Same_Day_Service}}</h6>
+                                    {% endif %}
+                                    {% if info.Packaging %}
+                                    <h6><strong>Packaging: </strong> {{info.Packaging}}</h6>
+                                    {% endif %}
+                                    {% if info.Shipping_Weight %}
+                                    <h6><strong>Shipping Weight: </strong> {{info.Shipping_Weight}}</h6>
+                                    {% endif %}
+                                    {% if info.Shipper_Bills_By %}
+                                    <h6><strong>Shipper Bills By: </strong> {{info.Shipper_Bills_By}}</h6>
+                                    {% endif %}
+                                    {% if info.Shipping_Info %}
+                                    <h6><strong>Shipping Info: </strong> {{info.Shipping_Info}}</h6>
+                                    {% endif %}
+                                    {% if info.Free_Shipping %}
+                                    <h6><strong>Free Shipping: </strong> {{info.Free_Shipping}}</h6>
+                                    {% endif %}
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+             
+            </div>
+
+            <div class="col-lg-12 text-left bottomGood">
+                RELATED PRODUCTS
+            </div>
+            
+
+            <div class="row">
+                <div class="cardspad col-lg-12">
+                    <div class="goodsInfoCards row">
+                        {% for good in goods %}
+                        <div class="goodsCard">
+                            <div class="goodsCardItem">
+                                <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}">
+                                    <img class="imgSize", src="{{good.Product_img}}", alt="">
+                                </a>
+                                
+                                <div>
+                                    <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardname">{{good.Product_Name}}</a>
+                                </div>
+                                <div class="row priceidtype">
+                                    <div class="col-lg-6">
+                                        <div class="cardprice">$ {{good.P1}}</div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{good.Product_Number}}" class="cardprice">{{good.Product_Number}}</a>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+
+</body>
+</html>

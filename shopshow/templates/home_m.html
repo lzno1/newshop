@@ -1,0 +1,724 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Union</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_m.css' %}">
+    <link rel="stylesheet" href="{% static 'js/bootstrap.bundle.js' %}">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        });
+    </script>
+
+    
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <ul class="nav title_nav ">
+            <!-- <li class="nav-item">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'img/logo.png' %}", height="30", alt="logo">
+                </a>
+            </li> -->
+            <li class="nav-item navbar-brand">
+                <a class="nav-link active " height="40" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item navbar-brand">
+                <a class="nav-link" height="60" href="{% url 'goods' %}All/">Products</a>
+            </li>
+           
+            <li class="nav-item navbar-brand">
+                <a class="nav-link " height="60" href="{% url 'contact' %}">Contact</a>
+            </li>
+        </ul>
+
+        <div class="form-inline m-auto search-title">
+            <form method="post" class="w-100 my-2 search_form">
+                {%csrf_token%}
+                <input type="text" class="border_radius search_form_input" placeholder="Search for the Products You Need Here" name="goodid" value="{{ERROR}}">
+                <button class="btn btn-outline-secondary search_form_button" id="searchOrderId" type="submit">search</button>
+            </form>
+        </div>
+
+        <!-- <div class="row title_time_phone_email w-25">
+            <div class="col-lg-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-alarm" viewBox="0 0 16 16">
+                        <path d="M8.5 5.5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5z"/>
+                        <path d="M6.5 0a.5.5 0 0 0 0 1H7v1.07a7.001 7.001 0 0 0-3.273 12.474l-.602.602a.5.5 0 0 0 .707.708l.746-.746A6.97 6.97 0 0 0 8 16a6.97 6.97 0 0 0 3.422-.892l.746.746a.5.5 0 0 0 .707-.708l-.601-.602A7.001 7.001 0 0 0 9 2.07V1h.5a.5.5 0 0 0 0-1h-3zm1.038 3.018a6.093 6.093 0 0 1 .924 0 6 6 0 1 1-.924 0zM0 3.5c0 .753.333 1.429.86 1.887A8.035 8.035 0 0 1 4.387 1.86 2.5 2.5 0 0 0 0 3.5zM13.5 1c-.753 0-1.429.333-1.887.86a8.035 8.035 0 0 1 3.527 3.527A2.5 2.5 0 0 0 13.5 1z"/>
+                    </svg>
+            </div>
+            <div class="col-lg-4">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="9:00AM - 5:00PM">
+                    <div style="pointer-events: none;" type="button" disabled>9:00AM - 5:00PM</div>
+                </span>
+            </div>
+            <div class="col-lg-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                </svg>
+             </div>
+            <div class="col-lg-4">
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="(518) 765-1199">
+                    <div style="pointer-events: none;" type="button" disabled>(518) 765-1199</div>
+                </span>
+            </div>
+            <div class="col-lg-2">
+                <a href="mailto:support@promo-union.com" class="text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                        <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2H2Zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671Z"/>
+                        <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034v.21Zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z"/>
+                    </svg>
+                </a>
+            </div>
+            
+        </div> -->
+    </nav>
+
+    
+    <div id="carousel" class="carousel slide w-100" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel" data-slide-to="1"></li>
+            <li data-target="#carousel" data-slide-to="2"></li>
+            <li data-target="#carousel" data-slide-to="3"></li>
+            <li data-target="#carousel" data-slide-to="4"></li>
+            <li data-target="#carousel" data-slide-to="5"></li>
+            <li data-target="#carousel" data-slide-to="6"></li>
+            <li data-target="#carousel" data-slide-to="7"></li>
+        </ol>
+        <div class="carousel-inner">
+            {% for ban in banner %}
+                {% if not forloop.first %}
+                <div class="carousel-item" >
+                    <a class="carousel-a-href", href="{{ban.bannerUrl}}">
+                        <img src="{{ban.bannerImg}}" class="w-100 carousel_img d-block img-fluid" alt="">
+                    </a>
+                </div>
+                {% else %}
+                <div class="carousel-item active" >
+                    <a class="carousel-a-href", href="{{ban.bannerUrl}}">
+                        <img src="{{ban.bannerImg}}" class="w-100 carousel_img d-block img-fluid" alt="">
+                    </a>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+        <a href="#carousel" class="carousel-control-prev" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a href="#carousel" class="carousel-control-next" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+
+    <div class="container jumbotron row m-auto">
+        <div class="goodsInfoCards row w-100 m-auto">
+            <div class="goodsCard_home_banner">
+                <div class="goodsCardItem">
+                    <a href="{% url 'goods' %}BAGS">
+                        <img class="imgSize", src="https://images14.fotki.com/v1683/photos/2/4164902/16539898/banner1-vi.png", alt="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="goodsCard_home_banner">
+                <div class="goodsCardItem">
+                    <a href="{% url 'goods' %}HATS">
+                        <img class="imgSize", src="https://images46.fotki.com/v1682/photos/2/4164902/16539898/banner2-vi.png", alt="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="goodsCard_home_banner">
+                <div class="goodsCardItem">
+                    <a href="{% url 'goods' %}kitchen">
+                        <img class="imgSize", src="https://images12.fotki.com/v1686/photos/2/4164902/16539898/banner3-vi.png", alt="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="goodsCard_home_banner">
+                <div class="goodsCardItem">
+                    <a href="{% url 'goods' %}phone">
+                        <img class="imgSize", src="https://images14.fotki.com/v1683/photos/2/4164902/16539898/banner4-vi.png", alt="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="goodsCard_home_banner">
+                <div class="goodsCardItem">
+                    <a href="{% url 'goods' %}outdoor">
+                        <img class="imgSize", src="https://images49.fotki.com/v1679/photos/2/4164902/16539898/banner5-vi.png", alt="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="goodsCard_home_banner">
+                <div class="goodsCardItem">
+                    <a href="{% url 'goods' %}PENS">
+                        <img class="imgSize", src="https://images15.fotki.com/v1685/photos/2/4164902/16539898/banner6-vi.png", alt="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="goodsCard_home_banner">
+                <div class="goodsCardItem">
+                    <a href="{% url 'goods' %}reliever">
+                        <img class="imgSize", src="https://images12.fotki.com/v1686/photos/2/4164902/16539898/banner7-vi.png", alt="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="goodsCard_home_banner">
+                <div class="goodsCardItem">
+                    <a href="{% url 'goods' %}water_bottle">
+                        <img class="imgSize", src="https://images14.fotki.com/v1683/photos/2/4164902/16539898/banner8-vi.png", alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container jumbotron card_center", id="searchGoodGps">
+        <div class="whatWeDoTitle1 jumbotron-fluid">Promo Union--Order Tracking System</div>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container h-100">
+                <div class="row justify-content-between align-items-center text-md-center text-lg-left">
+                    <form method="post" class="form_90 w-100">
+                        {%csrf_token%}
+                        <div class="row m-auto">
+                            <div class="w-75">
+                                <input class="form-control input-round h-auto" placeholder="Track Your Order Status Here" type="text" name="logisticsid">
+                            </div>
+                            <div class="w-25">
+                                <input class="btn btn-success btn-round" type="submit" value="search">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% if poInfo %}
+        <div class="card bg-transparent">
+            <div class="table-responsive">
+                <table class="table table-hcenter card-table">
+                    <tbody>
+                        
+                        <tr>
+                            <td>PO Number</th>
+                            <td>{{poInfo.poNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mock-up</th>
+                            <td>
+                                <button type="button" class="alert-info" data-toggle="modal" data-target="#exampleModal" >Image Viewer</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Order Date</th>
+                            <td>{{poInfo.orderDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Received</th>
+                            <td>{{poInfo.paymentReceived}}</td>
+                        </tr>
+                        <tr>
+                            <td>Balance</th>
+                            <td>{{poInfo.balance}}</td>
+                        </tr>
+                        <tr>
+                            <td>Order Status</th>
+                            <td>{{poInfo.orderStatus}}</td>
+                        </tr>
+                        <tr>
+                            <td>Test Report</th>
+                            <td>
+                                <button type="button" class="alert-info" data-toggle="modal" data-target="#exampleModal1" >Image Viewer</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ETA</th>
+                            <td>{{poInfo.eta}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-home">
+                        <div class="model-content">
+                            <div class="modal-header">
+                                <h4 class="model-title" id="exampleModalLabel">Mock-Up</h4>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    X
+                                </button>
+                            </div>
+                            <div class="model-body text-center">
+                                <span id="myImg">
+                                    <img src={{poInfo.mockUp}} class="mock-up-img">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-home">
+                        <div class="model-content">
+                            <div class="modal-header">
+                                <h4 class="model-title" id="exampleModalLabel">Test Report</h4>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    X
+                                </button>
+                            </div>
+                            <div class="model-body text-center">
+                                <span id="myImg">
+                                    <img src={{poInfo.testReport}} class="mock-up-img">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% if logInfo %}
+    <div class="container jumbotron row m-auto">
+        <div class="col-lg-4 mb-4">
+            <div class="list_card card text-white bg-dark" >
+                <div class="card-header">出库</div>
+                <div class="card-body card_body_height">
+                    {% if logInfo.check1 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.check1}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">效果图确认</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.check2 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.check2}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">安排打样+出样时间确认</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.check3 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.check3}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">出样拍照确认</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.check4 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.check4}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">样品寄出+单号更新</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.check5 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.check5}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">样品送达确认</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="list_card card text-white bg-dark" >
+                <div class="card-header">运输</div>
+                <div class="card-body card_body_height">
+                    {% if logInfo.tran1 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.tran1}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">货物发出+单号更新</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.tran2 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.tran2}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">第一周</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.tran3 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.tran3}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">第二周</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.tran4 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.tran4}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">第三周</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.tran1 %}
+                    <div class="row">
+                        <a href="#" class="btn btn-primary m-auto w-75" >物流查询</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <div class="list_card card text-white bg-dark" >
+                <div class="card-header">派送</div>
+                <div class="card-body card_body_height">
+                    {% if logInfo.eva1 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.eva1}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">物品派送</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.eva2 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.eva2}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">物品送达</p>
+                    </div>
+                    {% endif %}
+                    {% if logInfo.eva3 %}
+                    <div class="row">
+                        <p class="card-text">{{logInfo.eva3}}</p>
+                        <p class="card_line"></p>
+                        <p class="card-text">用户确认收货</p>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="btn btn-primary m-auto border-bottom w-75">用户反馈</a>
+                    </div>
+                    <div class="row">
+                        <a href="#" class="btn btn-primary m-auto w-75">用户评价</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+       
+    </div>
+    {% endif %}
+
+    <div class="container" id="whatWedo">
+        <div class="whatWeDoTitle1">For Our Clients</div>
+        <div class="whatWeDoTitle2">What We Do</div>
+        <div class="wedoitems row">
+            <div class="w-50 wedoitem" data-toggle="tooltip" data-placement="bottom" title="Every Client can track their order status by searching the order#">
+                <div class="wedoitem-icon">
+                    <img src="{% static 'img/icon/wedoicon01.png' %}" alt="">
+                </div>
+                <div class="wedoitem-text">
+                    <h6>Order Tracking System</h6>
+                </div>
+            </div>
+            <div class="w-50 wedoitem " data-toggle="tooltip" data-placement="bottom" title="You could leave us a message about your idea and end buyers’ request and  we will give our product recommendation.">
+                <div class="wedoitem-icon">
+                    <img src="{% static 'img/icon/wedoicon01.png' %}" alt="">
+                </div>
+                <div class="wedoitem-text">
+                    <h6>Products Recommendation</h6>
+                </div>
+            </div>
+            <div class="w-50 wedoitem " data-toggle="tooltip" data-placement="bottom" title="We always develop new and hot products leading the promo market irregularly scheduled.">
+                <div class="wedoitem-icon">
+                    <img src="{% static 'img/icon/wedoicon01.png' %}" alt="">
+                </div>
+                <div class="wedoitem-text">
+                    <h6>Hot & New Products</h6>
+                </div>
+            </div>
+            <div class="w-50 wedoitem" data-toggle="tooltip" data-placement="bottom" title="We always give our clients free service of mock-up after receiving your logo artwork.">
+                <div class="wedoitem-icon">
+                    <img src="{% static 'img/icon/wedoicon01.png' %}" alt="">
+                </div>
+                <div class="wedoitem-text">
+                    <h6>Free Mock-Up</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="goodsInfo">
+        <div class="whatWeDoTitle1">Our Products</div>
+        <div class="whatWeDoTitle2">More & Price & Quality</div>
+        <div class="row">
+            <div class="goodspad col-lg-12">
+                <div class="goodsTypeBuutonGroup row">
+                    <ul class="nav nav-pills row" id="pills-tab" role="tablist">
+                        <li class="nav-item w-25" role="presentation">
+                            <button class="nav-link active goodsTypeBuuton" id="pills-1-tab" data-toggle="pill" data-target="#pills-1" type="button" role="tab" aria-controls="pills-1" aria-selected="true">Swag Stuff</button>
+                        </li>
+                        <li class="nav-item w-25" role="presentation">
+                            <button class="nav-link goodsTypeBuuton" id="pills-2-tab" data-toggle="pill" data-target="#pills-2" type="button" role="tab" aria-controls="pills-2" aria-selected="false">Seasonal Items</button>
+                        </li>
+                        <li class="nav-item w-25" role="presentation">
+                            <button class="nav-link goodsTypeBuuton" id="pills-3-tab" data-toggle="pill" data-target="#pills-3" type="button" role="tab" aria-controls="pills-3" aria-selected="false">New Promo</button>
+                        </li>
+                        <li class="nav-item w-25" role="presentation">
+                            <button class="nav-link goodsTypeBuuton" id="pills-4-tab" data-toggle="pill" data-target="#pills-4" type="button" role="tab" aria-controls="pills-4" aria-selected="false">Holidays Related</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cardspad col-lg-12">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+                        <div class="goodsInfoCards row">
+                            {% for hotgood in hotgoods.Swag_Stuff %}
+                            <div class="goodsCard_home">
+                                <div class="goodsCardItem">
+                                    <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{hotgood.goodID}}">
+                                        <img class="imgSize", src="{{hotgood.goodUrl}}", alt="">
+                                    </a>
+                                    <div class="cardname">{{hotgood.goodName}}</div>
+                                    <div class="cardprice">{{hotgood.goodPrice}}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
+                        <div class="goodsInfoCards row">
+                            {% for hotgood in hotgoods.Seasonal_Items %}
+                            <div class="goodsCard_home">
+                                <div class="goodsCardItem">
+                                    <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{hotgood.goodID}}">
+                                        <img class="imgSize", src="{{hotgood.goodUrl}}", alt="">
+                                    </a>
+                                    <div class="cardname">{{hotgood.goodName}}</div>
+                                    <div class="cardprice">$ {{hotgood.goodPrice}}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3-tab">
+                        <div class="goodsInfoCards row">
+                            {% for hotgood in hotgoods.New_Peomo %}
+                            <div class="goodsCard_home">
+                                <div class="goodsCardItem">
+                                    <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{hotgood.goodID}}">
+                                        <img class="imgSize", src="{{hotgood.goodUrl}}", alt="">
+                                    </a>
+                                    <div class="cardname">{{hotgood.goodName}}</div>
+                                    <div class="cardprice">$ {{hotgood.goodPrice}}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-4" role="tabpanel" aria-labelledby="pills-4-tab">
+                        <div class="goodsInfoCards row">
+                            {% for hotgood in hotgoods.Holidays_Related %}
+                            <div class="goodsCard_home">
+                                <div class="goodsCardItem">
+                                    <a href="{% url 'goods' %}../goodInfo/?test=a&goodid={{hotgood.goodID}}">
+                                        <img class="imgSize", src="{{hotgood.goodUrl}}", alt="">
+                                    </a>
+                                    <div class="cardname">{{hotgood.goodName}}</div>
+                                    <div class="cardprice">$ {{hotgood.goodPrice}}</div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="col-lg-12 view-btn-mp">
+                    <a href="{% url 'goods' %}All/" class="btn-ash-outline">view all products</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class='container' id="aboutInfo">
+        <div class="row">
+            <div class="col-lg-6" id="container-row-left">
+                <div class="aboutInfoPlace">
+                    <div class="aboutInfoTitle"><h1>About Us</h1></div>
+                    <!-- <h4 class="aboutInfoInfo">Enjoy getting closer to the nature? You're in the right place!</h4> -->
+                    <p class="aboutInfoP">Welcome to our company, a union of 7 experienced promotional products companies that brings together a vast selection of products for businesses and individuals. By combining our expertise and resources, we are able to offer our customers a wider range of products and services than any individual company could provide.</p>
+                    <p class="aboutInfoP">With over 20 years of experience in the industry, we have become a leading provider of promotional products, offering our customers a one-stop-shop for all their branding needs. Our team is made up of knowledgeable professionals who are passionate about providing the best possible service to our clients.</p>
+                    <p class="aboutInfoP">Our mission is to provide the highest quality promotional products while also prioritizing the environment. We specialize in green and eco-friendly products, helping our customers to reduce their environmental impact while still achieving their marketing goals.</p>
+                    <p class="aboutInfoP">Our website showcases over 100,000 products, giving our clients access to an unparalleled selection of items to choose from. From classic promotional items like pens and mugs to unique eco-friendly products like bamboo utensils and recycled tote bags, we have something for everyone.
+                        At our company, we believe in putting our clients first. We strive to provide the best possible customer service, working with our clients to find the perfect product for their needs and ensuring that their orders are delivered on time and to their satisfaction. Our commitment to our clients is reflected in our 200+ positive reviews from satisfied customers.</p>
+                    <p class="aboutInfoP">Thank you for choosing us as your promotional products supplier. We look forward to helping you achieve your branding goals while also making a positive impact on the environment.</p>
+                    <a href="" class="btn btn-primary aboutInfoButton">learn more</a>
+                </div>
+            </div>
+
+            <div class="col-lg-6" id="container-row-right">
+                <div class="aboutInfoPlace">
+                    <div class="aboutInfoTitle"><h1>Our Services</h1></div>
+                    <p class="aboutInfoP">At our company, we offer a range of services to help our clients achieve their branding goals. Whether you're looking for custom promotional products, free mock-up services, or help with shipping, we've got you covered.</p>
+                    <p class="aboutInfoP">Custom Branding: We specialize in creating custom-branded promotional products that showcase your logo or message. Our team works with you to select the best products for your needs and ensures that your branding is consistent across all items.</p>
+                    <p class="aboutInfoP">Free Mock-Up Services: Our team can provide free mock-up services to help you visualize how your logo or design will look on different products. This allows you to see how your branding will appear before you place an order, giving you confidence in your selection.</p>
+                    <p class="aboutInfoP">Eco-Friendly Options: We understand the importance of sustainability and offer a range of eco-friendly promotional products. From reusable water bottles to recycled tote bags, we can help you make a positive impact on the environment.</p>
+                    <p class="aboutInfoP">Shipping: We provide fast and reliable shipping services, ensuring that your promotional products are delivered on time and to your satisfaction. We also offer tracking information and notifications so that you can stay informed about the status of your order.</p>
+                    <p class="aboutInfoP">At our company, we're committed to providing the highest quality services to our clients. We work closely with each client to understand their unique needs and offer tailored solutions that meet their goals. Contact us today to learn more about our services and how we can help you achieve your branding goals.</p>
+                    <a href="" class="btn btn-primary aboutInfoButton">learn more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <div class="container row" id="pagefoot">
+        <div class="col-lg-3">
+            <div class="text-left bottomHomeTitle">
+                SIGNUP FOR NEWSLETTER
+            </div>
+            <div class="text-left bottomHomeContent">
+                Subscribe to our regular newsletter for all the lastest updates
+            </div>
+            <div class="text-left bottomHomeContent">
+                <form method="post" class="row w-100 my-2">
+                    {%csrf_token%}
+                    <input type="text" class="border_radius col-lg-11 mr-sm-2 email_input" placeholder="Your Email(required)" id="email_request" name="email_request">
+                    <button class="col-lg-11 btn btn-outline-secondary email_button" id="submit_email" name="submit_email" type="submit">SIGN UP</button>
+                </form>
+            </div>
+            
+        </div>
+        
+        <div class="col-lg-6 m-auto">
+            
+            <h4 class="pageFoot-font">
+                <a href="mailto:support@promo-union.com">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                        <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2H2Zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671Z"/>
+                        <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034v.21Zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z"/>
+                    </svg>
+                </a>
+                support@promo-union.com
+            </h4>
+
+            <form action="" method="post">
+                {%csrf_token%}
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                </svg>
+                            </span>
+                            
+                            <input type="text" class="form-control" placeholder="First name" name="first_name" id="first_name">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" placeholder="Last name" name="last_name" id="last_name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
+                                <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+                                <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
+                              </svg>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Company" name="company" id="company">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                            </svg>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Phone" name="phone" id="phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                                <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2H2Zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671Z"/>
+                                <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034v.21Zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z"/>
+                            </svg>
+                        </span>
+                        <input type="text" class="form-control" placeholder="your@email.com" name="email" id="email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Contact us .." name="contact" id="contact" rows="6"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="submit" name="submit_to_me" id="submit_to_me" class="w-25">
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="text-left bottomHomeTitle">
+                HEAD OFFICE
+            </div>
+            <div class="text-left bottomHomeContent">
+                210 Frederick Road,Fredericksburg,TX 78624
+            </div>
+            <div class="text-left bottomHomeContent">
+                TEL: 518-765-1199
+            </div>
+            <div class="text-left bottomHomeContent">
+                FAX: 800-655-8028
+            </div>
+            <div class="text-left bottomHomeContent">
+                Email: support@promo-union.com
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<!-- <script>
+    var btn = document.getElementById("searchOrderId")
+    btn.onclick = function(){
+        window.location.href = "https://www.runoob.com";
+    }
+</script> -->
+
+{% if poInfo %}
+        <script>
+            document.write("yes")
+            $(document).ready(function(){
+                var dd = document.getElementById('searchGoodGps')
+                dd.scrollIntoView() 
+            });
+        </script>
+    
+{% endif%}
+</html>
