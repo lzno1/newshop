@@ -343,7 +343,8 @@ def showAllGood(request, category):
                     if good['Category']:
                         # if category in good['Category']:
                         if keywords(goodid, good):
-                            newgoods.append(good)
+                            if good['Product_img']:
+                                newgoods.append(good)
                 random.shuffle(newgoods)
                 page = Paginator(newgoods, 20)
                 page_obj = page.get_page(1)
@@ -370,50 +371,51 @@ def showAllGood(request, category):
             newgoods = []
             # print(type(goods))
             for good in goods.iterator():
-                if good['P10']:
-                    good['P1'] = good['P10']
-                elif good['P9']:
-                    good['P1'] = good['P9']
-                elif good['P8']:
-                    good['P1'] = good['P8']
-                elif good['P7']:
-                    good['P1'] = good['P7']
-                elif good['P6']:
-                    good['P1'] = good['P6']
-                elif good['P5']:
-                    good['P1'] = good['P5']
-                elif good['P4']:
-                    good['P1'] = good['P4']
-                elif good['P3']:
-                    good['P1'] = good['P3']
-                elif good['P2']:
-                    good['P1'] = good['P2']
-                if good['P1']:
-                    try:
-                        good['P1'] = float(good['P1'])
-                    except:
+                if good['Product_img']:
+                    if good['P10']:
+                        good['P1'] = good['P10']
+                    elif good['P9']:
+                        good['P1'] = good['P9']
+                    elif good['P8']:
+                        good['P1'] = good['P8']
+                    elif good['P7']:
+                        good['P1'] = good['P7']
+                    elif good['P6']:
+                        good['P1'] = good['P6']
+                    elif good['P5']:
+                        good['P1'] = good['P5']
+                    elif good['P4']:
+                        good['P1'] = good['P4']
+                    elif good['P3']:
+                        good['P1'] = good['P3']
+                    elif good['P2']:
+                        good['P1'] = good['P2']
+                    if good['P1']:
+                        try:
+                            good['P1'] = float(good['P1'])
+                        except:
+                            continue
+                    else:
                         continue
-                else:
-                    continue
-                if good['Category']:
-                    if category in good['Category'] or category=='All':
-                        if good['P1'] and price_from:
-                            if good['P1'] >= float(price_from):
-                                if price_to:
-                                    if good['P1'] <= float(price_to):
-                                        if keywords(key_word, good):
-                                            newgoods.append(good)
-                                else:
-                                    if keywords(key_word, good):
-                                        newgoods.append(good)
-                        else:
-                            if price_to:
-                                    if good['P1'] <= float(price_to):
+                    if good['Category']:
+                        if category in good['Category'] or category=='All':
+                            if good['P1'] and price_from:
+                                if good['P1'] >= float(price_from):
+                                    if price_to:
+                                        if good['P1'] <= float(price_to):
+                                            if keywords(key_word, good):
+                                                newgoods.append(good)
+                                    else:
                                         if keywords(key_word, good):
                                             newgoods.append(good)
                             else:
-                                if keywords(key_word, good):
-                                    newgoods.append(good)
+                                if price_to:
+                                        if good['P1'] <= float(price_to):
+                                            if keywords(key_word, good):
+                                                newgoods.append(good)
+                                else:
+                                    if keywords(key_word, good):
+                                        newgoods.append(good)
             if sort:
                 if 'price_up' in sort:
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'))
@@ -462,50 +464,51 @@ def showAllGood(request, category):
             newgoods = []
             # print(type(goods))
             for good in goods.iterator():
-                if good['P10']:
-                    good['P1'] = good['P10']
-                elif good['P9']:
-                    good['P1'] = good['P9']
-                elif good['P8']:
-                    good['P1'] = good['P8']
-                elif good['P7']:
-                    good['P1'] = good['P7']
-                elif good['P6']:
-                    good['P1'] = good['P6']
-                elif good['P5']:
-                    good['P1'] = good['P5']
-                elif good['P4']:
-                    good['P1'] = good['P4']
-                elif good['P3']:
-                    good['P1'] = good['P3']
-                elif good['P2']:
-                    good['P1'] = good['P2']
-                if good['P1']:
-                    try:
-                        good['P1'] = float(good['P1'])
-                    except:
+                if good['Product_img']:
+                    if good['P10']:
+                        good['P1'] = good['P10']
+                    elif good['P9']:
+                        good['P1'] = good['P9']
+                    elif good['P8']:
+                        good['P1'] = good['P8']
+                    elif good['P7']:
+                        good['P1'] = good['P7']
+                    elif good['P6']:
+                        good['P1'] = good['P6']
+                    elif good['P5']:
+                        good['P1'] = good['P5']
+                    elif good['P4']:
+                        good['P1'] = good['P4']
+                    elif good['P3']:
+                        good['P1'] = good['P3']
+                    elif good['P2']:
+                        good['P1'] = good['P2']
+                    if good['P1']:
+                        try:
+                            good['P1'] = float(good['P1'])
+                        except:
+                            continue
+                    else:
                         continue
-                else:
-                    continue
-                if good['Category']:
-                    if category in good['Category'] or category=='All':
-                        if good['P1'] and price_from:
-                            if good['P1'] >= float(price_from):
-                                if price_to:
-                                    if good['P1'] <= float(price_to):
-                                        if keywords(key_word, good):
-                                            newgoods.append(good)
-                                else:
-                                    if keywords(key_word, good):
-                                        newgoods.append(good)
-                        else:
-                            if price_to:
-                                    if good['P1'] <= float(price_to):
+                    if good['Category']:
+                        if category in good['Category'] or category=='All':
+                            if good['P1'] and price_from:
+                                if good['P1'] >= float(price_from):
+                                    if price_to:
+                                        if good['P1'] <= float(price_to):
+                                            if keywords(key_word, good):
+                                                newgoods.append(good)
+                                    else:
                                         if keywords(key_word, good):
                                             newgoods.append(good)
                             else:
-                                if keywords(key_word, good):
-                                    newgoods.append(good)
+                                if price_to:
+                                        if good['P1'] <= float(price_to):
+                                            if keywords(key_word, good):
+                                                newgoods.append(good)
+                                else:
+                                    if keywords(key_word, good):
+                                        newgoods.append(good)
             if sort:
                 if 'price_up' in sort:
                     newgoods = sorted(newgoods, key=lambda e:e.__getitem__('P1'))
@@ -546,30 +549,7 @@ def showAllGood(request, category):
         goods = allgoods.values("Product_Name","Product_Number","P1","P2","P3","P4","P5","P6","P7","P8","P9","P10","Product_img","Category","Keywords","Description")
         newgoods = []
         for good in goods.iterator():
-            if good['P10']:
-                good['P1'] = good['P10']
-            elif good['P9']:
-                good['P1'] = good['P9']
-            elif good['P8']:
-                good['P1'] = good['P8']
-            elif good['P7']:
-                good['P1'] = good['P7']
-            elif good['P6']:
-                good['P1'] = good['P6']
-            elif good['P5']:
-                good['P1'] = good['P5']
-            elif good['P4']:
-                good['P1'] = good['P4']
-            elif good['P3']:
-                good['P1'] = good['P3']
-            elif good['P2']:
-                good['P1'] = good['P2']
-            if good['Category']:
-                if category in good['Category'] or category=='All':
-                    newgoods.append(good)
-        if len(newgoods) < 5:
-            newgoods = []
-            for good in goods.iterator():
+            if good['Product_img']:
                 if good['P10']:
                     good['P1'] = good['P10']
                 elif good['P9']:
@@ -589,8 +569,33 @@ def showAllGood(request, category):
                 elif good['P2']:
                     good['P1'] = good['P2']
                 if good['Category']:
-                    if keywords(category, good):
+                    if category in good['Category'] or category=='All':
                         newgoods.append(good)
+        if len(newgoods) < 5:
+            newgoods = []
+            for good in goods.iterator():
+                if good['Product_img']:
+                    if good['P10']:
+                        good['P1'] = good['P10']
+                    elif good['P9']:
+                        good['P1'] = good['P9']
+                    elif good['P8']:
+                        good['P1'] = good['P8']
+                    elif good['P7']:
+                        good['P1'] = good['P7']
+                    elif good['P6']:
+                        good['P1'] = good['P6']
+                    elif good['P5']:
+                        good['P1'] = good['P5']
+                    elif good['P4']:
+                        good['P1'] = good['P4']
+                    elif good['P3']:
+                        good['P1'] = good['P3']
+                    elif good['P2']:
+                        good['P1'] = good['P2']
+                    if good['Category']:
+                        if keywords(category, good):
+                            newgoods.append(good)
         random.shuffle(newgoods)
         page = Paginator(newgoods, 20)
         page_obj = page.get_page(1)

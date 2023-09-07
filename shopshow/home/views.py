@@ -12,7 +12,7 @@ from goods.models import AllGoods
 from contact.models import MessageBoard
 from django.http import HttpResponse,Http404,FileResponse
 from django.conf import settings
-import os
+import os,json
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -237,3 +237,59 @@ def sendEmail(title, email_content, mail_receivers):
     # print('邮件发送成功')
     smtpObject.quit()
  
+def getJsonByHomeData(request):
+    homeData = {}
+    allBanners = BannerShow.objects.all().values()
+    bannerDict = {}
+    for good in allBanners.iterator():
+        bannerDict[good['bannerUrl']] = good['bannerImg']
+    homeData['banner'] = bannerDict
+
+    allBanners = HotGoods.objects.all().values()
+    showGoods = {}
+    for good in allBanners.iterator():
+        showGoods[good['goodID']] = good['goodUrl']
+    homeData['showgoods'] = showGoods
+
+    return HttpResponse(json.dumps(homeData))
+
+def getJsonByGoodsData(request):
+    homeData = {}
+    allBanners = AllGoods.objects.all().values()
+    for good in allBanners.iterator():
+        homeData[good['Product_Number']] = good['Product_img']
+
+    return HttpResponse(json.dumps(homeData))
+
+def UpdateBannerTool(request, info):
+    infoData = info.split('=end=')[:-1]
+    for onedata in infoData:
+        filterId,newcontent = onedata.split('=lz=')
+        filterId = filterId.replace('=', '/')
+        newcontent = newcontent.replace('=', '/')
+        _new = BannerShow.objects.get(bannerUrl = filterId)
+        _new.bannerImg = newcontent
+        _new.save()
+    return HttpResponse('true')
+
+def UpdateShowgoodsTool(request, info):
+    infoData = info.split('=end=')[:-1]
+    for onedata in infoData:
+        filterId,newcontent = onedata.split('=lz=')
+        filterId = filterId.replace('=', '/')
+        newcontent = newcontent.replace('=', '/')
+        _new = BannerShow.objects.get(bannerUrl = filterId)
+        _new.bannerImg = newcontent
+        _new.save()
+    return HttpResponse('true')
+
+def UpdateAllGoodsTool(request, info):
+    infoData = info.split('=end=')[:-1]
+    for onedata in infoData:
+        filterId,newcontent = onedata.split('=lz=')
+        filterId = filterId.replace('=', '/')
+        newcontent = newcontent.replace('=', '/')
+        _new = AllGoods.objects.get(Product_Number = filterId)
+        _new.Product_img = newcontent
+        _new.save()
+    return HttpResponse('true')
